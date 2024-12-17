@@ -1,5 +1,6 @@
 // @flow strict
 import { personalData } from '@/utils/data/personal-data';
+import Link from 'next/link'; // Make sure this import is here
 import { MdAlternateEmail } from "react-icons/md";
 import { IoLogoGithub } from "react-icons/io";
 import ContactForm from './contact-form';
