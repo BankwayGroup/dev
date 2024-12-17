@@ -1,6 +1,7 @@
 // @flow strict
 import { personalData } from '@/utils/data/personal-data';
 import { MdAlternateEmail } from "react-icons/md";
+import { FaTelegram } from "react-icons/fa"; // Importing Telegram icon
 import ContactForm from './contact-form';
 
 function ContactSection() {
@@ -22,6 +23,15 @@ function ContactSection() {
                 size={36}
               />
               <span>{personalData.email}</span>
+            </p>
+            <p className="text-sm md:text-xl flex items-center gap-3">
+              <FaTelegram
+                className="bg-[#8b98a5] p-2 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                size={36}
+              />
+              <span>
+                <a target="_blank" href="https://t.me/astrov3" className="text-[#16f2b3]">Telegram @astrov3</a>
+              </span>
             </p>
           </div>
         </div>
