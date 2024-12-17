@@ -2,7 +2,6 @@
 import { personalData } from '@/utils/data/personal-data';
 import Link from 'next/link'; // Make sure this import is here
 import { MdAlternateEmail } from "react-icons/md";
-import { IoLogoGithub } from "react-icons/io";
 import ContactForm from './contact-form';
 
 function ContactSection() {
@@ -26,13 +25,6 @@ function ContactSection() {
               <span>{personalData.email}</span>
             </p>
           </div>
-          <div className="mt-8 lg:mt-16 flex items-center gap-5 lg:gap-10">
-            <Link target="_blank" href={personalData.github}>
-              <IoLogoGithub
-                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
-                size={48}
-              />
-            </Link>
           </div>
         </div>
       </div>
