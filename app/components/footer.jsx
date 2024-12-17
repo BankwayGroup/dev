@@ -14,10 +14,9 @@ function Footer() {
           <p className="text-sm">
             © Developer Contact: <Link target="_blank" href="https://t.me/astrov3/" className="text-[#16f2b3]">Dev Zahir</Link>
           </p>
-          </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 
