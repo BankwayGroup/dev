@@ -46,7 +46,13 @@ function HeroSection() {
             >
               <SiLeetcode size={30} />
             </Link>
-   
+     <Link
+    href="https://www.fiverr.com/devzahir"  // Replace with your actual Fiverr profile link
+    target='_blank'
+    className="transition-all text-pink-500 hover:scale-125 duration-300"
+  >
+    <FaFiverr size={30} />  {/* Fiverr icon */}
+  </Link>
           </div>
 
           <div className="flex items-center gap-3">
