@@ -7,7 +7,6 @@ import { BsGithub, BsLinkedin } from "react-icons/bs";
 import { FaFacebook, FaTwitterSquare, FaRobot, FaSuitcase } from "react-icons/fa"; // Combine imports
 import { RiContactsFill } from "react-icons/ri";
 import { SiLeetcode } from "react-icons/si";
-import React from "react";
 import { Typewriter } from "react-simple-typewriter";
 
 function HeroSection() {
