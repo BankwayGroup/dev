@@ -6,7 +6,7 @@ export const personalData = {
   email: 'DevZahirLLC@gmail.com',
   phone: 'Not Initialized',
   address: 'Not Initialized',
-  github: 'https://github.com/devzahir',
+  github: 'https://github.com/devzahirx3',
   facebook: '',
   linkedIn: '',
   twitter: '',
