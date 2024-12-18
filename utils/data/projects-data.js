@@ -56,7 +56,7 @@ export const projectsData = [
         role: 'Bot Developer',
         code: '',
         demo: '',
-        image: botImage,
+        image: ayla,
     },
     {
         id: 6,
@@ -66,7 +66,7 @@ export const projectsData = [
         role: 'Discord Developer',
         code: '',
         demo: '',
-        image: discordImage,
+        image: ayla,
     },
     {
         id: 7,
@@ -76,7 +76,7 @@ export const projectsData = [
         role: 'Bot Developer',
         code: '',
         demo: '',
-        image: facebookImage,
+        image: ayla,
     },
     {
         id: 8,
@@ -86,7 +86,7 @@ export const projectsData = [
         role: 'Web Developer',
         code: '',
         demo: '',
-        image: websiteImage,
+        image: ayla,
     }
 ];
 
