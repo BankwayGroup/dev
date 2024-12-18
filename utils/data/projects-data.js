@@ -11,15 +11,13 @@ export const projectsData = [
         tools: [
             'MongoDB', 'OpenAI API', 'Node Mailer', 'NextJS',
             'MySQL', 'React', 'Stripe', 'OpenAI', 
-            'Cronjob','Telegram Bot API', 'Python', 'Node.js', 
+            'Cronjob', 'Telegram Bot API', 'Python', 'Node.js', 
             'JavaScript', 'PHP', 'HTML', 'CSS'
         ],
         role: 'Full Stack Developer / Bot Developer',
         image: ayla
     },
 ];
-
-
 
 
 // Do not remove any property.
