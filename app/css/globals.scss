@@ -37,14 +37,15 @@ body {
   // padding-top: calc(var(--index) * 2.5rem);
   top: calc(var(--index) * 4rem);
 }
+/* Ensure the text doesn't break into new lines prematurely */
 .typewriter-effect {
   display: inline-block;
-  white-space: nowrap;
+  white-space: nowrap; /* Prevents line breaks */
   overflow: hidden;
-  border-right: 0.15em solid orange;  /* Cursor effect */
-  animation: typing 4s steps(50) 1s 1 normal both, blink 0.75s step-end infinite, vanish-cursor 4s forwards, glitch 1.2s infinite alternate-reverse, shake-end 1s forwards;
+  animation: typing 2s steps(30) 1s forwards, blink-caret 0.75s step-end infinite, glitch 0.6s ease-out 2s forwards;
 }
 
+/* Typing animation */
 @keyframes typing {
   from {
     width: 0;
@@ -54,18 +55,21 @@ body {
   }
 }
 
+/* Blinking cursor animation */
 @keyframes blink {
   50% {
     border-color: transparent;
   }
 }
 
+/* Vanish the cursor after typing */
 @keyframes vanish-cursor {
   100% {
-    border-color: transparent; /* Make the cursor disappear after typing */
+    border-color: transparent;
   }
 }
 
+/* Glitch effect for added randomness */
 @keyframes glitch {
   0% {
     transform: translateX(0);
@@ -93,11 +97,12 @@ body {
   }
 }
 
+/* Shake effect at the end of the animation */
 @keyframes shake-end {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(0); /* Ensure it stops at the final position */
+    transform: translateX(0); /* Stop shaking at the final position */
   }
 }
