@@ -42,6 +42,13 @@ function HeroSection() {
     <FaSuitcase size={30} />  {/* Fiverr icon */}
   </Link>
             <Link
+    href="https://github.com/devzahirx3"  // Replace with your actual Fiverr profile link
+              target='_blank'
+              className="transition-all text-pink-500 hover:scale-125 duration-300"
+            >
+              <BsGithub size={30} />
+            </Link>
+            <Link
               href={personalData.leetcode}
               target='_blank'
               className="transition-all text-pink-500 hover:scale-125 duration-300"
