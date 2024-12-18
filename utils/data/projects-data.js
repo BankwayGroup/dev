@@ -9,11 +9,10 @@ export const projectsData = [
         name: 'Projects',
         description: `A diverse portfolio of projects showcasing expertise in AI applications, full-stack development, bot creation, and dynamic website development. Highlights include building AI-powered financial and real estate apps, a multilingual travel agency platform, and a newsroom management dashboard. Additionally, developed Telegram and Discord bots for automation, Facebook bots for customer engagement, and dynamic websites using PHP and JavaScript.`,
         tools: [
-            'Express', 'MongoDB', 'OpenAI API', 'AWS SES', 'AWS S3', 'Node Mailer', 'Joi', 'Puppeteer', 
-            'EC2', 'PM2', 'Nginx', 'NextJS', 'Tailwind CSS', 'Google Maps', 'NestJS', 'TypeScript', 
-            'MySQL', 'Sun-Editor', 'React', 'Bootstrap', 'SCSS', 'Stripe', 'Azure Blob', 'Replicate AI', 
-            'Cronjob', 'JWT', 'Material UI', 'Redux', 'Telegram Bot API', 'Python', 'Node.js', 
-            'JavaScript', 'PHP', 'Facebook Messenger API', 'HTML', 'CSS'
+            'MongoDB', 'OpenAI API', 'Node Mailer', 'NextJS',
+            'MySQL', 'React', 'Stripe', 'OpenAI', 
+            'Cronjob','Telegram Bot API', 'Python', 'Node.js', 
+            'JavaScript', 'PHP', 'HTML', 'CSS'
         ],
         role: 'Full Stack Developer / Bot Developer',
         image: ayla
