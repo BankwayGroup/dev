@@ -27,16 +27,8 @@ function HeroSection() {
             This is{' '}
             <span className="text-pink-500">{personalData.name}</span>
             {` , I'm a Professional `}
-            <span className="text-[#16f2b3]">
-              <Typewriter
-                words={[personalData.designation]}
-                loop={true} // Continues the typing animation
-                cursor
-                cursorStyle="|"
-                typeSpeed={70} // Adjust typing speed
-                deleteSpeed={50} // Adjust delete speed
-                delaySpeed={1000} // Delay before retyping
-              />
+            <span className="text-[#16f2b3] typewriter-effect">
+              {personalData.designation}
             </span>
             .
           </h1>
