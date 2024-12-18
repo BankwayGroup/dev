@@ -2,7 +2,7 @@
 import { personalData } from '@/utils/data/personal-data';
 import { MdAlternateEmail } from "react-icons/md";
 import ContactForm from './contact-form';
-import { FaTelegram, FaFiverr } from 'react-icons/fa'; // Fiverr icon import
+import { FaTelegram, FaGlobe } from 'react-icons/fa'; // Fiverr icon import
 
 function ContactSection() {
   return (
@@ -34,7 +34,7 @@ function ContactSection() {
               </span>
             </p>
         <p className="text-sm md:text-xl flex items-center gap-3">
-        <FaFiverr
+        <FaGlobe
           className="bg-[#8b98a5] p-2 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
           size={36}
         />
