@@ -8,7 +8,7 @@ import { FaFacebook, FaTwitterSquare } from "react-icons/fa";
 import { FaRobot } from 'react-icons/fa';
 import { RiContactsFill } from "react-icons/ri";
 import { SiLeetcode } from "react-icons/si";
-import { FaFiverr } from 'react-icons/fa';  // Fiverr icon import
+import { FaGlobe } from 'react-icons/fa';  // Fiverr icon import
 
 function HeroSection() {
   return (
@@ -52,7 +52,7 @@ function HeroSection() {
     target='_blank'
     className="transition-all text-pink-500 hover:scale-125 duration-300"
   >
-    <FaFiverr size={30} />  {/* Fiverr icon */}
+    <FaGlobe size={30} />  {/* Fiverr icon */}
   </Link>
           </div>
 
