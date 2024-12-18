@@ -24,8 +24,8 @@ function HeroSection() {
     <h1 className="text-3xl font-bold leading-10 text-white md:font-extrabold lg:text-[2.6rem] lg:leading-[3.5rem]">
       <span className="text-white typewriter-effect">
         Hello, <br />
-        This is{' '},
-        <span className="text-pink-500">{personalData.name}</span>
+        This is{' '}
+        <span className="text-pink-500">{personalData.name}</span>,
          <br />{`I'm a Professional`} <br />
         <span className="text-[#16f2b3]">{personalData.designation}</span>
       </span>
