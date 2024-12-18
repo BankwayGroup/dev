@@ -23,7 +23,7 @@
     "react-icons": "^4.11.0",
     "react-toastify": "^10.0.4",
     "sharp": "^0.33.5",
-  "react-simple-typewriter": "^3.0.0"  // Add this line for version 4
+    "typewriter-effect": "^2.18.0"  // New addition for typing effect
 
   },
   "devDependencies": {
