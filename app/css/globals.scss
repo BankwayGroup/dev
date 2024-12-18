@@ -42,7 +42,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   border-right: 0.15em solid orange;  /* Cursor effect */
-  animation: typing 4s steps(50) 1s 1 normal both, blink 0.75s step-end infinite, vanish-cursor 4s forwards, glitch 1.2s infinite alternate-reverse;
+  animation: typing 4s steps(50) 1s 1 normal both, blink 0.75s step-end infinite, vanish-cursor 4s forwards, glitch 1.2s infinite alternate-reverse, shake-end 1s forwards;
 }
 
 @keyframes typing {
@@ -93,8 +93,11 @@ body {
   }
 }
 
-@keyframes blink {
-  50% {
-    border-color: transparent;
+@keyframes shake-end {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(0); /* Ensure it stops at the final position */
   }
 }
