@@ -1,9 +1,8 @@
 // @flow strict
 import { personalData } from '@/utils/data/personal-data';
 import { MdAlternateEmail } from "react-icons/md";
-import { FaTelegram } from "react-icons/fa"; // Importing Telegram icon
 import ContactForm from './contact-form';
-import { FaFiverr } from 'react-icons/fa';  // Fiverr icon import
+import { FaTelegram, FaFiverr } from 'react-icons/fa'; // Fiverr icon import
 
 function ContactSection() {
   return (
