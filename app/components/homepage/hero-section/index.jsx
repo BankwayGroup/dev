@@ -21,21 +21,20 @@ function HeroSection() {
 
 <div className="grid grid-cols-1 items-start lg:grid-cols-2 lg:gap-12 gap-y-8">
   <div className="order-2 lg:order-1 flex flex-col items-start justify-center p-2 pb-20 md:pb-10 lg:pt-10">
-<h1 className="text-3xl font-bold leading-10 text-white md:font-extrabold lg:text-[2.6rem] lg:leading-[3.5rem]">
-  <span className="text-white typewriter-effect">
-    Hello, <br />
-  </span>
-  <span className="text-white typewriter-effect" style="animation-delay: 4s">
-    This is <span className="text-pink-500">{personalData.name},</span><br />
-  </span>
-  <span className="text-white typewriter-effect" style="animation-delay: 8s">
-    I'm a Professional <br />
-  </span>
-  <span className="text-[#16f2b3] typewriter-effect" style="animation-delay: 12s">
-    {personalData.designation}.
-  </span>
-</h1>
-
+    <h1 className="text-3xl font-bold leading-10 text-white md:font-extrabold lg:text-[2.6rem] lg:leading-[3.5rem]">
+      <span className="text-white typewriter-effect" style={{ animationDelay: '0s' }}>
+        Hello, <br />
+      </span>
+      <span className="text-white typewriter-effect" style={{ animationDelay: '4s' }}>
+        This is <span className="text-pink-500">{personalData.name},</span><br />
+      </span>
+      <span className="text-white typewriter-effect" style={{ animationDelay: '8s' }}>
+        I'm a Professional <br />
+      </span>
+      <span className="text-[#16f2b3] typewriter-effect" style={{ animationDelay: '12s' }}>
+        {personalData.designation}.
+      </span>
+    </h1>
           <div className="my-12 flex items-center gap-5">
             <Link
               href="https://www.fiverr.com/devzahir"
