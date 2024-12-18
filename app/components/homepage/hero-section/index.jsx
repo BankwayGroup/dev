@@ -4,24 +4,11 @@ import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
 import Link from "next/link";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
-import { FaFacebook, FaTwitterSquare } from "react-icons/fa";
-import { FaRobot } from 'react-icons/fa';
+import { FaFacebook, FaTwitterSquare, FaRobot, FaSuitcase } from "react-icons/fa"; // Combine imports
 import { RiContactsFill } from "react-icons/ri";
 import { SiLeetcode } from "react-icons/si";
-import { FaSuitcase } from 'react-icons/fa';  // Fiverr icon import
-import React from 'react';
-import { Typewriter } from 'react-simple-typewriter';
-
-function HeroSection() {
-  return (
-    <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
-      <Image
-        src="/hero.svg"
-        alt="Hero"
-        width={1572}
-        height={795}
-        className="absolute -top-[98px] -z-10"
-      />
+import React from "react";
+import { Typewriter } from "react-simple-typewriter";
 
 function HeroSection() {
   return (
@@ -55,24 +42,23 @@ function HeroSection() {
             .
           </h1>
           <div className="my-12 flex items-center gap-5">
-
-     <Link
-    href="https://www.fiverr.com/devzahir"  // Replace with your actual Fiverr profile link
-    target='_blank'
-    className="transition-all text-pink-500 hover:scale-125 duration-300"
-  >
-    <FaSuitcase size={30} />  {/* Fiverr icon */}
-  </Link>
             <Link
-    href="https://github.com/devzahirx3"  // Replace with your actual Fiverr profile link
-              target='_blank'
+              href="https://www.fiverr.com/devzahir"
+              target="_blank"
+              className="transition-all text-pink-500 hover:scale-125 duration-300"
+            >
+              <FaSuitcase size={30} />
+            </Link>
+            <Link
+              href="https://github.com/devzahirx3"
+              target="_blank"
               className="transition-all text-pink-500 hover:scale-125 duration-300"
             >
               <BsGithub size={30} />
             </Link>
             <Link
               href={personalData.leetcode}
-              target='_blank'
+              target="_blank"
               className="transition-all text-pink-500 hover:scale-125 duration-300"
             >
               <SiLeetcode size={30} />
