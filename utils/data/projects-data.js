@@ -2,6 +2,10 @@ import ayla from '/public/image/ayla.jpg';
 import crefin from '/public/image/crefin.jpg';
 import realEstate from '/public/image/real-estate.jpg';
 import travel from '/public/image/travel.jpg';
+import botImage from '/public/image/botImage.jpg';
+import websiteImage from '/public/image/websiteImage.jpg';
+import discordImage from '/public/image/discordImage.jpg';
+import facebookImage from '/public/image/facebookImage.jpg';
 
 export const projectsData = [
     {
