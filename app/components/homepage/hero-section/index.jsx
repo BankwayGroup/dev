@@ -31,7 +31,6 @@ function HeroSection() {
         .
       </span>
     </h1>
-  </div>
 
 
           <div className="my-12 flex items-center gap-5">
