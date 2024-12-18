@@ -8,6 +8,7 @@ import { FaFacebook, FaTwitterSquare } from "react-icons/fa";
 import { FaRobot } from 'react-icons/fa';
 import { RiContactsFill } from "react-icons/ri";
 import { SiLeetcode } from "react-icons/si";
+import { FaFiverr } from 'react-icons/fa';  // Fiverr icon import
 
 function HeroSection() {
   return (
