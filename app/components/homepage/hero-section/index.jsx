@@ -8,7 +8,7 @@ import { FaFacebook, FaTwitterSquare } from "react-icons/fa";
 import { FaRobot } from 'react-icons/fa';
 import { RiContactsFill } from "react-icons/ri";
 import { SiLeetcode } from "react-icons/si";
-import { FaGlobe } from 'react-icons/fa';  // Fiverr icon import
+import { FaSuitcase } from 'react-icons/fa';  // Fiverr icon import
 
 function HeroSection() {
   return (
@@ -33,6 +33,13 @@ function HeroSection() {
           </h1>
 
           <div className="my-12 flex items-center gap-5">
+     <Link
+    href="https://www.fiverr.com/devzahir"  // Replace with your actual Fiverr profile link
+    target='_blank'
+    className="transition-all text-pink-500 hover:scale-125 duration-300"
+  >
+    <FaSuitcase size={30} />  {/* Fiverr icon */}
+  </Link>
             <Link
               href={personalData.github}
               target='_blank'
@@ -47,13 +54,7 @@ function HeroSection() {
             >
               <SiLeetcode size={30} />
             </Link>
-     <Link
-    href="https://www.fiverr.com/devzahir"  // Replace with your actual Fiverr profile link
-    target='_blank'
-    className="transition-all text-pink-500 hover:scale-125 duration-300"
-  >
-    <FaGlobe size={30} />  {/* Fiverr icon */}
-  </Link>
+
           </div>
 
           <div className="flex items-center gap-3">
