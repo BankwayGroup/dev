@@ -22,13 +22,21 @@ function HeroSection() {
 <div className="grid grid-cols-1 items-start lg:grid-cols-2 lg:gap-12 gap-y-8">
   <div className="order-2 lg:order-1 flex flex-col items-start justify-center p-2 pb-20 md:pb-10 lg:pt-10">
     <h1 className="text-3xl font-bold leading-10 text-white md:font-extrabold lg:text-[2.6rem] lg:leading-[3.5rem]">
-      <span className="text-white typewriter-effect">
-        Hello, <br />
-        This is{' '}
-        <span className="text-pink-500">{personalData.name}</span>
-        {` ,<br /> I'm a Professional <br />`}
-        <span className="text-[#16f2b3]">{personalData.designation}</span>
-        .
+      <span className="text-white">
+        <Typewriter
+          words={[
+            "Hello,",
+            `This is ${personalData.name}`,
+            `, I'm a Professional`,
+            personalData.designation,
+          ]}
+          loop={false} // You can change this to `true` if you want the animation to repeat
+          cursor
+          cursorStyle="|"
+          typeSpeed={70} // Adjust typing speed here
+          deleteSpeed={50} // Adjust delete speed
+          delaySpeed={1000} // Delay before retyping
+        />
       </span>
     </h1>
 
