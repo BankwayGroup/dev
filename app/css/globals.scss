@@ -42,7 +42,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   border-right: 0.15em solid orange;  /* Cursor effect */
-  animation: typing 4s steps(40) 1 normal both, blink 0.75s step-end infinite;
+  animation: typing 4s steps(50) 1s 1 normal both, blink 0.75s step-end infinite, vanish-cursor 4s forwards;
 }
 
 @keyframes typing {
@@ -51,6 +51,18 @@ body {
   }
   to {
     width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@keyframes vanish-cursor {
+  100% {
+    border-color: transparent; /* Make the cursor disappear after typing */
   }
 }
 
