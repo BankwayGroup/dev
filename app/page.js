@@ -9,7 +9,7 @@ import Projects from "./components/homepage/projects";
 import Skills from "./components/homepage/skills";
 
 async function getData() {
-  const res = await fetch(`https://dev.to/api/articles?username=devzahirx3`)
+  const res = await fetch(`https://dev.to/api/articles?username=${personalData.devUsername}`)
 
   if (!res.ok) {
     throw new Error('Failed to fetch data')
