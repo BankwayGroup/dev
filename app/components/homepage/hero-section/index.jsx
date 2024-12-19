@@ -26,7 +26,7 @@ function HeroSection() {
         Hello, <br />
       </span>
       <span className="text-white typewriter-effect" style={{ animationDelay: '1s' }}>
-        I&apos;m <span className="text-pink-500">{personalData.name},</span><br />
+        I&apos;m <span className="text-pink-500"> {personalData.name},</span><br />
       </span>
       <span className="text-white typewriter-effect" style={{ animationDelay: '2s' }}>
         A Professional <br />
