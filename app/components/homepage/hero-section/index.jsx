@@ -14,7 +14,7 @@ if (typeof window !== "undefined") {
   const script = document.createElement('script');
   script.src = "https://telegram.org/js/telegram-widget.js?7";
   script.async = true;
-  script.setAttribute('data-telegram-chat-url', 'https://t.me/devzahirrobot');
+  script.setAttribute('data-telegram-chat-url', 'https://t.me/devzahirrobot?start=start');
   script.setAttribute('data-telegram-width', '100%');
   script.setAttribute('data-telegram-height', '50');
   document.body.appendChild(script);
