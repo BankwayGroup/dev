@@ -1,4 +1,5 @@
 // @flow strict
+'use client'; // Move this to the top
 
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
@@ -8,7 +9,6 @@ import { FaFacebook, FaTwitterSquare, FaRobot, FaSuitcase } from "react-icons/fa
 import { RiContactsFill } from "react-icons/ri";
 import { SiLeetcode } from "react-icons/si";
 
-'use client';
 
 function HeroSection() {
 const handleClose = () => {
