@@ -8,8 +8,17 @@ import { FaFacebook, FaTwitterSquare, FaRobot, FaSuitcase } from "react-icons/fa
 import { RiContactsFill } from "react-icons/ri";
 import { SiLeetcode } from "react-icons/si";
 
+
 function HeroSection() {
-  return (
+  const handleClose = () => {
+    if (window.Telegram && window.Telegram.Webview) {
+      window.Telegram.Webview.close();
+    } else {
+      console.log("Telegram Webview is not available.");
+    }
+  };
+
+  return  (
     <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
       <Image
         src="/hero.svg"
@@ -68,11 +77,13 @@ function HeroSection() {
               </button>
             </Link>
 
-            <Link className="flex items-center gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-3 md:px-8 py-3 md:py-4 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold" role="button" target="_blank" href={personalData.resume}
+            <button
+              onClick={handleClose}
+              className="flex items-center gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-3 md:px-8 py-3 md:py-4 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold"
             >
               <span>Support Bot</span>
               <FaRobot size={16} />
-            </Link>
+            </button>
           </div>
 
         </div>
