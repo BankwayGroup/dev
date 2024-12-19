@@ -1,5 +1,4 @@
 // @flow strict
-'use client'; // Ensure this is at the very top
 
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
