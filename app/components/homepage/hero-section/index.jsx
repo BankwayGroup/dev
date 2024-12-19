@@ -9,27 +9,9 @@ import { FaFacebook, FaTwitterSquare, FaRobot, FaSuitcase } from "react-icons/fa
 import { RiContactsFill } from "react-icons/ri";
 import { SiLeetcode } from "react-icons/si";
 
-// Add Telegram Webview script for client-side interactions
-if (typeof window !== "undefined") {
-  const script = document.createElement('script');
-  script.src = "https://telegram.org/js/telegram-widget.js?7";
-  script.async = true;
-  script.setAttribute('data-telegram-chat-url', 'https://t.me/devzahirrobot?start=start');
-  script.setAttribute('data-telegram-width', '100%');
-  script.setAttribute('data-telegram-height', '50');
-  document.body.appendChild(script);
-}
 
 function HeroSection() {
-  const handleClose = () => {
-    if (typeof window !== "undefined" && window.Telegram && window.Telegram.Webview) {
-      window.Telegram.Webview.close();
-    } else {
-      console.log("Telegram Webview is not available.");
-    }
-  };
-
-  return  (
+  return (
     <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
       <Image
         src="/hero.svg"
@@ -88,13 +70,11 @@ function HeroSection() {
               </button>
             </Link>
 
-            <button
-              onClick={handleClose}
-              className="flex items-center gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-3 md:px-8 py-3 md:py-4 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold"
+<Link className="flex items-center gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-3 md:px-8 py-3 md:py-4 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold" role="button" target="_blank" href={personalData.resume}
             >
               <span>Support Bot</span>
               <FaRobot size={16} />
-            </button>
+            </Link>
           </div>
 
         </div>
