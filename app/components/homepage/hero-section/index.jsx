@@ -8,15 +8,17 @@ import { FaFacebook, FaTwitterSquare, FaRobot, FaSuitcase } from "react-icons/fa
 import { RiContactsFill } from "react-icons/ri";
 import { SiLeetcode } from "react-icons/si";
 
+'use client';
 
 function HeroSection() {
-  const handleClose = () => {
-    if (window.Telegram && window.Telegram.Webview) {
-      window.Telegram.Webview.close();
-    } else {
-      console.log("Telegram Webview is not available.");
-    }
-  };
+const handleClose = () => {
+  if (typeof window !== "undefined" && window.Telegram && window.Telegram.Webview) {
+    window.Telegram.Webview.close();
+  } else {
+    console.log("Telegram Webview is not available.");
+  }
+};
+
 
   return  (
     <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
