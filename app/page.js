@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { personalData } from "@/utils/data/personal-data";
 import AboutSection from "./components/homepage/about";
 import Blog from "./components/homepage/blog";
@@ -8,22 +9,46 @@ import HeroSection from "./components/homepage/hero-section";
 import Projects from "./components/homepage/projects";
 import Skills from "./components/homepage/skills";
 
+// Function to fetch data
 async function getData() {
-  const res = await fetch(`https://dev.to/api/articles?username=${personalData.devUsername}`)
+  try {
+    const res = await fetch(
+      `https://dev.to/api/articles?username=${personalData.devUsername}`
+    );
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
+    if (!res.ok) {
+      throw new Error("Failed to fetch data");
+    }
+
+    const data = await res.json();
+
+    // Filter and sort data
+    const filtered = data
+      .filter((item) => item?.cover_image)
+      .sort(() => Math.random() - 0.2);
+
+    return filtered;
+  } catch (error) {
+    console.error("Error fetching blog data:", error);
+    return [];
   }
+}
 
-  const data = await res.json();
+// Main Home Component
+export default function Home() {
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const filtered = data.filter((item) => item?.cover_image).sort(() => Math.random() - 0.2);
-
-  return filtered;
-};
-
-export default async function Home() {
-  const blogs = await getData();
+  // Fetch data on component mount
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      const fetchedBlogs = await getData();
+      setBlogs(fetchedBlogs);
+      setLoading(false);
+    }
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -33,8 +58,15 @@ export default async function Home() {
       <Skills />
       <Projects />
       <Education />
-      <Blog blogs={blogs} />
+      {/* Blog Section with Loading and Error Handling */}
+      {loading ? (
+        <p>Loading blogs...</p>
+      ) : blogs.length > 0 ? (
+        <Blog blogs={blogs} />
+      ) : (
+        <p>No blogs available at the moment.</p>
+      )}
       <ContactSection />
     </>
-  )
-};
+  );
+}
