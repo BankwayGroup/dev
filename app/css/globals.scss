@@ -37,12 +37,12 @@ body {
   // padding-top: calc(var(--index) * 2.5rem);
   top: calc(var(--index) * 4rem);
 }
-/* Professional and dynamic entrance animation */
+/* Professional and dynamic entrance animation without glitch */
 .typewriter-effect {
   display: inline-block;
   opacity: 0; /* Start with the element hidden */
   transform: scale(0.95); /* Start slightly scaled down */
-  animation: entranceAnimation 1.8s ease-out forwards, glitchEffect 3s ease-out 1.8s forwards; /* Smooth entrance followed by glitch effect */
+  animation: entranceAnimation 2s ease-out forwards, fadeIn 2s ease-in 1s forwards; /* Smooth entrance with delayed fade-in */
 }
 
 /* Smooth fade-in, scale-up, and slight movement */
@@ -52,8 +52,8 @@ body {
     transform: scale(0.95) translateY(20px); /* Start with a slight downward translation */
   }
   60% {
-    opacity: 0.6;
-    transform: scale(1.05) translateY(-10px); /* Slight scale up and translate upwards */
+    opacity: 0.7;
+    transform: scale(1.05) translateY(-15px); /* Slight scale up and translate upwards */
   }
   100% {
     opacity: 1;
@@ -61,30 +61,12 @@ body {
   }
 }
 
-/* Glitch effect with controlled randomness */
-@keyframes glitchEffect {
+/* Smooth fade-in effect */
+@keyframes fadeIn {
   0% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  20% {
-    transform: translateX(-5px) rotate(-2deg);
-    opacity: 0.8;
-  }
-  40% {
-    transform: translateX(5px) rotate(2deg);
-    opacity: 0.9;
-  }
-  60% {
-    transform: translateX(-3px) rotate(-1deg);
-    opacity: 0.85;
-  }
-  80% {
-    transform: translateX(3px) rotate(1deg);
-    opacity: 0.95;
+    opacity: 0;
   }
   100% {
-    transform: translateX(0) rotate(0deg);
     opacity: 1;
   }
 }
