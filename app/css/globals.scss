@@ -45,68 +45,50 @@ body {
   animation: typing 2s steps(30) 1s forwards, blink-caret 0.75s step-end infinite, glitch 1s ease-in-out 2s 1 forwards;
 }
 
-/* Typing animation */
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
+/* Smooth fade-in with scale-up for initial page load */
+.typewriter-effect {
+  display: inline-block;
+  opacity: 0; /* Start with the element hidden */
+  transform: scale(0.9); /* Start scaled down */
+  animation: fadeInScale 1.5s ease-out forwards; /* Fade-in with scale effect */
 }
 
-/* Blinking cursor animation */
-@keyframes blink {
-  50% {
-    border-color: transparent;
+/* Smooth fade-in with scale-up */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9); /* Start smaller */
   }
-}
-
-/* Vanish the cursor after typing */
-@keyframes vanish-cursor {
   100% {
-    border-color: transparent;
+    opacity: 1;
+    transform: scale(1); /* End at normal size */
   }
 }
 
-/* Glitch effect for added randomness with smoother transitions */
+/* Glitch effect for added randomness */
 @keyframes glitch {
   0% {
     transform: translateX(0);
     opacity: 1;
   }
-  15% {
-    transform: translateX(-8px);
-    opacity: 0.85;
+  20% {
+    transform: translateX(-5px);
+    opacity: 0.8;
   }
-  30% {
-    transform: translateX(10px);
+  40% {
+    transform: translateX(5px);
     opacity: 0.9;
   }
-  45% {
+  60% {
     transform: translateX(-5px);
     opacity: 0.85;
   }
-  60% {
+  80% {
     transform: translateX(5px);
     opacity: 0.95;
-  }
-  75% {
-    transform: translateX(-3px);
-    opacity: 0.9;
   }
   100% {
     transform: translateX(0);
     opacity: 1;
-  }
-}
-
-/* Shake effect at the end of the animation */
-@keyframes shake-end {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(0); /* Stop shaking at the final position */
   }
 }
