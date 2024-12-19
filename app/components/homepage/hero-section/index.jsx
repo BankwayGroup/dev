@@ -1,24 +1,33 @@
 // @flow strict
-'use client'; // Move this to the top
+'use client'; // Ensure this is at the very top
 
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
 import Link from "next/link";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
-import { FaFacebook, FaTwitterSquare, FaRobot, FaSuitcase } from "react-icons/fa"; // Combine imports
+import { FaFacebook, FaTwitterSquare, FaRobot, FaSuitcase } from "react-icons/fa"; 
 import { RiContactsFill } from "react-icons/ri";
 import { SiLeetcode } from "react-icons/si";
 
+// Add Telegram Webview script for client-side interactions
+if (typeof window !== "undefined") {
+  const script = document.createElement('script');
+  script.src = "https://telegram.org/js/telegram-widget.js?7";
+  script.async = true;
+  script.setAttribute('data-telegram-chat-url', 'https://t.me/your_telegram_channel');
+  script.setAttribute('data-telegram-width', '100%');
+  script.setAttribute('data-telegram-height', '50');
+  document.body.appendChild(script);
+}
 
 function HeroSection() {
-const handleClose = () => {
-  if (typeof window !== "undefined" && window.Telegram && window.Telegram.Webview) {
-    window.Telegram.Webview.close();
-  } else {
-    console.log("Telegram Webview is not available.");
-  }
-};
-
+  const handleClose = () => {
+    if (typeof window !== "undefined" && window.Telegram && window.Telegram.Webview) {
+      window.Telegram.Webview.close();
+    } else {
+      console.log("Telegram Webview is not available.");
+    }
+  };
 
   return  (
     <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
