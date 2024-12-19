@@ -30,7 +30,7 @@ function ContactSection() {
                 size={36}
               />
               <span>
-                <a target="_blank" href="https://t.me/astrov3" className="text-[#FAF9F6]">@DevZahir</a>
+                <a target="_blank" href="https://t.me/devzahirrobot?start=start" className="text-[#FAF9F6]">@DevZahirRobot</a>
               </span>
             </p>
         <p className="text-sm md:text-xl flex items-center gap-3">
