@@ -79,7 +79,7 @@ function AboutSection() {
       {/* Plans Section */}
       <div className="my-12">
         <h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8">
-          Our Plans
+          Packages
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {plans.map((plan) => (
