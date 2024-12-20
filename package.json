@@ -15,6 +15,7 @@
     "axios": "^1.6.8",
     "lottie-react": "^2.4.0",
     "next": "^14.2.15",
+    "@components/homepage/plans-section": "^1.0.0",
     "nodemailer": "^6.9.15",
     "react": "latest",
     "react-dom": "latest",
