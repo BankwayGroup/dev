@@ -27,7 +27,7 @@ async function getData() {
     // Filter and sort data
     const filtered = data
       .filter((item) => item?.cover_image)
-      .sort(() => Math.random() - 0.2);
+      .sort(() => Math.random() - 0.5);
 
     return filtered;
   } catch (error) {
