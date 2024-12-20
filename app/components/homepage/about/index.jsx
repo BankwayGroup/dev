@@ -23,8 +23,6 @@ const plans = [
     ],
     deliveryTime: "3 days",
     revisions: "2",
-    contact: "@DevZahirRobot",
-    link: "https://devzahir.com/",
   },
   {
     id: 2,
@@ -46,8 +44,6 @@ const plans = [
     ],
     deliveryTime: "5 days",
     revisions: "3",
-    contact: "@DevZahirRobot",
-    link: "https://devzahir.com/",
   },
   {
     id: 3,
@@ -68,8 +64,6 @@ const plans = [
     ],
     deliveryTime: "10 days",
     revisions: "5",
-    contact: "@DevZahirRobot",
-    link: "https://devzahir.com/",
   },
 ];
 
@@ -81,36 +75,38 @@ function AboutSection() {
         <h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8">
           Packages
         </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {plans.map((plan) => (
-            <div
-              key={plan.id}
-              className="bg-[#1a1443] text-white p-6 rounded-lg shadow-lg"
-            >
-              <h3 className="text-xl font-bold mb-4">{plan.title}</h3>
-              <p className="text-lg font-semibold mb-4">{plan.price}</p>
-              <p className="text-sm mb-4">{plan.description}</p>
-              <ul className="list-disc ml-5 mb-4 text-sm">
-                {plan.features.map((feature, index) => (
-                  <li key={index}>{feature}</li>
-                ))}
-              </ul>
-              <p className="text-sm mb-2">
-                <strong>Delivery Time:</strong> {plan.deliveryTime}
-              </p>
-              <p className="text-sm mb-4">
-                <strong>Revisions:</strong> {plan.revisions}
-              </p>
-              <a
-                href={plan.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#16f2b3] underline"
+        <div className="relative">
+          <div className="flex overflow-x-auto space-x-6 p-4 scrollbar-thin scrollbar-thumb-[#16f2b3] scrollbar-thumb-rounded-lg">
+            {plans.map((plan) => (
+              <div
+                key={plan.id}
+                className="min-w-[300px] bg-[#1a1443] text-white p-6 rounded-lg shadow-lg flex-shrink-0 hover:scale-105 transition-transform duration-300"
               >
-                Contact: {plan.contact}
-              </a>
-            </div>
-          ))}
+                <h3 className="text-xl font-bold mb-4">{plan.title}</h3>
+                <p className="text-lg font-semibold mb-4">{plan.price}</p>
+                <p className="text-sm mb-4">{plan.description}</p>
+                <ul className="list-disc ml-5 mb-4 text-sm">
+                  {plan.features.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                  ))}
+                </ul>
+                <p className="text-sm mb-2">
+                  <strong>Delivery Time:</strong> {plan.deliveryTime}
+                </p>
+                <p className="text-sm mb-4">
+                  <strong>Revisions:</strong> {plan.revisions}
+                </p>
+                <a
+                  href="https://devzahir.com/#contact"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block mt-4 px-6 py-3 text-center text-white font-medium bg-gradient-to-r from-[#16f2b3] via-[#12d9f7] to-[#16f2b3] rounded-full shadow-lg transition-all duration-500 hover:scale-110 hover:shadow-xl hover:from-[#12d9f7] hover:via-[#16f2b3] hover:to-[#12d9f7] animate-pulse"
+                >
+                  Contact Now
+                </a>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
