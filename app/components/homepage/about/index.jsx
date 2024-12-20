@@ -76,14 +76,17 @@ function AboutSection() {
           Packages
         </h2>
         <div className="relative">
-          <div className="flex overflow-x-auto space-x-6 p-4 scrollbar-thin scrollbar-thumb-[#16f2b3] scrollbar-thumb-rounded-lg">
+          <div className="flex overflow-x-auto space-x-8 p-4 scrollbar-thin scrollbar-thumb-[#16f2b3] scrollbar-thumb-rounded-lg">
             {plans.map((plan) => (
               <div
                 key={plan.id}
-                className="min-w-[300px] bg-[#1a1443] text-white p-6 rounded-lg shadow-lg flex-shrink-0 hover:scale-105 transition-transform duration-300"
+                className="min-w-[320px] bg-[#1a1443] text-white p-6 rounded-lg shadow-lg flex-shrink-0 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
               >
                 <h3 className="text-xl font-bold mb-4">{plan.title}</h3>
-                <p className="text-lg font-semibold mb-4">{plan.price}</p>
+                {/* Emphasizing Price */}
+                <p className="text-2xl font-bold mb-4 text-[#16f2b3] hover:text-[#12d9f7] transition-colors duration-300">
+                  {plan.price}
+                </p>
                 <p className="text-sm mb-4">{plan.description}</p>
                 <ul className="list-disc ml-5 mb-4 text-sm">
                   {plan.features.map((feature, index) => (
