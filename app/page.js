@@ -9,24 +9,33 @@ import Projects from "./components/homepage/projects";
 import Skills from "./components/homepage/skills";
 
 async function getData() {
-  const res = await fetch(`https://dev.to/api/articles?username=${personalData.devUsername}`)
+  try {
+    const res = await fetch(`https://dev.to/api/articles?username=${personalData.devUsername || "devzahirx3"}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
+    if (!res.ok) {
+      throw new Error(`Failed to fetch data: ${res.status} ${res.statusText}`);
+    }
+
+    const data = await res.json();
+
+    // Filter for items with a cover image and randomize the order
+    return data.filter((item) => item?.cover_image).sort(() => Math.random() - 0.5);
+  } catch (error) {
+    console.error("Error fetching data:", error.message);
+    return [];
   }
-
-  const data = await res.json();
-
-  const filtered = data.filter((item) => item?.cover_image).sort(() => Math.random() - 0.5);
-
-  return filtered;
-};
+}
 
 export default async function Home() {
   const blogs = await getData();
 
   return (
-    <div suppressHydrationWarning >
+    <div suppressHydrationWarning>
       <HeroSection />
       <AboutSection />
       <Experience />
@@ -36,5 +45,5 @@ export default async function Home() {
       <Blog blogs={blogs} />
       <ContactSection />
     </div>
-  )
-};
+  );
+}
