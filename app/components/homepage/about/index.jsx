@@ -78,11 +78,11 @@ function AboutSection() {
         <div className="relative">
           {/* Container for Plans */}
           <div className="overflow-x-auto px-4">
-            <div className="flex space-x-8 animate-scroll-infinite scroll-smooth">
+            <div className="flex flex-wrap justify-center space-x-8 animate-scroll-infinite scroll-smooth">
               {plans.map((plan) => (
                 <div
                   key={plan.id}
-                  className="max-w-[320px] w-full bg-[#1a1443] text-white p-6 rounded-lg shadow-lg flex-shrink-0 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
+                  className="max-w-[320px] w-full bg-[#1a1443] text-white p-6 rounded-lg shadow-lg flex-shrink-0 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl mb-8"
                 >
                   <h3 className="text-xl font-bold mb-4">{plan.title}</h3>
                   {/* Emphasizing Price */}
@@ -103,7 +103,6 @@ function AboutSection() {
                   </p>
                   <a
                     href="https://devzahir.com/#contact"
-                    target="_blank"
                     rel="noopener noreferrer"
                     className="block mt-4 px-6 py-3 text-center text-white font-medium bg-gradient-to-r from-[#16f2b3] via-[#12d9f7] to-[#16f2b3] rounded-full shadow-lg transition-all duration-500 hover:scale-110 hover:shadow-xl hover:from-[#12d9f7] hover:via-[#16f2b3] hover:to-[#12d9f7] animate-pulse"
                   >
