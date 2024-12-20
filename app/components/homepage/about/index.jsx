@@ -101,6 +101,17 @@ function AboutSection() {
               <p className="text-sm mb-4">
                 <strong>Revisions:</strong> {plan.revisions}
               </p>
+              <p className="text-sm">
+                <strong>Contact:</strong>{" "}
+                <a
+                  href={plan.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#16f2b3] underline"
+                >
+                  {plan.contact}
+                </a>
+              </p>
             </div>
           ))}
         </div>
@@ -140,7 +151,7 @@ function AboutSection() {
               src={personalData.profile}
               width={280}
               height={280}
-              alt="Abu Said"
+              alt={personalData.description || "Profile Image"}
               className="rounded-lg transition-all duration-1000 hover:scale-110 cursor-pointer"
             />
           </div>
@@ -149,3 +160,5 @@ function AboutSection() {
     </div>
   );
 }
+
+export default AboutSection;
