@@ -51,7 +51,7 @@ function HeroSection() {
               <BsGithub size={30} />
             </Link>
 <Link
-  href="https://wa.me/9013359043"
+  href="https://wa.me/c/19013359043"
   target="_blank"
   className="transition-all text-green-500 hover:scale-125 duration-300"
 >
