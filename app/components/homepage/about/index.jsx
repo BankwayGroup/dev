@@ -47,7 +47,7 @@ const plans = [
   },
   {
     id: 3,
-    title: "💎 Premium: Fully Functional E-Commerce Website",
+    title: "💎 Premium: Functional E-Commerce Website",
     price: "$425",
     description:
       "Get a fully functional e-commerce website or an advanced site with backend integration.",
@@ -77,8 +77,8 @@ function AboutSection() {
         </h2>
         <div className="relative">
           {/* Container for Plans */}
-          <div className="overflow-hidden relative">
-            <div className="flex space-x-8 animate-scroll-infinite">
+          <div className="overflow-x-auto px-4">
+            <div className="flex space-x-8 animate-scroll-infinite scroll-smooth">
               {plans.map((plan) => (
                 <div
                   key={plan.id}
@@ -149,4 +149,3 @@ function AboutSection() {
 }
 
 export default AboutSection;
-
