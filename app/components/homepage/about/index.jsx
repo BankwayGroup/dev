@@ -2,7 +2,7 @@
 
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
-import PlansSection from "@/components/plans-section"; // Import the PlansSection
+import PlansSection from "@/components/homepage/plans-section";
 
 function AboutSection() {
   return (
