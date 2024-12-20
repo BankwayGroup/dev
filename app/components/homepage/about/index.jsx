@@ -76,39 +76,42 @@ function AboutSection() {
           Packages
         </h2>
         <div className="relative">
-          <div className="flex overflow-x-auto space-x-8 p-4 scrollbar-thin scrollbar-thumb-[#16f2b3] scrollbar-thumb-rounded-lg">
-            {plans.map((plan) => (
-              <div
-                key={plan.id}
-                className="min-w-[320px] bg-[#1a1443] text-white p-6 rounded-lg shadow-lg flex-shrink-0 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
-              >
-                <h3 className="text-xl font-bold mb-4">{plan.title}</h3>
-                {/* Emphasizing Price */}
-                <p className="text-2xl font-bold mb-4 text-[#16f2b3] hover:text-[#12d9f7] transition-colors duration-300">
-                  {plan.price}
-                </p>
-                <p className="text-sm mb-4">{plan.description}</p>
-                <ul className="list-disc ml-5 mb-4 text-sm">
-                  {plan.features.map((feature, index) => (
-                    <li key={index}>{feature}</li>
-                  ))}
-                </ul>
-                <p className="text-sm mb-2">
-                  <strong>Delivery Time:</strong> {plan.deliveryTime}
-                </p>
-                <p className="text-sm mb-4">
-                  <strong>Revisions:</strong> {plan.revisions}
-                </p>
-                <a
-                  href="https://devzahir.com/#contact"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block mt-4 px-6 py-3 text-center text-white font-medium bg-gradient-to-r from-[#16f2b3] via-[#12d9f7] to-[#16f2b3] rounded-full shadow-lg transition-all duration-500 hover:scale-110 hover:shadow-xl hover:from-[#12d9f7] hover:via-[#16f2b3] hover:to-[#12d9f7] animate-pulse"
+          {/* Container for Plans */}
+          <div className="overflow-hidden relative">
+            <div className="flex space-x-8 animate-scroll-infinite">
+              {plans.map((plan) => (
+                <div
+                  key={plan.id}
+                  className="max-w-[320px] w-full bg-[#1a1443] text-white p-6 rounded-lg shadow-lg flex-shrink-0 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
                 >
-                  Contact Now
-                </a>
-              </div>
-            ))}
+                  <h3 className="text-xl font-bold mb-4">{plan.title}</h3>
+                  {/* Emphasizing Price */}
+                  <p className="text-2xl font-bold mb-4 text-[#16f2b3] hover:text-[#12d9f7] transition-colors duration-300">
+                    {plan.price}
+                  </p>
+                  <p className="text-sm mb-4">{plan.description}</p>
+                  <ul className="list-disc ml-5 mb-4 text-sm">
+                    {plan.features.map((feature, index) => (
+                      <li key={index}>{feature}</li>
+                    ))}
+                  </ul>
+                  <p className="text-sm mb-2">
+                    <strong>Delivery Time:</strong> {plan.deliveryTime}
+                  </p>
+                  <p className="text-sm mb-4">
+                    <strong>Revisions:</strong> {plan.revisions}
+                  </p>
+                  <a
+                    href="https://devzahir.com/#contact"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block mt-4 px-6 py-3 text-center text-white font-medium bg-gradient-to-r from-[#16f2b3] via-[#12d9f7] to-[#16f2b3] rounded-full shadow-lg transition-all duration-500 hover:scale-110 hover:shadow-xl hover:from-[#12d9f7] hover:via-[#16f2b3] hover:to-[#12d9f7] animate-pulse"
+                  >
+                    Contact Now
+                  </a>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -146,3 +149,4 @@ function AboutSection() {
 }
 
 export default AboutSection;
+
