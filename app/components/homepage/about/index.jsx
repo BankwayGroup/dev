@@ -1,78 +1,3 @@
-// @flow strict
-
-import { personalData } from "@/utils/data/personal-data";
-import Image from "next/image";
-
-const plans = [
-  {
-    id: 1,
-    title: "🚀 Starter Website or Bot Plan",
-    price: "$80",
-    description:
-      "A basic bot with essential features OR a simple 1-page static website tailored to your needs!",
-    features: [
-      "E-commerce functionality",
-      "Content upload and management",
-      "Speed optimization",
-      "Social media icons",
-      "Plugin/extension setup",
-      "Payment processing integration",
-      "Opt-in form and autoresponder setup",
-      "Hosting setup support",
-      "1 beautifully designed page",
-    ],
-    deliveryTime: "3 days",
-    revisions: "2",
-    contact: "@DevZahirRobot",
-    link: "https://devzahir.com/",
-  },
-  {
-    id: 2,
-    title: "🌐 Dynamic Multi-Page Website",
-    price: "$165",
-    description:
-      "Get a multi-page responsive website with dynamic features and user-friendly navigation.",
-    features: [
-      "Up to 5 pages",
-      "Content upload & management",
-      "Functionality enhancements",
-      "3 plugins/extensions",
-      "E-commerce features for 20 products",
-      "Payment processing integration",
-      "Opt-in form & autoresponder setup",
-      "Speed optimization",
-      "Hosting setup assistance",
-      "Social media icons for branding",
-    ],
-    deliveryTime: "5 days",
-    revisions: "3",
-    contact: "@DevZahirRobot",
-    link: "https://devzahir.com/",
-  },
-  {
-    id: 3,
-    title: "💎 Premium: Fully Functional E-Commerce Website",
-    price: "$425",
-    description:
-      "Get a fully functional e-commerce website or an advanced site with backend integration.",
-    features: [
-      "Content upload & management",
-      "5 plugins/extensions",
-      "E-commerce setup for 50 products",
-      "Payment processing integration",
-      "Opt-in form & autoresponder setup",
-      "Speed optimization",
-      "Hosting setup support",
-      "Social media icons",
-      "Up to 10 pages",
-    ],
-    deliveryTime: "10 days",
-    revisions: "5",
-    contact: "@DevZahirRobot",
-    link: "https://devzahir.com/",
-  },
-];
-
 function AboutSection() {
   return (
     <div>
@@ -101,16 +26,20 @@ function AboutSection() {
               <p className="text-sm mb-4">
                 <strong>Revisions:</strong> {plan.revisions}
               </p>
-              <a
-                href={plan.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#16f2b3] underline"
-              >
-                Contact: {plan.contact}
-              </a>
             </div>
           ))}
+        </div>
+
+        {/* Purchase Button */}
+        <div className="flex justify-center mt-8">
+          <a
+            href="https://devzahir.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[#16f2b3] text-white font-semibold py-2 px-6 rounded-lg shadow-lg hover:bg-[#13d2a1] transition"
+          >
+            Purchase Now
+          </a>
         </div>
       </div>
 
@@ -145,5 +74,3 @@ function AboutSection() {
     </div>
   );
 }
-
-export default AboutSection;
