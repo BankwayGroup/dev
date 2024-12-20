@@ -70,3 +70,115 @@ body {
     opacity: 1;
   }
 }
+/* Plan Card Styles */
+.plan-card {
+  max-width: 320px;
+  width: 100%;
+  background-color: #121212; /* Dark background, like a terminal */
+  color: #00FF00; /* Neon green text, typical for terminal style */
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: "Courier New", Courier, monospace; /* Monospace font for terminal style */
+  overflow: hidden;
+  position: relative;
+}
+
+/* Hover Effect on Plan Cards */
+.plan-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Terminal-Style Typing Animation */
+.plan-card h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  animation: typing 2s steps(30) 1s forwards; /* Typewriting effect */
+}
+
+.plan-card .price {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #16f2b3; /* Neon color for price */
+  animation: typing 3s steps(30) 2s forwards; /* Typewriting effect */
+}
+
+/* Terminal Features Animation */
+.plan-card ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  animation: typing 5s steps(50) 3s forwards; /* Typewriting effect */
+}
+
+/* Revisions and Delivery */
+.plan-card p {
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  animation: typing 5s steps(50) 4s forwards; /* Typewriting effect */
+}
+
+/* Gradient Button Style */
+.contact-button {
+  display: block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-image: linear-gradient(to right, #16f2b3, #12d9f7, #16f2b3);
+  color: white;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.5s ease;
+  font-family: "Courier New", Courier, monospace;
+  border: 1px solid #16f2b3; /* Border to mimic a terminal button */
+}
+
+.contact-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  background-image: linear-gradient(to right, #12d9f7, #16f2b3, #12d9f7);
+  border: 1px solid #12d9f7; /* Highlighted border on hover */
+}
+
+/* Terminal Typing Animation Keyframe */
+@keyframes typing {
+  from {
+    width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Prevent Horizontal Scrolling */
+body {
+  overflow-x: hidden;
+}
+
+/* About Section Style */
+#about {
+  margin-top: 4rem;
+  padding: 4rem 2rem;
+}
+
+#about .grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  #about .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+}
