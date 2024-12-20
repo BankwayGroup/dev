@@ -37,7 +37,7 @@ function HeroSection() {
     </h1>
           <div className="my-12 flex items-center gap-5">
             <Link
-              href="https://www.fiverr.com/devzahir"
+              href="https://www.fiverr.com/s/m5Vb1g8"
               target="_blank"
               className="transition-all text-pink-500 hover:scale-125 duration-300"
             >
