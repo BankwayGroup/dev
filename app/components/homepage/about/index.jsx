@@ -82,6 +82,8 @@ function AboutSection() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("fade-in-active");
+          } else {
+            entry.target.classList.remove("fade-in-active");
           }
         });
       },
@@ -125,17 +127,6 @@ function AboutSection() {
               </p>
             </div>
           ))}
-        </div>
-
-        {/* Purchase Button */}
-        <div className="flex justify-center mt-8">
-          <a
-            href="#contact"
-            className="flex items-center justify-center bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold py-3 px-8 rounded-full shadow-md transition-transform transform hover:scale-105 focus:scale-100"
-          >
-            Purchase Now
-            <span className="ml-2 text-lg">→</span>
-          </a>
         </div>
       </div>
     </>
