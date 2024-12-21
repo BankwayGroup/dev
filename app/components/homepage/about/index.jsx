@@ -1,7 +1,9 @@
 // @flow strict
 
+import { useEffect, useState } from "react";
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
+import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css";
 
 const plans = [
   {
@@ -74,19 +76,43 @@ const plans = [
 ];
 
 function AboutSection() {
+  const [visibleCards, setVisibleCards] = useState([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisibleCards((prev) => [...new Set([...prev, entry.target.id])]);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const cardElements = document.querySelectorAll(".fade-card");
+    cardElements.forEach((el) => observer.observe(el));
+
+    return () => {
+      cardElements.forEach((el) => observer.unobserve(el));
+    };
+  }, []);
+
   return (
     <div>
       {/* Plans Section */}
       <div className="my-12">
-<h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center">
-  <i className="fas fa-box-open mr-3"></i> Packages
-</h2>
-
+        <h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center">
+          <i className="fas fa-box-open mr-3"></i> Packages
+        </h2>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {plans.map((plan) => (
             <div
               key={plan.id}
-              className="bg-[#1a1443] text-white p-6 rounded-lg shadow-lg"
+              id={`card-${plan.id}`}
+              className={`fade-card bg-[#1a1443] text-white p-6 rounded-lg shadow-lg transition-opacity duration-700 ${
+                visibleCards.includes(`card-${plan.id}`) ? "opacity-100" : "opacity-0"
+              }`}
             >
               <h3 className="text-xl font-bold mb-4">{plan.title}</h3>
               <p className="text-lg font-semibold mb-4">{plan.price}</p>
@@ -106,16 +132,15 @@ function AboutSection() {
           ))}
         </div>
 
-{/* Purchase Button */}
-<div className="flex justify-center mt-8">
-  <a
-    href="#contact"
-    className="bg-[#16f2b3] text-white font-semibold py-2 px-6 rounded-lg shadow-lg hover:bg-[#13d2a1] transition"
-  >
-    Purchase Now
-  </a>
-</div>
-
+        {/* Purchase Button */}
+        <div className="flex justify-center mt-8">
+          <a
+            href="#contact"
+            className="bg-[#16f2b3] text-white font-semibold py-2 px-6 rounded-lg shadow-lg hover:bg-[#13d2a1] transition"
+          >
+            Purchase Now
+          </a>
+        </div>
       </div>
 
       {/* About Section */}
@@ -140,7 +165,7 @@ function AboutSection() {
               src={personalData.profile}
               width={280}
               height={280}
-              alt={personalData.description || "Profile Image"}
+              alt="Personal Profile Image"
               className="rounded-lg transition-all duration-1000 hover:scale-110 cursor-pointer"
             />
           </div>
