@@ -2,7 +2,6 @@
 
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
-import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css";
 
 const plans = [
   {
@@ -76,7 +75,15 @@ const plans = [
 
 function AboutSection() {
   return (
-    <div>
+    <>
+      {/* Font Awesome CSS */}
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha384-jLKHWM+oNb1RWjaY2zk9sXyFq28RrETfRn1iwUuDvGJk2S3mCn1Bh4yw5ceMlNRZ"
+        crossOrigin="anonymous"
+      />
+
       {/* Plans Section */}
       <div className="my-12">
         <h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center">
@@ -87,7 +94,7 @@ function AboutSection() {
           {plans.map((plan) => (
             <div
               key={plan.id}
-              className="fade-in-card bg-[#1a1443] text-white p-6 rounded-lg shadow-lg opacity-0"
+              className="bg-[#1a1443] text-white p-6 rounded-lg shadow-lg"
             >
               <h3 className="text-xl font-bold mb-4">{plan.title}</h3>
               <p className="text-lg font-semibold mb-4">{plan.price}</p>
@@ -146,7 +153,7 @@ function AboutSection() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
