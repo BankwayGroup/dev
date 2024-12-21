@@ -132,10 +132,11 @@ function AboutSection() {
 
         {/* Dynamic Gradient Purchase Button */}
 {/* Dynamic Gradient Purchase Button */}
+{/* Dynamic Gradient Purchase Button */}
 <div className="flex justify-center mt-8">
   <a
     href="#contact"
-    className="flex items-center justify-center bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105 focus:scale-100"
+    className="flex items-center justify-center bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold py-3 px-8 rounded-full shadow-md transition-transform transform hover:scale-105 focus:scale-100"
   >
     Purchase Now
     <span className="ml-2 text-lg">→</span>
