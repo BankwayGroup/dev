@@ -6,7 +6,7 @@ import Image from "next/image";
 const plans = [
   {
     id: 1,
-    title: "🚀 Starter Website or Bot Plan",
+    title: "Starter Website or Bot Plan",
     price: "$80",
     description:
       "A basic bot with essential features OR a simple 1-page static website tailored to your needs!",
@@ -28,7 +28,7 @@ const plans = [
   },
   {
     id: 2,
-    title: "🌐 Dynamic Multi-Page Website",
+    title: "Dynamic Multi-Page Website or Bot",
     price: "$165",
     description:
       "Get a multi-page responsive website with dynamic features and user-friendly navigation.",
@@ -51,7 +51,7 @@ const plans = [
   },
   {
     id: 3,
-    title: "💎 Premium: Fully Functional E-Commerce Website",
+    title: "Premium E-Commerce Website or Bot",
     price: "$425",
     description:
       "Get a fully functional e-commerce website or an advanced site with backend integration.",
@@ -100,17 +100,6 @@ function AboutSection() {
               </p>
               <p className="text-sm mb-4">
                 <strong>Revisions:</strong> {plan.revisions}
-              </p>
-              <p className="text-sm">
-                <strong>Contact:</strong>{" "}
-                <a
-                  href={plan.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#16f2b3] underline"
-                >
-                  {plan.contact}
-                </a>
               </p>
             </div>
           ))}
