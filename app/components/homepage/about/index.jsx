@@ -113,8 +113,8 @@ function AboutSection() {
   >
     Purchase Now
   </a>
+</div>
 
-        </div>
       </div>
 
       {/* About Section */}
