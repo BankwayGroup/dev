@@ -105,6 +105,7 @@ function AboutSection() {
         <h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center">
           <i className="fas fa-box-open mr-3"></i> Packages
         </h2>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {plans.map((plan) => (
             <div
