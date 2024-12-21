@@ -2,6 +2,9 @@
 "use client";
 
 import { useEffect } from "react";
+import AnimationLottie from "../../helper/animation-lottie";
+import GlowCard from "../../helper/glow-card";
+import plansAnimation from "/public/lottie/code.json";
 
 const plans = [
   {
@@ -103,27 +106,34 @@ function AboutSection() {
         <i className="fas fa-box-open mr-3"></i> Packages
       </h2>
 
+      {/* Lottie Animation */}
+      <div className="flex justify-center mb-8">
+        <div className="w-full max-w-lg">
+          <AnimationLottie animationPath={plansAnimation} />
+        </div>
+      </div>
+
+      {/* Plans Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {plans.map((plan) => (
-          <div
-            key={plan.id}
-            className="fade-in-card bg-[#1a1443] text-white p-6 rounded-lg shadow-lg"
-          >
-            <h3 className="text-xl font-bold mb-4">{plan.title}</h3>
-            <p className="text-lg font-semibold mb-4">{plan.price}</p>
-            <p className="text-sm mb-4">{plan.description}</p>
-            <ul className="list-disc ml-5 mb-4 text-sm">
-              {plan.features.map((feature, index) => (
-                <li key={index}>{feature}</li>
-              ))}
-            </ul>
-            <p className="text-sm mb-2">
-              <strong>Delivery Time:</strong> {plan.deliveryTime}
-            </p>
-            <p className="text-sm mb-4">
-              <strong>Revisions:</strong> {plan.revisions}
-            </p>
-          </div>
+          <GlowCard key={plan.id} identifier={`plan-${plan.id}`}>
+            <div className="fade-in-card bg-[#1a1443] text-white p-6 rounded-lg shadow-lg">
+              <h3 className="text-xl font-bold mb-4">{plan.title}</h3>
+              <p className="text-lg font-semibold mb-4">{plan.price}</p>
+              <p className="text-sm mb-4">{plan.description}</p>
+              <ul className="list-disc ml-5 mb-4 text-sm">
+                {plan.features.map((feature, index) => (
+                  <li key={index}>{feature}</li>
+                ))}
+              </ul>
+              <p className="text-sm mb-2">
+                <strong>Delivery Time:</strong> {plan.deliveryTime}
+              </p>
+              <p className="text-sm mb-4">
+                <strong>Revisions:</strong> {plan.revisions}
+              </p>
+            </div>
+          </GlowCard>
         ))}
       </div>
 
