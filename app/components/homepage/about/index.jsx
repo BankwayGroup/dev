@@ -1,6 +1,5 @@
 // @flow strict
 
-import { useEffect, useState } from "react";
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
 import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css";
@@ -76,28 +75,6 @@ const plans = [
 ];
 
 function AboutSection() {
-  const [visibleCards, setVisibleCards] = useState([]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisibleCards((prev) => [...new Set([...prev, entry.target.id])]);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const cardElements = document.querySelectorAll(".fade-card");
-    cardElements.forEach((el) => observer.observe(el));
-
-    return () => {
-      cardElements.forEach((el) => observer.unobserve(el));
-    };
-  }, []);
-
   return (
     <div>
       {/* Plans Section */}
@@ -110,10 +87,7 @@ function AboutSection() {
           {plans.map((plan) => (
             <div
               key={plan.id}
-              id={`card-${plan.id}`}
-              className={`fade-card bg-[#1a1443] text-white p-6 rounded-lg shadow-lg transition-opacity duration-700 ${
-                visibleCards.includes(`card-${plan.id}`) ? "opacity-100" : "opacity-0"
-              }`}
+              className="fade-in-card bg-[#1a1443] text-white p-6 rounded-lg shadow-lg opacity-0"
             >
               <h3 className="text-xl font-bold mb-4">{plan.title}</h3>
               <p className="text-lg font-semibold mb-4">{plan.price}</p>
