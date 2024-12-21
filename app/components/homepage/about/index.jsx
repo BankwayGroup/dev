@@ -6,7 +6,7 @@ import Image from "next/image";
 const plans = [
   {
     id: 1,
-    title: "Starter Website or Bot Plan",
+    title: "Starter Website or Bot",
     price: "$80",
     description:
       "A basic bot with essential features OR a simple 1-page static website tailored to your needs!",
