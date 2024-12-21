@@ -1,5 +1,5 @@
 // @flow strict
-"use client"; // Add this at the top of the file
+"use client";
 
 import { useEffect } from "react";
 import { personalData } from "@/utils/data/personal-data";
@@ -30,7 +30,7 @@ const plans = [
   },
   {
     id: 2,
-    title: "Dynamic Multi-Page Website or Bot",
+    title: "Multi-Page Website or Bot",
     price: "$165",
     description:
       "Get a multi-page responsive website with dynamic features and user-friendly navigation.",
@@ -53,7 +53,7 @@ const plans = [
   },
   {
     id: 3,
-    title: "Premium E-Commerce Website or Bot",
+    title: "E-Commerce Website or Bot",
     price: "$425",
     description:
       "Get a fully functional e-commerce website or an advanced site with backend integration.",
@@ -128,6 +128,16 @@ function AboutSection() {
               </p>
             </div>
           ))}
+        </div>
+
+        {/* Dynamic Gradient Purchase Button */}
+        <div className="flex justify-center mt-8">
+          <a
+            href="#contact"
+            className="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition-transform transform hover:scale-105 focus:scale-100"
+          >
+            Purchase Now
+          </a>
         </div>
       </div>
     </>
