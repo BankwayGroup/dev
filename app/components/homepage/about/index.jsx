@@ -133,6 +133,7 @@ function AboutSection() {
         {/* Dynamic Gradient Purchase Button */}
 {/* Dynamic Gradient Purchase Button */}
 {/* Dynamic Gradient Purchase Button */}
+{/* Dynamic Gradient Purchase Button */}
 <div className="flex justify-center mt-8">
   <a
     href="#contact"
