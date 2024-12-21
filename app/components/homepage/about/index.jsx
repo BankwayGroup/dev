@@ -131,14 +131,17 @@ function AboutSection() {
         </div>
 
         {/* Dynamic Gradient Purchase Button */}
-        <div className="flex justify-center mt-8">
-          <a
-            href="#contact"
-            className="bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition-transform transform hover:scale-105 focus:scale-100"
-          >
-            Purchase Now
-          </a>
-        </div>
+{/* Dynamic Gradient Purchase Button */}
+<div className="flex justify-center mt-8">
+  <a
+    href="#contact"
+    className="flex items-center justify-center bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105 focus:scale-100"
+  >
+    Purchase Now
+    <span className="ml-2 text-lg">→</span>
+  </a>
+</div>
+
       </div>
     </>
   );
