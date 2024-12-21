@@ -105,16 +105,15 @@ function AboutSection() {
           ))}
         </div>
 
-        {/* Purchase Button */}
-        <div className="flex justify-center mt-8">
-          <a
-            href="https://devzahir.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-[#16f2b3] text-white font-semibold py-2 px-6 rounded-lg shadow-lg hover:bg-[#13d2a1] transition"
-          >
-            Purchase Now
-          </a>
+{/* Purchase Button */}
+<div className="flex justify-center mt-8">
+  <a
+    href="#contact"
+    className="bg-[#16f2b3] text-white font-semibold py-2 px-6 rounded-lg shadow-lg hover:bg-[#13d2a1] transition"
+  >
+    Purchase Now
+  </a>
+
         </div>
       </div>
 
