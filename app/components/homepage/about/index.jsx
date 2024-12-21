@@ -82,6 +82,8 @@ function AboutSection() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("fade-in-active");
+          } else {
+            entry.target.classList.remove("fade-in-active");
           }
         });
       },
@@ -96,49 +98,46 @@ function AboutSection() {
   }, []);
 
   return (
-    <>
-      {/* Plans Section */}
-      <div className="my-12">
-        <h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center">
-          <i className="fas fa-box-open mr-3"></i> Packages
-        </h2>
+    <div className="my-12">
+      <h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center">
+        <i className="fas fa-box-open mr-3"></i> Packages
+      </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {plans.map((plan) => (
-            <div
-              key={plan.id}
-              className="fade-in-card bg-[#1a1443] text-white p-6 rounded-lg shadow-lg"
-            >
-              <h3 className="text-xl font-bold mb-4">{plan.title}</h3>
-              <p className="text-lg font-semibold mb-4">{plan.price}</p>
-              <p className="text-sm mb-4">{plan.description}</p>
-              <ul className="list-disc ml-5 mb-4 text-sm">
-                {plan.features.map((feature, index) => (
-                  <li key={index}>{feature}</li>
-                ))}
-              </ul>
-              <p className="text-sm mb-2">
-                <strong>Delivery Time:</strong> {plan.deliveryTime}
-              </p>
-              <p className="text-sm mb-4">
-                <strong>Revisions:</strong> {plan.revisions}
-              </p>
-            </div>
-          ))}
-        </div>
-
-{/* Purchase Button */}
-<div className="flex justify-center mt-8">
-  <a
-    href="#contact"
-    className="flex items-center justify-center bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold py-3 px-8 rounded-full shadow-md transition-transform transform hover:scale-105 focus:scale-100"
-  >
-    Purchase Now
-    <span className="ml-2 text-lg">→</span>
-  </a>
-</div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {plans.map((plan) => (
+          <div
+            key={plan.id}
+            className="fade-in-card bg-[#1a1443] text-white p-6 rounded-lg shadow-lg"
+          >
+            <h3 className="text-xl font-bold mb-4">{plan.title}</h3>
+            <p className="text-lg font-semibold mb-4">{plan.price}</p>
+            <p className="text-sm mb-4">{plan.description}</p>
+            <ul className="list-disc ml-5 mb-4 text-sm">
+              {plan.features.map((feature, index) => (
+                <li key={index}>{feature}</li>
+              ))}
+            </ul>
+            <p className="text-sm mb-2">
+              <strong>Delivery Time:</strong> {plan.deliveryTime}
+            </p>
+            <p className="text-sm mb-4">
+              <strong>Revisions:</strong> {plan.revisions}
+            </p>
+          </div>
+        ))}
       </div>
-    </>
+
+      {/* Purchase Button */}
+      <div className="flex justify-center mt-8">
+        <a
+          href="#contact"
+          className="flex items-center justify-center bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold py-3 px-8 rounded-full shadow-md transition-transform transform hover:scale-105 focus:scale-100"
+        >
+          Purchase Now
+          <span className="ml-2 text-lg">→</span>
+        </a>
+      </div>
+    </div>
   );
 }
 
