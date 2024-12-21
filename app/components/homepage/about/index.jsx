@@ -1,4 +1,5 @@
 // @flow strict
+"use client"; // Add this at the top of the file
 
 import { useEffect } from "react";
 import { personalData } from "@/utils/data/personal-data";
