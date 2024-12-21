@@ -73,3 +73,57 @@ body {
 html {
   scroll-behavior: smooth;
 }
+/* Initial state for fade-in cards */
+.fade-in-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Active state when the card enters the viewport */
+.fade-in-card.fade-in-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Card Styling */
+.fade-in-card {
+  background-color: #1a1443; /* Matches the bg-[#1a1443] from Tailwind */
+  color: white; /* Text color */
+  padding: 1.5rem; /* Matches p-6 */
+  border-radius: 0.75rem; /* Matches rounded-lg */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Matches shadow-lg */
+}
+/* Purchase Button Styling */
+.purchase-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #ec4899, #8b5cf6); /* Matches from-pink-500 to-purple-500 */
+  color: white;
+  font-weight: 600; /* Matches font-semibold */
+  padding: 0.75rem 2rem; /* Matches py-3 px-8 */
+  border-radius: 9999px; /* Matches rounded-full */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Matches shadow-md */
+  transition: transform 0.3s ease; /* Matches hover:scale-105 */
+}
+
+.purchase-button:hover {
+  transform: scale(1.05); /* Matches hover:scale-105 */
+}
+
+.purchase-button:focus {
+  transform: scale(1); /* Matches focus:scale-100 */
+}
+/* Grid Layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr); /* Default to one column */
+  gap: 2rem; /* Matches gap-8 */
+}
+
+@media (min-width: 1024px) {
+  /* For larger screens (lg:grid-cols-3) */
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
