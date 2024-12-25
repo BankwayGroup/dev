@@ -6,15 +6,16 @@ import { TbMailForward } from "react-icons/tb";
 import { toast } from "react-toastify";
 
 function ContactForm() {
-  const [error, setError] = useState({ required: false });
+  const [error, setError] = useState({ email: false, required: false });
   const [isLoading, setIsLoading] = useState(false);
   const [userInput, setUserInput] = useState({
     name: "",
+    email: "",
     message: "",
   });
 
   const checkRequired = () => {
-    if (userInput.message && userInput.name) {
+    if (userInput.email && userInput.message && userInput.name) {
       setError({ ...error, required: false });
     }
   };
@@ -22,7 +23,7 @@ function ContactForm() {
   const handleSendMessage = async (e) => {
     e.preventDefault();
 
-    if (!userInput.message || !userInput.name) {
+    if (!userInput.email || !userInput.message || !userInput.name) {
       setError({ ...error, required: true });
       return;
     } else {
@@ -41,7 +42,7 @@ function ContactForm() {
       }
 
       // Message to send to Telegram
-      const telegramMessage = `New Contact Form Submission:\n\nName: ${userInput.name}\nMessage: ${userInput.message}`;
+      const telegramMessage = `New Contact Form Submission:\n\nName: ${userInput.name}\nEmail: ${userInput.email}\nMessage: ${userInput.message}`;
 
       // Send message to Telegram group
       await axios.post(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
@@ -52,6 +53,7 @@ function ContactForm() {
       toast.success("Message sent successfully!");
       setUserInput({
         name: "",
+        email: "",
         message: "",
       });
     } catch (error) {
@@ -78,6 +80,23 @@ function ContactForm() {
               onBlur={checkRequired}
               value={userInput.name}
             />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="text-base">Your Email: </label>
+            <input
+              className="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
+              type="email"
+              maxLength="100"
+              required={true}
+              value={userInput.email}
+              onChange={(e) => setUserInput({ ...userInput, email: e.target.value })}
+              onBlur={() => {
+                checkRequired();
+                setError({ ...error, email: !userInput.email.includes("@") });
+              }}
+            />
+            {error.email && <p className="text-sm text-red-400">Please provide a valid email!</p>}
           </div>
 
           <div className="flex flex-col gap-2">
