@@ -38,7 +38,7 @@ function ContactForm() {
       const telegramChatId = "-1002335191091";
 
       // Message to send to Telegram
-      const telegramMessage = `New Contact Form Submission:\n\nName: ${userInput.name}\nEmail: ${userInput.email}\nMessage: ${userInput.message}`;
+      const telegramMessage = `🌐 DevZahir.com\nContact Form Submission:\n\nName: ${userInput.name}\nEmail: ${userInput.email}\nMessage: ${userInput.message}`;
 
       // Send message to Telegram group
       await axios.post(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
