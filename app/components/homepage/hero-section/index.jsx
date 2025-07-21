@@ -116,7 +116,7 @@ function HeroSection() {
                   <span key={skill}>
                     <span className="text-gray-400">'</span>
                     <span className="text-amber-300">{skill}</span>
-                    <span className="text-gray-400">{index < arr.length - 1 ? "', " : "'"},</span>
+                    <span className="text-gray-400">() {'{'}</span>
                   </span>
                 ))}
                 <span className="text-gray-400">],</span>
