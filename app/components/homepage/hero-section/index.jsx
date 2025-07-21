@@ -18,15 +18,15 @@ function HeroSection() {
         height={795}
         className="absolute -top-[98px] -z-10"
       />
-
 <div className="grid grid-cols-1 items-start lg:grid-cols-2 lg:gap-12 gap-y-8">
+  {/* Left Column */}
   <div className="order-2 lg:order-1 flex flex-col items-start justify-center p-2 pb-20 md:pb-10 lg:pt-10">
     <h1 className="text-3xl font-bold leading-tight text-white md:font-extrabold lg:text-[2.6rem] lg:leading-[3.5rem]">
       <span className="text-white typewriter-effect" style={{ animationDelay: '0s' }}>
         Hello, <br />
       </span>
       <span className="text-white typewriter-effect" style={{ animationDelay: '1s' }}>
-        I&apos;m <span className="text-pink-500"> {personalData.name},</span><br />
+        I&apos;m <span className="text-pink-500">{personalData.name},</span><br />
       </span>
       <span className="text-white typewriter-effect" style={{ animationDelay: '2s' }}>
         A Professional <br />
@@ -35,41 +35,49 @@ function HeroSection() {
         {personalData.designation}.
       </span>
     </h1>
-<div className="my-12 flex items-center gap-5">
-  <Link
-    href="https://www.fiverr.com/s/m5Vb1g8"
-    target="_blank"
-    className="transition-all text-pink-500 hover:scale-125 duration-300"
-  >
-    <FaSuitcase size={30} />
-  </Link>
-  <Link
-    href="https://github.com/devzahirx3"
-    target="_blank"
-    className="transition-all text-pink-500 hover:scale-125 duration-300"
-  >
-    <BsGithub size={30} />
-  </Link>
-  <Link
-    href="https://wa.me/c/19013359043"
-    target="_blank"
-    className="transition-all text-green-500 hover:scale-125 duration-300"
-  >
-    <SiWhatsapp size={30} />
-  </Link>
+
+    {/* Social Links */}
+    <div className="my-12 flex items-center gap-5">
+      <Link
+        href="https://www.fiverr.com/s/m5Vb1g8"
+        target="_blank"
+        className="transition-all text-pink-500 hover:scale-125 duration-300"
+      >
+        <FaSuitcase size={30} />
+      </Link>
+      <Link
+        href="https://github.com/devzahirx3"
+        target="_blank"
+        className="transition-all text-pink-500 hover:scale-125 duration-300"
+      >
+        <BsGithub size={30} />
+      </Link>
+      <Link
+        href="https://wa.me/c/19013359043"
+        target="_blank"
+        className="transition-all text-green-500 hover:scale-125 duration-300"
+      >
+        <SiWhatsapp size={30} />
+      </Link>
+    </div>
+
+    {/* Contact Button */}
+    <div className="flex items-center gap-3">
+      <Link
+        href="#contact"
+        className="bg-gradient-to-r to-pink-500 from-violet-600 p-[1px] rounded-full transition-all duration-300 hover:from-pink-500 hover:to-violet-600"
+      >
+        <button className="px-3 text-xs md:px-8 py-3 md:py-4 bg-[#0d1224] rounded-full border-none text-center md:text-sm font-medium uppercase tracking-wider text-[#ffff] no-underline transition-all duration-200 ease-out md:font-semibold flex items-center gap-1 hover:gap-3">
+          <span>Contact me</span>
+          <RiContactsFill size={16} />
+        </button>
+      </Link>
+    </div>
+  </div>
+
+  {/* You can add your right-side content here in a sibling <div> if needed */}
 </div>
 
-<div className="flex items-center gap-3">
-  <Link
-    href="#contact"
-    className="bg-gradient-to-r to-pink-500 from-violet-600 p-[1px] rounded-full transition-all duration-300 hover:from-pink-500 hover:to-violet-600"
-  >
-    <button className="px-3 text-xs md:px-8 py-3 md:py-4 bg-[#0d1224] rounded-full border-none text-center md:text-sm font-medium uppercase tracking-wider text-[#ffff] no-underline transition-all duration-200 ease-out md:font-semibold flex items-center gap-1 hover:gap-3">
-      <span>Contact me</span>
-      <RiContactsFill size={16} />
-    </button>
-  </Link>
-</div>
 
         <div className="order-1 lg:order-2 from-[#0d1224] border-[#1b2c68a0] relative rounded-lg border bg-gradient-to-r to-[#0a0d37]">
           <div className="flex flex-row">
