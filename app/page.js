@@ -31,7 +31,6 @@ async function getData() {
 }
 
 export default async function Home() {
-  const blogs = await getData();
 
   return (
     <div suppressHydrationWarning>
@@ -41,7 +40,6 @@ export default async function Home() {
       <Skills />
       <Projects />
       <Education />
-      <Blog blogs={blogs} />
       <ContactSection />
     </div>
   );
