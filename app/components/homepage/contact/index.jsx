@@ -24,15 +24,7 @@ function ContactSection() {
               />
               <span>{personalData.email}</span>
             </p>
-            <p className="text-sm md:text-xl flex items-center gap-3">
-              <FaTelegram
-                className="bg-[#8b98a5] p-2 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
-                size={36}
-              />
-              <span>
-                <a target="_blank" href="https://t.me/devzahirrobot?start=start" className="text-[#FAF9F6]">@DevZahirRobot</a>
-              </span>
-            </p>
+      
         <p className="text-sm md:text-xl flex items-center gap-3">
         <FaGlobe
           className="bg-[#8b98a5] p-2 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
