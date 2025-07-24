@@ -29,51 +29,62 @@ function HeroSection() {
             <span className=" text-[#16f2b3]">{personalData.designation}</span>
             .
           </h1>
+<div className="my-12 flex items-center gap-5">
+  {/* Fiverr (greenish teal) */}
+  <Link
+    href="https://www.fiverr.com/s/m5Vb1g8"
+    target="_blank"
+    className="transition-all text-[#1DBF73] hover:scale-125 duration-300"
+  >
+    <FaSuitcase size={30} />
+  </Link>
 
-          <div className="my-12 flex items-center gap-5">
-            <Link
-              href="https://www.fiverr.com/s/m5Vb1g8"
-              target="_blank"
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <FaSuitcase size={30} />
-            </Link>
-            <Link
-              href="https://github.com/devzahirx3"
-              target="_blank"
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <BsGithub size={30} />
-            </Link>
-            <Link
-              href="https://wa.me/c/19013359043"
-              target="_blank"
-              className="transition-all text-green-500 hover:scale-125 duration-300"
-            >
-              <SiWhatsapp size={30} />
-<Link
-  href="https://www.linkedin.com/in/dev-zahir-54baa5376"
-  target="_blank"
-  className="transition-all text-[#0A66C2] hover:scale-125 duration-300"
->
-  <BsLinkedin size={30} />
-</Link>
-<Link
-  href="https://www.facebook.com/share/1gjjhoY2Vn/?mibextid=wwXIfr"
-  target="_blank"
-  className="transition-all text-[#1877F2] hover:scale-125 duration-300"
->
-  <FaFacebook size={30} />
-</Link>
-<Link
-  href={personalData.twitter}
-  target="_blank"
-  className="transition-all text-[#1DA1F2] hover:scale-125 duration-300"
->
-  <FaTwitterSquare size={30} />
-</Link>
+  {/* GitHub (neutral gray/black) */}
+  <Link
+    href="https://github.com/devzahirx3"
+    target="_blank"
+    className="transition-all text-[#333] hover:scale-125 duration-300"
+  >
+    <BsGithub size={30} />
+  </Link>
 
-          </div>
+  {/* WhatsApp (green) */}
+  <Link
+    href="https://wa.me/c/19013359043"
+    target="_blank"
+    className="transition-all text-[#25D366] hover:scale-125 duration-300"
+  >
+    <SiWhatsapp size={30} />
+  </Link>
+
+  {/* LinkedIn (blue) */}
+  <Link
+    href="https://www.linkedin.com/in/dev-zahir-54baa5376"
+    target="_blank"
+    className="transition-all text-[#0A66C2] hover:scale-125 duration-300"
+  >
+    <BsLinkedin size={30} />
+  </Link>
+
+  {/* Facebook (blue) */}
+  <Link
+    href="https://www.facebook.com/share/1gjjhoY2Vn/?mibextid=wwXIfr"
+    target="_blank"
+    className="transition-all text-[#1877F2] hover:scale-125 duration-300"
+  >
+    <FaFacebook size={30} />
+  </Link>
+
+  {/* Twitter (legacy blue) */}
+  <Link
+    href={personalData.twitter}
+    target="_blank"
+    className="transition-all text-[#1DA1F2] hover:scale-125 duration-300"
+  >
+    <FaTwitterSquare size={30} />
+  </Link>
+</div>
+
           {/* Contact Button */}
           <div className="flex items-center gap-3">
             <Link
