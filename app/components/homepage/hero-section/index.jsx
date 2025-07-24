@@ -52,6 +52,28 @@ function HeroSection() {
             >
               <SiWhatsapp size={30} />
             </Link>
+                 <Link
+              href="https://www.linkedin.com/in/dev-zahir-54baa5376"
+              target='_blank'
+              className="transition-all text-pink-500 hover:scale-125 duration-300"
+            >
+              <BsLinkedin size={30} />
+            </Link>
+            <Link
+              href="https://www.facebook.com/share/1gjjhoY2Vn/?mibextid=wwXIfr"
+              target='_blank'
+              className="transition-all text-pink-500 hover:scale-125 duration-300"
+            >
+              <FaFacebook size={30} />
+            </Link>
+  
+            <Link
+              href={personalData.twitter}
+              target='_blank'
+              className="transition-all text-pink-500 hover:scale-125 duration-300"
+            >
+              <FaTwitterSquare size={30} />
+            </Link>
           </div>
 
           {/* Contact Button */}
