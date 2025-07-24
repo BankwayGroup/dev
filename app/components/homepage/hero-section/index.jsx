@@ -51,30 +51,28 @@ function HeroSection() {
               className="transition-all text-green-500 hover:scale-125 duration-300"
             >
               <SiWhatsapp size={30} />
-            </Link>
-                 <Link
-              href="https://www.linkedin.com/in/dev-zahir-54baa5376"
-              target='_blank'
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <BsLinkedin size={30} />
-            </Link>
-            <Link
-              href="https://www.facebook.com/share/1gjjhoY2Vn/?mibextid=wwXIfr"
-              target='_blank'
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <FaFacebook size={30} />
-            </Link>
-  
-            <Link
-              href={personalData.twitter}
-              target='_blank'
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <FaTwitterSquare size={30} />
-            </Link>
-          </div>
+<Link
+  href="https://www.linkedin.com/in/dev-zahir-54baa5376"
+  target='_blank'
+  className="transition-all text-blue-500 hover:scale-125 duration-300"
+>
+  <BsLinkedin size={30} />
+</Link>
+<Link
+  href="https://www.facebook.com/share/1gjjhoY2Vn/?mibextid=wwXIfr"
+  target='_blank'
+  className="transition-all text-blue-500 hover:scale-125 duration-300"
+>
+  <FaFacebook size={30} />
+</Link>
+<Link
+  href={personalData.twitter}
+  target='_blank'
+  className="transition-all text-blue-500 hover:scale-125 duration-300"
+>
+  <FaTwitterSquare size={30} />
+</Link>
+
 
           {/* Contact Button */}
           <div className="flex items-center gap-3">
