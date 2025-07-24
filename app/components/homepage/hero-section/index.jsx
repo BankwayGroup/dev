@@ -73,7 +73,7 @@ function HeroSection() {
   <FaTwitterSquare size={30} />
 </Link>
 
-
+          </div>
           {/* Contact Button */}
           <div className="flex items-center gap-3">
             <Link
