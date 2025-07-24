@@ -29,15 +29,18 @@ function HeroSection() {
             <span className=" text-[#16f2b3]">{personalData.designation}</span>
             .
           </h1>
-<div className="my-12 flex items-center gap-5">
-  {/* Fiverr (greenish teal) */}
-  <Link
-    href="https://www.fiverr.com/s/m5Vb1g8"
-    target="_blank"
-    className="transition-all text-[#1DBF73] hover:scale-125 duration-300"
-  >
-    <FaSuitcase size={30} />
-  </Link>
+<Link
+  href="https://www.fiverr.com/s/m5Vb1g8"
+  target="_blank"
+  className="transition-all hover:scale-125 duration-300"
+>
+  <img
+    src="https://i.ibb.co/MDVmy6gd/Fiverr-Logo.png"
+    alt="Fiverr Logo"
+    className="w-[30px] h-[30px] object-contain"
+  />
+</Link>
+
 
   {/* GitHub (neutral gray/black) */}
   <Link
