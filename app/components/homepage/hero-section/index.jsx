@@ -45,7 +45,7 @@ function HeroSection() {
 
   {/* GitHub (neutral gray/black) */}
   <Link
-    href="https://github.com/devzahirx3"
+    href="https://github.com/devzahirx3/DevZahir"
     target="_blank"
     className="transition-all text-[#333] hover:scale-125 duration-300"
   >
