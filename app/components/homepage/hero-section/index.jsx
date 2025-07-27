@@ -8,6 +8,7 @@ import { FaFacebook, FaTwitterSquare, FaRobot, FaSuitcase } from "react-icons/fa
 import { RiContactsFill } from "react-icons/ri";
 import { SiWhatsapp } from "react-icons/si";
 import { SiLeetcode } from "react-icons/si";
+import { SiTelegram } from 'react-icons/si';
 function HeroSection() {
   return (
     <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
@@ -95,16 +96,17 @@ function HeroSection() {
 >
   <SiLeetcode size={30} style={{ color: '#FFA116' }} />
 </Link>
-import { SiTelegram } from 'react-icons/si';
 
-<Link
+
+<a
   href="https://t.me/devzahirbot?start=start"
   target="_blank"
   rel="noopener noreferrer"
   className="transition-all hover:scale-125 duration-300"
 >
   <SiTelegram size={30} style={{ color: '#0088cc' }} />
-</Link>
+</a>
+
 
 </div>
 
