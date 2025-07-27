@@ -7,7 +7,7 @@ import { BsGithub, BsLinkedin } from "react-icons/bs";
 import { FaFacebook, FaTwitterSquare, FaRobot, FaSuitcase } from "react-icons/fa"; 
 import { RiContactsFill } from "react-icons/ri";
 import { SiWhatsapp } from "react-icons/si";
-
+import { SiLeetcode } from "react-icons/si";
 function HeroSection() {
   return (
     <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
