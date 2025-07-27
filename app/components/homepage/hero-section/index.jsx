@@ -83,10 +83,11 @@ function HeroSection() {
   href="https://x.com/devzahirjs"
   target="_blank"
   rel="noopener noreferrer"
-  className="transition-all text-pink-500 hover:scale-125 duration-300"
+  className="transition-all hover:scale-125 duration-300"
 >
-  <FaTwitterSquare size={30} />
+  <FaTwitterSquare size={30} style={{ color: '#1DA1F2' }} />
 </Link>
+
 </div>
 
           {/* Contact Button */}
