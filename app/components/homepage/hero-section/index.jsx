@@ -79,13 +79,14 @@ function HeroSection() {
     <FaFacebook size={30} />
   </Link>
 
-          <Link
-              href="https://x.com/devzahirjs"
-              target='_blank'
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <FaTwitterSquare size={30} />
-            </Link>
+<Link
+  href="https://x.com/devzahirjs"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="transition-all text-pink-500 hover:scale-125 duration-300"
+>
+  <FaTwitterSquare size={30} />
+</Link>
 </div>
 
           {/* Contact Button */}
