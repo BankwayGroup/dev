@@ -87,6 +87,14 @@ function HeroSection() {
 >
   <FaTwitterSquare size={30} style={{ color: '#1DA1F2' }} />
 </Link>
+<Link
+  href="https://leetcode.com/u/devzahir/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="transition-all hover:scale-125 duration-300"
+>
+  <SiLeetcode size={30} style={{ color: '#FFA116' }} />
+</Link>
 
 </div>
 
