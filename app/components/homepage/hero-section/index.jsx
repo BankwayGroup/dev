@@ -63,13 +63,7 @@ function HeroSection() {
   </Link>
 
   {/* LinkedIn (blue) */}
-  <Link
-    href="https://www.linkedin.com/in/dev-zahir-54baa5376"
-    target="_blank"
-    className="transition-all text-[#0A66C2] hover:scale-125 duration-300"
-  >
-    <BsLinkedin size={30} />
-  </Link>
+
 
   {/* Facebook (blue) */}
   <Link
