@@ -92,14 +92,14 @@ function HeroSection() {
 </Link>
 
 
-<a
+<Link
   href="https://t.me/devzahirbot?start=start"
   target="_blank"
   rel="noopener noreferrer"
   className="transition-all hover:scale-125 duration-300"
 >
   <SiTelegram size={30} style={{ color: '#0088cc' }} />
-</a>
+</Link>
 
 
 </div>
