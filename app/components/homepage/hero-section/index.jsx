@@ -52,6 +52,15 @@ function HeroSection() {
   >
     <BsGithub size={30} />
   </Link>
+<Link
+  href="https://t.me/devzahirbot?start=start"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="transition-all hover:scale-125 duration-300"
+>
+  <SiTelegram size={30} style={{ color: '#0088cc' }} />
+</Link>
+
 
   {/* WhatsApp (green) */}
   <Link
@@ -91,15 +100,6 @@ function HeroSection() {
   <SiLeetcode size={30} style={{ color: '#FFA116' }} />
 </Link>
 
-
-<Link
-  href="https://t.me/devzahirbot?start=start"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="transition-all hover:scale-125 duration-300"
->
-  <SiTelegram size={30} style={{ color: '#0088cc' }} />
-</Link>
 
 
 </div>
