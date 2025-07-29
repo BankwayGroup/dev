@@ -9,6 +9,7 @@ import { RiContactsFill } from "react-icons/ri";
 import { SiWhatsapp } from "react-icons/si";
 import { SiLeetcode } from "react-icons/si";
 import { SiTelegram } from 'react-icons/si';
+
 function HeroSection() {
   return (
     <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
@@ -60,8 +61,6 @@ function HeroSection() {
 >
   <SiTelegram size={30} style={{ color: '#0088cc' }} />
 </Link>
-
-
   {/* WhatsApp (green) */}
   <Link
     href="https://wa.me/c/19013359043"
@@ -70,8 +69,6 @@ function HeroSection() {
   >
     <SiWhatsapp size={30} />
   </Link>
-
-  {/* LinkedIn (blue) */}
 
 
   {/* Facebook (blue) */}
@@ -91,14 +88,7 @@ function HeroSection() {
 >
   <FaTwitterSquare size={30} style={{ color: '#1DA1F2' }} />
 </Link>
-<Link
-  href="https://leetcode.com/u/devzahir/"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="transition-all hover:scale-125 duration-300"
->
-  <SiLeetcode size={30} style={{ color: '#FFA116' }} />
-</Link>
+
 
 
 
