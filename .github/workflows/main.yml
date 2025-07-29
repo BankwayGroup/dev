@@ -1,0 +1,30 @@
+# .github/workflows/deploy.yml
+
+name: Build and Deploy to Netlify
+
+on:
+  push:
+    branches:
+      - master  # or main, adjust if needed
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          corepack enable  # only if using pnpm
+          pnpm install --no-frozen-lockfile  # or npm install if not using pnpm
+
+      - name: Build project
+        run: pnpm build  # or npm run build if not using pnpm
+
+      - name: Deploy to Netlify
+        run: npx netlify deploy --dir=.next --prod
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
