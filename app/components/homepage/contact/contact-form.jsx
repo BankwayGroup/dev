@@ -30,21 +30,41 @@ function ContactForm() {
       setError({ ...error, required: false });
     }
 
-    try {
-      setIsLoading(true);
+const handleSendMessage = async (e) => {
+  e.preventDefault();
 
-      // Token and chat ID
-      const telegramBotToken = "8153922399:AAH2_pfw1cxcUD2AdmAeBBlvX_PdXDb76vA";
-      const telegramChatId = "-1002853662444";
+  if (!userInput.email || !userInput.message || !userInput.name) {
+    setError({ ...error, required: true });
+    return;
+  } else {
+    setError({ ...error, required: false });
+  }
 
-      // Message to send to Telegram
-      const telegramMessage = `🌐 DevZahir.com\nContact Form Submission:\n\nName: ${userInput.name}\nEmail: ${userInput.email}\nMessage: ${userInput.message}`;
+  try {
+    setIsLoading(true);
 
-      // Send message to Telegram group
-      await axios.post(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
-        chat_id: telegramChatId,
-        text: telegramMessage,
-      });
+    // Token and chat ID
+    const telegramBotToken = "8153922399:AAH2_pfw1cxcUD2AdmAeBBlvX_PdXDb76vA";
+    const telegramChatId = "-1002853662444";
+
+    // Message to send to Telegram group
+    const telegramMessage = `🌐 DevZahir.com\nContact Form Submission:\n\nName: ${userInput.name}\nEmail: ${userInput.email}\nMessage: ${userInput.message}`;
+
+    // Send message to Telegram group
+    await axios.post(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+      chat_id: telegramChatId,
+      text: telegramMessage,
+    });
+
+    toast.success("Message sent successfully!");
+    setUserInput({ name: "", email: "", message: "" }); // Reset form
+  } catch (error) {
+    toast.error("Failed to send message.");
+    console.error("Telegram API error:", error);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
       toast.success("Message sent successfully!");
       setUserInput({
