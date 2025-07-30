@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect } from "react";
+import axios from "axios";
 import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
 import plansAnimation from "/public/lottie/code.json";
@@ -100,6 +101,19 @@ function AboutSection() {
     };
   }, []);
 
+  const handleCheckout = async (plan) => {
+    try {
+      const response = await axios.post("/api/checkout", {
+        title: plan.title,
+        price: plan.price,
+      });
+      window.location.href = response.data.url;
+    } catch (error) {
+      console.error("Checkout Error:", error);
+      alert("There was an error creating the Stripe checkout session.");
+    }
+  };
+
   return (
     <div className="my-12">
       <h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center">
@@ -117,35 +131,33 @@ function AboutSection() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {plans.map((plan) => (
           <GlowCard key={plan.id} identifier={`plan-${plan.id}`}>
-            <div className="fade-in-card bg-[#1a1443] text-white p-6 rounded-lg shadow-lg">
-              <h3 className="text-xl font-bold mb-4">{plan.title}</h3>
-              <p className="text-lg font-semibold mb-4">{plan.price}</p>
-              <p className="text-sm mb-4">{plan.description}</p>
-              <ul className="list-disc ml-5 mb-4 text-sm">
-                {plan.features.map((feature, index) => (
-                  <li key={index}>{feature}</li>
-                ))}
-              </ul>
-              <p className="text-sm mb-2">
-                <strong>Delivery Time:</strong> {plan.deliveryTime}
-              </p>
-              <p className="text-sm mb-4">
-                <strong>Revisions:</strong> {plan.revisions}
-              </p>
+            <div className="fade-in-card bg-[#1a1443] text-white p-6 rounded-lg shadow-lg flex flex-col justify-between h-full">
+              <div>
+                <h3 className="text-xl font-bold mb-4">{plan.title}</h3>
+                <p className="text-lg font-semibold mb-4">{plan.price}</p>
+                <p className="text-sm mb-4">{plan.description}</p>
+                <ul className="list-disc ml-5 mb-4 text-sm">
+                  {plan.features.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                  ))}
+                </ul>
+                <p className="text-sm mb-2">
+                  <strong>Delivery Time:</strong> {plan.deliveryTime}
+                </p>
+                <p className="text-sm mb-4">
+                  <strong>Revisions:</strong> {plan.revisions}
+                </p>
+              </div>
+
+              <button
+                onClick={() => handleCheckout(plan)}
+                className="mt-auto w-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:scale-105 transition"
+              >
+                Buy with Stripe →
+              </button>
             </div>
           </GlowCard>
         ))}
-      </div>
-
-      {/* Purchase Button */}
-      <div className="flex justify-center mt-8">
-        <a
-          href="#contact"
-          className="flex items-center justify-center bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold py-3 px-8 rounded-full shadow-md transition-transform transform hover:scale-105 focus:scale-100"
-        >
-          Purchase Now
-          <span className="ml-2 text-lg">→</span>
-        </a>
       </div>
     </div>
   );
