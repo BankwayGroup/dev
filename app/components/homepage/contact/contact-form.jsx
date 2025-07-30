@@ -67,7 +67,7 @@ const handleSendMessage = async (e) => {
     setIsLoading(false);
   }
 };
-
+ 
 
       toast.success("Message sent successfully!");
       setUserInput({
