@@ -20,17 +20,7 @@ function ContactForm() {
     }
   };
 
-  const handleSendMessage = async (e) => {
-    e.preventDefault();
-
-    if (!userInput.email || !userInput.message || !userInput.name) {
-      setError({ ...error, required: true });
-      return;
-    } else {
-      setError({ ...error, required: false });
-    }
-
-const handleSendMessage = async (e) => {
+ const handleSendMessage = async (e) => {
   e.preventDefault();
 
   if (!userInput.email || !userInput.message || !userInput.name) {
@@ -70,21 +60,6 @@ const handleSendMessage = async (e) => {
     setIsLoading(false);
   }
 };
-
- 
-
-      toast.success("Message sent successfully!");
-      setUserInput({
-        name: "",
-        email: "",
-        message: "",
-      });
-    } catch (error) {
-      toast.error(error?.response?.data?.description || "Failed to send the message.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   return (
     <div>
