@@ -153,7 +153,7 @@ function AboutSection() {
                 onClick={() => handleCheckout(plan)}
                 className="mt-auto w-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:scale-105 transition"
               >
-                Buy with Stripe →
+                Purchase →
               </button>
             </div>
           </GlowCard>
