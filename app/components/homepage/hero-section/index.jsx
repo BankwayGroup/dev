@@ -32,6 +32,7 @@ function HeroSection() {
             .
           </h1>
           <div className="my-12 flex items-center gap-5">
+{/*
 <Link
   href="https://www.fiverr.com/s/m5Vb1g8"
   target="_blank"
@@ -43,6 +44,8 @@ function HeroSection() {
     className="w-[30px] h-[30px] object-contain"
   />
 </Link>
+*/}
+
 
 
   {/* GitHub (neutral gray/black) */}
