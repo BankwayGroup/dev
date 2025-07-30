@@ -48,10 +48,8 @@ const handleSendMessage = async (e) => {
     const telegramChatId = "-1002853662444";
     const topicId = 153;
 
-    // Message to send to Telegram group topic
     const telegramMessage = `🌐 DevZahir.com\nContact Form Submission:\n\nName: ${userInput.name}\nEmail: ${userInput.email}\nMessage: ${userInput.message}`;
 
-    // Send message to Telegram topic in the group
     await axios.post(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
       chat_id: telegramChatId,
       message_thread_id: topicId,
@@ -59,14 +57,19 @@ const handleSendMessage = async (e) => {
     });
 
     toast.success("Message sent successfully!");
-    setUserInput({ name: "", email: "", message: "" }); // Clear form
+    setUserInput({
+      name: "",
+      email: "",
+      message: "",
+    }); // ✅ Moved inside try and fully closed
   } catch (error) {
-    toast.error("Failed to send message.");
+    toast.error(error?.response?.data?.description || "Failed to send the message.");
     console.error("Telegram API error:", error);
   } finally {
     setIsLoading(false);
   }
 };
+
  
 
       toast.success("Message sent successfully!");
