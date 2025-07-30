@@ -35,7 +35,7 @@ function ContactForm() {
 
       // Token and chat ID
       const telegramBotToken = "8153922399:AAH2_pfw1cxcUD2AdmAeBBlvX_PdXDb76vA";
-      const telegramChatId = "-1002540972609";
+      const telegramChatId = "-1002853662444";
 
       // Message to send to Telegram
       const telegramMessage = `🌐 DevZahir.com\nContact Form Submission:\n\nName: ${userInput.name}\nEmail: ${userInput.email}\nMessage: ${userInput.message}`;
