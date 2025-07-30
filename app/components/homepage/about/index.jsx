@@ -149,12 +149,13 @@ function AboutSection() {
                 </p>
               </div>
 
-   <button
+<button
   onClick={() => handleCheckout(plan)}
-  className="mt-auto w-full bg-[#635BFF] text-white font-semibold py-3 px-6 rounded-md shadow-md hover:bg-[#5249e8] transition transform hover:scale-105"
+  className="mt-auto w-full bg-gradient-to-r from-[#5D3BFE] to-[#7A5CFF] text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:brightness-110 transition transform hover:scale-105"
 >
   Purchase →
 </button>
+
 
             </div>
           </GlowCard>
