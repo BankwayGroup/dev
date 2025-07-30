@@ -1,4 +1,3 @@
-// dev/app/api/checkout/route.js
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
@@ -17,7 +16,7 @@ export async function POST(request) {
           price_data: {
             currency: "usd",
             product_data: { name: title },
-            unit_amount: parseInt(price.replace("$", "")) * 100,
+            unit_amount: parseInt(price.replace("$", "")) * 100, // convert $ to cents
           },
           quantity: 1,
         },
@@ -29,9 +28,9 @@ export async function POST(request) {
 
     return Response.json({ url: session.url });
   } catch (error) {
-    console.error("Stripe Error:", error.message);
+    console.error("Stripe Checkout Error:", error.message);
     return new Response(
-      JSON.stringify({ error: "Failed to create Stripe session." }),
+      JSON.stringify({ error: "Stripe session creation failed." }),
       { status: 500 }
     );
   }
