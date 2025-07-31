@@ -128,7 +128,8 @@ function AboutSection() {
       </div>
 
       {/* Plans Section */}
-      <div id="packages" className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div id="packages" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
         {plans.map((plan) => (
 <GlowCard key={plan.id} identifier={`plan-${plan.id}`}>
   <div className="fade-in-card h-full flex flex-col justify-between rounded-2xl border border-[#2c2b55] bg-gradient-to-br from-[#18153a] to-[#1f1c46] p-6 text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/20">
