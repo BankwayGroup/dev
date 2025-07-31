@@ -1,92 +1,22 @@
 export const educations = [
   {
     id: 1,
-    title: "Python • Flask • Django • FastAPI • Telegram API",
+    title:
+      "Python (Flask, Django, FastAPI), JavaScript/TypeScript (Node.js, React, Next.js), APIs (Telegram, Discord, Stripe, REST, GraphQL), Bot & Web Development",
     duration: "Special Skills",
     institution: "",
   },
   {
     id: 2,
-    title: "JavaScript • Node.js • Express • Next.js • React",
+    title:
+      "Databases (MongoDB, Mongoose), DevOps (Docker, AWS, VPS, ngrok), Frontend (HTML5, CSS3, Tailwind), Authentication (OAuth2, JWT), Version Control (Git, GitHub)",
     duration: "Special Skills",
     institution: "",
   },
   {
     id: 3,
-    title: "Discord API • discord.js • Discord Bot Development",
-    duration: "Special Skills",
-    institution: "",
-  },
-  {
-    id: 4,
-    title: "Stripe API • Payment Integration • Subscription Management",
-    duration: "Special Skills",
-    institution: "",
-  },
-  {
-    id: 5,
-    title: "Flarum • Forum Software Customization • Extension Development",
-    duration: "Special Skills",
-    institution: "",
-  },
-  {
-    id: 6,
-    title: "MongoDB • Mongoose • Database Design & Optimization",
-    duration: "Special Skills",
-    institution: "",
-  },
-  {
-    id: 7,
-    title: "HTML5 • CSS3 • Tailwind CSS • Responsive Design",
-    duration: "Special Skills",
-    institution: "",
-  },
-  {
-    id: 8,
-    title: "Docker • Containerization • DevOps Basics",
-    duration: "Special Skills",
-    institution: "",
-  },
-  {
-    id: 9,
-    title: "Git • GitHub • Version Control & Collaboration",
-    duration: "Special Skills",
-    institution: "",
-  },
-  {
-    id: 10,
-    title: "RESTful API Design • OAuth2 • JWT Authentication",
-    duration: "Special Skills",
-    institution: "",
-  },
-  {
-    id: 11,
-    title: "AWS • Cloud Hosting • Serverless Functions",
-    duration: "Special Skills",
-    institution: "",
-  },
-  {
-    id: 12,
-    title: "GraphQL • Apollo Client & Server",
-    duration: "Special Skills",
-    institution: "",
-  },
-  {
-    id: 13,
-    title: "WebSockets • Real-Time Communication • Socket.IO",
-    duration: "Special Skills",
-    institution: "",
-  },
-  {
-    id: 14,
-    title: "Redux • State Management in React",
-    duration: "Special Skills",
-    institution: "",
-  },
-  {
-    id: 15,
-    title: "TypeScript • Strong Typing for JavaScript",
-    duration: "Special Skills",
-    institution: "",
+    title: "Bachelor of Business Administration",
+    duration: "University of Phoenix, St. Paul, Minnesota",
+    institution: "University of Phoenix",
   },
 ];
