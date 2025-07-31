@@ -61,7 +61,7 @@ function Navbar() {
 
           {/* Shopping Cart Icon Link */}
 <li className="block">
-  <Link href="/#packages">
+  <Link href="https://devzahir.com/#packages">
     <a className="block px-4 py-2 no-underline outline-none hover:no-underline text-white transition-colors duration-300 hover:text-pink-600 flex items-center">
       <FaShoppingCart size={20} />
     </a>
