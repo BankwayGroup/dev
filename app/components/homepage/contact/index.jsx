@@ -1,90 +1,89 @@
-'use client';
+// @flow strict
+import { personalData } from '@/utils/data/personal-data';
+import Link from 'next/link';
+import { BiLogoLinkedin } from "react-icons/bi";
+import { CiLocationOn } from "react-icons/ci";
+import { FaFacebook, FaStackOverflow } from 'react-icons/fa';
+import { FaXTwitter } from "react-icons/fa6";
+import { IoLogoGithub, IoMdCall } from "react-icons/io";
+import { MdAlternateEmail } from "react-icons/md";
+import ContactForm from './contact-form';
 
-import { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-
-function ContactForm() {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    message: '',
-    date: null,
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleDateChange = (date) => {
-    setFormData({ ...formData, date });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Submit logic here (e.g., send to API or EmailJS)
-  };
-
+function ContactSection() {
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white/5 p-6 rounded-2xl shadow-xl backdrop-blur-md border border-white/10 w-full"
-    >
-      <h2 className="text-2xl font-semibold mb-6 text-white">Book a Consultation</h2>
-
-      <div className="mb-4">
-        <input
-          type="text"
-          name="fullName"
-          placeholder="Your Full Name"
-          className="w-full p-3 rounded-xl bg-white/10 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#16f2b3] backdrop-blur-sm"
-          value={formData.fullName}
-          onChange={handleChange}
-          required
-        />
+    <div id="contact" className="my-12 lg:my-16 relative mt-24 text-white">
+      <div className="hidden lg:flex flex-col items-center absolute top-24 -right-8">
+        <span className="bg-[#1a1443] w-fit text-white rotate-90 p-2 px-5 text-xl rounded-md">
+          CONTACT
+        </span>
+        <span className="h-36 w-[2px] bg-[#1a1443]"></span>
       </div>
-
-      <div className="mb-4">
-        <input
-          type="email"
-          name="email"
-          placeholder="Your Email"
-          className="w-full p-3 rounded-xl bg-white/10 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#16f2b3] backdrop-blur-sm"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <ContactForm />
+        <div className="lg:w-3/4 ">
+          <div className="flex flex-col gap-5 lg:gap-9">
+            <p className="text-sm md:text-xl flex items-center gap-3">
+              <MdAlternateEmail
+                className="bg-[#8b98a5] p-2 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                size={36}
+              />
+              <span>{personalData.email}</span>
+            </p>
+            <p className="text-sm md:text-xl flex items-center gap-3">
+              <IoMdCall
+                className="bg-[#8b98a5] p-2 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                size={36}
+              />
+              <span>
+                {personalData.phone}
+              </span>
+            </p>
+            <p className="text-sm md:text-xl flex items-center gap-3">
+              <CiLocationOn
+                className="bg-[#8b98a5] p-2 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                size={36}
+              />
+              <span>
+                {personalData.address}
+              </span>
+            </p>
+          </div>
+          <div className="mt-8 lg:mt-16 flex items-center gap-5 lg:gap-10">
+            <Link target="_blank" href={personalData.github}>
+              <IoLogoGithub
+                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                size={48}
+              />
+            </Link>
+            <Link target="_blank" href={personalData.linkedIn}>
+              <BiLogoLinkedin
+                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                size={48}
+              />
+            </Link>
+            <Link target="_blank" href={personalData.twitter}>
+              <FaXTwitter
+                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                size={48}
+              />
+            </Link>
+            <Link target="_blank" href={personalData.stackOverflow}>
+              <FaStackOverflow
+                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                size={48}
+              />
+            </Link>
+            <Link target="_blank" href={personalData.facebook}>
+              <FaFacebook
+                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                size={48}
+              />
+            </Link>
+          </div>
+        </div>
       </div>
-
-      <div className="mb-4">
-        <textarea
-          name="message"
-          placeholder="Tell me about your project..."
-          rows="4"
-          className="w-full p-3 rounded-xl bg-white/10 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#16f2b3] backdrop-blur-sm resize-none"
-          value={formData.message}
-          onChange={handleChange}
-          required
-        />
-      </div>
-
-      <div className="mb-6">
-        <DatePicker
-          selected={formData.date}
-          onChange={handleDateChange}
-          placeholderText="Select a date"
-          className="w-full p-3 rounded-xl bg-white/10 text-white placeholder-gray-400 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#16f2b3] backdrop-blur-sm"
-        />
-      </div>
-
-      <button
-        type="submit"
-        className="w-full bg-gradient-to-r from-[#16f2b3] to-[#0e7dff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:scale-105 transition duration-200 ease-in-out"
-      >
-        Submit
-      </button>
-    </form>
+    </div>
   );
-}
+};
 
-export default ContactForm;
+export default ContactSection;
