@@ -38,10 +38,9 @@ function ContactForm() {
       setIsLoading(true);
 
       // Telegram config
-const telegramBotToken = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
-const telegramChatId = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
-const topicId = Number(process.env.NEXT_PUBLIC_TELEGRAM_TOPIC_ID);
-
+    const telegramBotToken = "8153922399:AAH2_pfw1cxcUD2AdmAeBBlvX_PdXDb76vA";
+    const telegramChatId = "-1002853662444";
+    const topicId = 153; // 🔥 Topic ID added
 
       const telegramMessage = `🌐 DevZahir.com\nContact Form Submission:\n\nName: ${userInput.name}\nEmail: ${userInput.email}\nMessage: ${userInput.message}`;
 
