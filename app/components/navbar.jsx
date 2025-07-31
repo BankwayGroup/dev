@@ -5,18 +5,21 @@ import { FaShoppingCart } from "react-icons/fa";
 function Navbar() {
   return (
     <nav className="bg-transparent">
-      <div className="flex items-center justify-between py-5">
-        <div className="flex flex-shrink-0 items-center">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between py-5 px-4 md:px-8">
+        {/* Logo + Mobile Cart */}
+        <div className="flex w-full items-center justify-between md:w-auto md:justify-start md:space-x-6">
           <Link href="/">
             <a className="text-[#16f2b3] text-3xl font-bold">DEV ZAHIR</a>
           </Link>
-            <a
-    href="/#packages"
-    className="block md:hidden w-9 h-9 flex items-center justify-center rounded-full bg-[#16f2b3] hover:bg-pink-600 transition-transform duration-300 hover:scale-110"
-    aria-label="Packages"
-  >
-    <FaShoppingCart size={18} className="text-black" />
-  </a>
+
+          {/* Mobile-only cart icon */}
+          <a
+            href="/#packages"
+            className="block md:hidden w-9 h-9 flex items-center justify-center rounded-full bg-[#16f2b3] hover:bg-pink-600 transition-transform duration-300 hover:scale-110"
+            aria-label="Packages"
+          >
+            <FaShoppingCart size={18} className="text-black" />
+          </a>
         </div>
 
         <ul
