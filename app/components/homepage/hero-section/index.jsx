@@ -14,15 +14,6 @@ import { SiTelegram } from 'react-icons/si';
 function HeroSection() {
   return (
 <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
-  {/* ✅ Cart icon (mobile only, fixed top-right) */}
-<div className="absolute top-2 right-4 z-50 block md:hidden">
-  <Link href="/#packages" aria-label="Go to Packages">
-    <FaShoppingCart
-      size={28}
-      className="text-white hover:text-pink-500 transition duration-300"
-    />
-  </Link>
-</div>
 
 
 
