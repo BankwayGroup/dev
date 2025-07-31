@@ -76,7 +76,14 @@ function HeroSection() {
 
 
 
-
+<Link
+  href="https://devzahir.com/#packages"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="transition-all hover:scale-125 duration-300"
+>
+  <FaShoppingCart size={30} style={{ color: '#16f2b3' }} />
+</Link>
 
 
 </div>
