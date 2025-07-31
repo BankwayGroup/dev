@@ -130,33 +130,34 @@ function AboutSection() {
       {/* Plans Section */}
       <div id="packages" className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {plans.map((plan) => (
-          <GlowCard key={plan.id} identifier={`plan-${plan.id}`}>
-            <div className="fade-in-card bg-[#1a1443] text-white p-6 rounded-lg shadow-lg flex flex-col justify-between h-full">
-              <div>
-                <h3 className="text-xl font-bold mb-4">{plan.title}</h3>
-                <p className="text-lg font-semibold mb-4">{plan.price}</p>
-                <p className="text-sm mb-4">{plan.description}</p>
-                <ul className="list-disc ml-5 mb-4 text-sm">
-                  {plan.features.map((feature, index) => (
-                    <li key={index}>{feature}</li>
-                  ))}
-                </ul>
-                <p className="text-sm mb-2">
-                  <strong>Delivery Time:</strong> {plan.deliveryTime}
-                </p>
-                <p className="text-sm mb-4">
-                  <strong>Revisions:</strong> {plan.revisions}
-                </p>
-              </div>
+<GlowCard key={plan.id} identifier={`plan-${plan.id}`}>
+  <div className="fade-in-card h-full flex flex-col justify-between rounded-2xl border border-[#2c2b55] bg-gradient-to-br from-[#18153a] to-[#1f1c46] p-6 text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/20">
+    <div className="mb-6">
+      <h3 className="text-2xl font-bold mb-2">{plan.title}</h3>
+      <p className="text-lg font-semibold text-[#7a5cff] mb-4">{plan.price}</p>
+      <p className="text-sm text-gray-300 mb-4">{plan.description}</p>
+      <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-4">
+        {plan.features.map((feature, index) => (
+          <li key={index}>{feature}</li>
+        ))}
+      </ul>
+      <p className="text-sm text-gray-400 mb-1">
+        <strong>Delivery Time:</strong> {plan.deliveryTime}
+      </p>
+      <p className="text-sm text-gray-400">
+        <strong>Revisions:</strong> {plan.revisions}
+      </p>
+    </div>
 
-              <button
-                onClick={() => handleCheckout(plan)}
-                className="mt-auto w-full bg-gradient-to-r from-[#5D3BFE] to-[#7A5CFF] text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:brightness-110 transition transform hover:scale-105"
-              >
-                Purchase →
-              </button>
-            </div>
-          </GlowCard>
+    <button
+      onClick={() => handleCheckout(plan)}
+      className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+    >
+      Purchase →
+    </button>
+  </div>
+</GlowCard>
+
         ))}
       </div>
     </div>
