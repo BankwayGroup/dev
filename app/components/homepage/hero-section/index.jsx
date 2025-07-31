@@ -74,23 +74,6 @@ function HeroSection() {
   </Link>
 
 
-  {/* Facebook (blue) */}
-  <Link
-    href="https://www.facebook.com/share/1gjjhoY2Vn/?mibextid=wwXIfr"
-    target="_blank"
-    className="transition-all text-[#1877F2] hover:scale-125 duration-300"
-  >
-    <FaFacebook size={30} />
-  </Link>
-
-<Link
-  href="https://x.com/devzahirjs"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="transition-all hover:scale-125 duration-300"
->
-  <FaTwitterSquare size={30} style={{ color: '#1DA1F2' }} />
-</Link>
 
 
 
