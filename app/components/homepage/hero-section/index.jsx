@@ -53,10 +53,18 @@ function HeroSection() {
   href="https://t.me/devzahirbot?start=start"
   target="_blank"
   rel="noopener noreferrer"
-  className="transition-all hover:scale-125 duration-300"
+  className="relative group transition-all hover:scale-125 duration-300"
 >
-  <SiTelegram size={30} style={{ color: '#0088cc' }} />
+  {/* Glowing pulse ring */}
+  <span className="absolute inset-0 rounded-full bg-[#0088cc] opacity-30 blur-xl animate-ping" />
+
+  {/* Telegram icon */}
+  <SiTelegram
+    size={30}
+    className="relative z-10 text-[#0088cc]"
+  />
 </Link>
+
   {/* WhatsApp (green) */}
   <Link
     href="https://wa.me/c/19013359043"
