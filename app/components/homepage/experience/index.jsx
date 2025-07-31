@@ -26,12 +26,12 @@ function Experience() {
         className="absolute top-0 -z-10"
       />
 
-      {/* Header Title */}
+      {/* Section Header */}
       <motion.div
         className="flex justify-center my-5 lg:py-8"
-        initial={{ opacity: 0, scale: 0.95 }}
+        initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
         viewport={{ once: true }}
       >
         <div className="flex items-center">
@@ -50,7 +50,7 @@ function Experience() {
             className="flex justify-center items-start"
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
             viewport={{ once: true }}
           >
             <div className="w-full h-full">
@@ -72,11 +72,11 @@ function Experience() {
               },
             }}
           >
-            {experiences.map((experience, index) => (
+            {experiences.map((experience) => (
               <motion.div
                 key={experience.id}
                 variants={{
-                  hidden: { opacity: 0, y: 30 },
+                  hidden: { opacity: 0, y: 40 },
                   visible: { opacity: 1, y: 0 },
                 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
