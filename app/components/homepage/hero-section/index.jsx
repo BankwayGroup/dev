@@ -15,14 +15,15 @@ function HeroSection() {
   return (
 <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
   {/* ✅ Cart icon (mobile only, fixed top-right) */}
-  <div className="fixed top-4 right-4 z-50 md:hidden">
-    <Link href="/#packages" aria-label="Go to Packages">
-      <FaShoppingCart
-        size={28}
-        className="text-white hover:text-pink-500 transition duration-300"
-      />
-    </Link>
-  </div>
+<div className="block md:hidden mb-6 ml-2">
+  <Link href="/#packages" aria-label="Go to Packages">
+    <FaShoppingCart
+      size={28}
+      className="text-white hover:text-pink-500 transition duration-300"
+    />
+  </Link>
+</div>
+
 
   {/* ✅ Background image */}
   <Image
