@@ -1,5 +1,6 @@
 // @flow strict
 import Link from "next/link";
+import { FaShoppingCart } from 'react-icons/fa';
 
 
 function Navbar() {
@@ -13,6 +14,15 @@ function Navbar() {
             DEV ZAHIR
           </Link>
         </div>
+  {/* ✅ Cart icon (mobile only, fixed top-right) */}
+<div className="absolute top-2 right-4 z-50 block md:hidden">
+  <Link href="/#packages" aria-label="Go to Packages">
+    <FaShoppingCart
+      size={28}
+      className="text-white hover:text-pink-500 transition duration-300"
+    />
+  </Link>
+</div>
 
         <ul className="mt-4 flex h-screen max-h-0 w-full flex-col items-start text-sm opacity-0 md:mt-0 md:h-auto md:max-h-screen md:w-auto md:flex-row md:space-x-1 md:border-0 md:opacity-100" id="navbar-default">
           <li>
