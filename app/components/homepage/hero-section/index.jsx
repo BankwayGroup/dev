@@ -76,14 +76,13 @@ function HeroSection() {
 
 
 
-<Link
-  href="https://devzahir.com/#packages"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="transition-all hover:scale-125 duration-300"
+<a
+  href="/#packages"
+  title="View Packages"
+  className="w-10 h-10 flex items-center justify-center rounded-full bg-[#16f2b3] text-black hover:bg-pink-600 transition-colors duration-300"
 >
-  <FaShoppingCart size={30} style={{ color: '#16f2b3' }} />
-</Link>
+  <FaShoppingCart size={18} />
+</a>
 
 
 </div>
