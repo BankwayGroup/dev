@@ -76,15 +76,13 @@ function HeroSection() {
 
 
 
-<a
-  href="/#packages"
-  title="View Packages"
-  className="w-10 h-10 flex items-center justify-center rounded-full bg-[#16f2b3] text-black hover:bg-pink-600 transition-colors duration-300"
->
-  <FaShoppingCart size={18} />
-</a>
-
-
+  <a
+    href="/#packages"
+    className="w-10 h-10 flex items-center justify-center rounded-full bg-[#16f2b3] hover:bg-pink-600 transition-all duration-300"
+    aria-label="Packages"
+  >
+    <FaShoppingCart size={20} className="text-black" />
+  </a>
 </div>
 
           {/* Contact Button */}
