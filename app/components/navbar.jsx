@@ -59,16 +59,16 @@ function Navbar() {
             </Link>
           </li>
 
+          {/* Shopping Cart Icon Link */}
 <li className="block">
-<a
-  href="/#packages"
-  title="View Packages"
-  className="w-10 h-10 flex items-center justify-center rounded-full bg-[#16f2b3] text-black hover:bg-pink-600 transition-colors duration-300"
->
-  <FaShoppingCart size={18} />
-</a>
-
+  <a
+    href="https://devzahir.com/#packages"
+    className="block px-4 py-2 no-underline outline-none hover:no-underline text-white transition-colors duration-300 hover:text-pink-600 flex items-center"
+  >
+    <FaShoppingCart size={20} />
+  </a>
 </li>
+
 
         </ul>
       </div>
