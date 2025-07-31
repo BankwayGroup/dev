@@ -1,6 +1,7 @@
 // @flow strict
 import Link from "next/link";
-import { FaShoppingCart } from 'react-icons/fa';
+import { FaShoppingCart } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 function Navbar() {
   return (
@@ -15,13 +16,17 @@ function Navbar() {
 
         {/* Right: Cart icon (mobile only) */}
         <div className="block md:hidden">
-      <Link href="/#packages" aria-label="Go to Packages">
-        <FaShoppingCart
-          size={24} // smaller size than before
-          className="text-pink-500 hover:text-pink-600 transition duration-300"
-        />
-      </Link>
-    </div>
+          <Link href="/#packages" aria-label="Go to Packages">
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="text-pink-500 hover:text-pink-600 transition duration-300"
+            >
+              <FaShoppingCart size={24} />
+            </motion.div>
+          </Link>
+        </div>
       </div>
 
       <ul
@@ -29,33 +34,63 @@ function Navbar() {
         id="navbar-default"
       >
         <li>
-          <Link className="block px-4 py-2 no-underline outline-none hover:no-underline" href="/#about">
-            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">ABOUT</div>
+          <Link
+            className="block px-4 py-2 no-underline outline-none hover:no-underline"
+            href="/#about"
+          >
+            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
+              ABOUT
+            </div>
           </Link>
         </li>
         <li>
-          <Link className="block px-4 py-2 no-underline outline-none hover:no-underline" href="/#packages">
-            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">BUY</div>
+          <Link
+            className="block px-4 py-2 no-underline outline-none hover:no-underline"
+            href="/#packages"
+          >
+            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
+              BUY
+            </div>
           </Link>
         </li>
         <li>
-          <Link className="block px-4 py-2 no-underline outline-none hover:no-underline" href="/#experience">
-            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">EXPERIENCE</div>
+          <Link
+            className="block px-4 py-2 no-underline outline-none hover:no-underline"
+            href="/#experience"
+          >
+            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
+              EXPERIENCE
+            </div>
           </Link>
         </li>
         <li>
-          <Link className="block px-4 py-2 no-underline outline-none hover:no-underline" href="/#skills">
-            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">SKILLS</div>
+          <Link
+            className="block px-4 py-2 no-underline outline-none hover:no-underline"
+            href="/#skills"
+          >
+            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
+              SKILLS
+            </div>
           </Link>
         </li>
         <li>
-          <Link className="block px-4 py-2 no-underline outline-none hover:no-underline" href="/#education">
-            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">EXPERTISE</div>
+          <Link
+            className="block px-4 py-2 no-underline outline-none hover:no-underline"
+            href="/#education"
+          >
+            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
+              EXPERTISE
+            </div>
           </Link>
         </li>
         <li>
-          <Link className="block px-4 py-2 no-underline outline-none hover:no-underline" href="/#projects">
-            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">PROJECTS</div>
+          <Link
+            className="block px-4 py-2 no-underline outline-none hover:no-underline"
+            href="/#projects"
+          >
+            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">
+              PROJECTS
+            </div>
           </Link>
         </li>
       </ul>
