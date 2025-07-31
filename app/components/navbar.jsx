@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { FaShoppingCart } from "react-icons/fa";
 import { motion } from "framer-motion";
-
+ 
 function Navbar() {
   return (
     <nav className="bg-transparent">
