@@ -25,7 +25,10 @@
     "react-toastify": "^10.0.4",
     "sharp": "^0.33.5",
     "stripe": "^14.0.0",
-    "framer-motion": "^10.12.16"
+    "framer-motion": "^10.12.16",
+    "react-datepicker": "^4.24.0",
+    "date-fns": "^2.30.0"
+
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
