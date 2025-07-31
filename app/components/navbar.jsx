@@ -1,6 +1,7 @@
 // @flow strict
 import Link from "next/link";
 import { FaShoppingCart } from 'react-icons/fa';
+import { motion } from "framer-motion";
 
 function Navbar() {
   return (
@@ -15,27 +16,32 @@ function Navbar() {
 
         {/* Right: Cart icon (mobile only) */}
         <div className="block md:hidden">
-      <Link href="/#packages" aria-label="Go to Packages">
-        <FaShoppingCart
-          size={24} // smaller size than before
-          className="text-pink-500 hover:text-pink-600 transition duration-300"
-        />
-      </Link>
-    </div>
+          <Link href="/#packages" aria-label="Go to Packages">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="inline-block"
+            >
+              <FaShoppingCart
+                size={24} // smaller size than before
+                className="text-pink-500 hover:text-pink-600 transition duration-300"
+              />
+            </motion.div>
+          </Link>
+        </div>
       </div>
 
-      <ul
-        className="mt-4 flex h-screen max-h-0 w-full flex-col items-start text-sm opacity-0 md:mt-0 md:h-auto md:max-h-screen md:w-auto md:flex-row md:space-x-1 md:border-0 md:opacity-100"
+      <motion.ul
         id="navbar-default"
+        className="mt-4 flex h-screen max-h-0 w-full flex-col items-start text-sm opacity-0 md:mt-0 md:h-auto md:max-h-screen md:w-auto md:flex-row md:space-x-1 md:border-0 md:opacity-100"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
       >
         <li>
           <Link className="block px-4 py-2 no-underline outline-none hover:no-underline" href="/#about">
             <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">ABOUT</div>
-          </Link>
-        </li>
-        <li>
-          <Link className="block px-4 py-2 no-underline outline-none hover:no-underline" href="/#packages">
-            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">BUY</div>
           </Link>
         </li>
         <li>
@@ -50,7 +56,12 @@ function Navbar() {
         </li>
         <li>
           <Link className="block px-4 py-2 no-underline outline-none hover:no-underline" href="/#education">
-            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">EXPERTISE</div>
+            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">EDUCATION</div>
+          </Link>
+        </li>
+        <li>
+          <Link className="block px-4 py-2 no-underline outline-none hover:no-underline" href="/blog">
+            <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">BLOGS</div>
           </Link>
         </li>
         <li>
@@ -58,7 +69,7 @@ function Navbar() {
             <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">PROJECTS</div>
           </Link>
         </li>
-      </ul>
+      </motion.ul>
     </nav>
   );
 }
