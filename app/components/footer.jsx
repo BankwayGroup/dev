@@ -14,9 +14,20 @@ function Footer() {
           <p className="text-sm">
 2025 © <Link href="https://devzahir.com/#skills" className="text-[#16f2b3]">Dev Zahir</Link>
           </p>
+          <div className="flex items-center gap-5">
+            <Link
+              target="_blank"
+              href="https://github.com/devzahirx3/DevZahir"
+              className="flex items-center gap-2 uppercase hover:text-[#16f2b3]"
+            >
+              <IoStar />
+              <span>Star</span>
+            </Link>
+    
+          </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
