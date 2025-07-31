@@ -45,9 +45,9 @@ function Navbar() {
             </Link>
           </li>
           <li>
-            <Link href="/packages">
+            <Link href="/blog">
               <a className="block px-4 py-2 no-underline outline-none hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600">
-                BUY
+                BLOG
               </a>
             </Link>
           </li>
@@ -60,13 +60,14 @@ function Navbar() {
           </li>
 
           {/* Shopping Cart Icon Link */}
-          <li>
-            <Link href="/cart">
-              <a className="block px-4 py-2 no-underline outline-none hover:no-underline text-white transition-colors duration-300 hover:text-pink-600 flex items-center">
-                <FaShoppingCart size={20} />
-              </a>
-            </Link>
-          </li>
+<li className="block md:hidden">
+  <Link href="/#packages">
+    <a className="block px-4 py-2 no-underline outline-none hover:no-underline text-white transition-colors duration-300 hover:text-pink-600 flex items-center">
+      <FaShoppingCart size={20} />
+    </a>
+  </Link>
+</li>
+
         </ul>
       </div>
     </nav>
