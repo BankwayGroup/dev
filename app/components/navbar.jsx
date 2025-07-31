@@ -68,13 +68,6 @@ function Navbar() {
     <FaShoppingCart size={20} />
   </a>
 </li>
-<a
-  href="/#packages"
-  className="block md:hidden fixed top-4 right-4 z-50 w-10 h-10 flex items-center justify-center rounded-full bg-[#16f2b3] hover:bg-pink-600 transition-all duration-300"
-  aria-label="Packages"
->
-  <FaShoppingCart size={20} className="text-black" />
-</a>
 
 
         </ul>
