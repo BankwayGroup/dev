@@ -1,52 +1,39 @@
 // @flow strict
+'use client';
+
 import Link from "next/link";
 
 function Navbar() {
   return (
-    <nav className="bg-transparent">
-      <div className="flex items-center justify-between py-5">
-        <div className="flex flex-shrink-0 items-center">
-          <Link href="/" className="text-[#16f2b3] text-3xl font-bold">
+    <nav className="bg-transparent w-full px-6 md:px-12 py-5">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center">
+          <Link href="/" className="text-[#16f2b3] text-3xl font-extrabold tracking-wide">
             DEV ZAHIR
           </Link>
         </div>
 
-        <ul className="mt-4 flex h-screen max-h-0 w-full flex-col items-start text-sm opacity-0 md:mt-0 md:h-auto md:max-h-screen md:w-auto md:flex-row md:space-x-1 md:border-0 md:opacity-100" id="navbar-default">
-          <li>
-            <Link className="block px-4 py-2 no-underline outline-none hover:no-underline" href="/#about">
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">ABOUT</div>
-            </Link>
-          </li>
-
-          <li>
-            <Link className="block px-4 py-2 no-underline outline-none hover:no-underline" href="/#packages">
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">Purchase</div>
-            </Link>
-          </li>
-
-          <li>
-            <Link className="block px-4 py-2 no-underline outline-none hover:no-underline" href="/#experience">
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">EXPERIENCE</div>
-            </Link>
-          </li>
-
-          <li>
-            <Link className="block px-4 py-2 no-underline outline-none hover:no-underline" href="/#skills">
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">SKILLS</div>
-            </Link>
-          </li>
-
-          <li>
-            <Link className="block px-4 py-2 no-underline outline-none hover:no-underline" href="/#education">
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">EXPERTISE</div>
-            </Link>
-          </li>
-
-          <li>
-            <Link className="block px-4 py-2 no-underline outline-none hover:no-underline" href="/#projects">
-              <div className="text-sm text-white transition-colors duration-300 hover:text-pink-600">PROJECTS</div>
-            </Link>
-          </li>
+        <ul
+          id="navbar-default"
+          className="mt-4 flex h-screen max-h-0 w-full flex-col items-start text-sm opacity-0 transition-all duration-300 ease-in-out md:mt-0 md:h-auto md:max-h-screen md:w-auto md:flex-row md:space-x-3 md:opacity-100"
+        >
+          {[
+            { label: "ABOUT", href: "/#about" },
+            { label: "Purchase", href: "/#packages" },
+            { label: "EXPERIENCE", href: "/#experience" },
+            { label: "SKILLS", href: "/#skills" },
+            { label: "EXPERTISE", href: "/#education" },
+            { label: "PROJECTS", href: "/#projects" },
+          ].map(({ label, href }) => (
+            <li key={label}>
+              <Link
+                className="block px-4 py-2 no-underline outline-none transition-colors duration-300 hover:no-underline"
+                href={href}
+              >
+                <span className="text-sm text-white hover:text-pink-600">{label}</span>
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </nav>
