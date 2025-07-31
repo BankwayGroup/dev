@@ -17,7 +17,7 @@ function Navbar() {
         <div className="block md:hidden">
       <Link href="/#packages" aria-label="Go to Packages">
         <FaShoppingCart
-          size={20} // smaller size than before
+          size={24} // smaller size than before
           className="text-pink-500 hover:text-pink-600 transition duration-300"
         />
       </Link>
