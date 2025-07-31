@@ -115,7 +115,7 @@ function AboutSection() {
   };
 
   return (
-    <div id="packages" className="my-12">
+    <div className="my-12">
       <h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center">
         <i className="fas fa-box-open mr-3"></i> Packages
       </h2>
