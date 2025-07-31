@@ -74,9 +74,9 @@ function HeroSection() {
 
 
 </div>
-<div className="absolute top-4 right-4 block md:hidden">
-  <Link href="/#packages">
-    <FaShoppingCart size={28} />
+<div className="absolute top-4 right-4 block md:hidden z-50">
+  <Link href="/#packages" aria-label="Go to Packages">
+    <FaShoppingCart size={28} className="text-white hover:text-pink-500 transition duration-300" />
   </Link>
 </div>
 
