@@ -1,5 +1,6 @@
 // @flow strict
 import Link from "next/link";
+import { FaShoppingCart } from "react-icons/fa";
 
 function Navbar() {
   return (
@@ -7,9 +8,7 @@ function Navbar() {
       <div className="flex items-center justify-between py-5">
         <div className="flex flex-shrink-0 items-center">
           <Link href="/">
-            <a className="text-[#16f2b3] text-3xl font-bold">
-              ABU SAID
-            </a>
+            <a className="text-[#16f2b3] text-3xl font-bold">DEV ZAHIR</a>
           </Link>
         </div>
 
@@ -41,14 +40,14 @@ function Navbar() {
           <li>
             <Link href="/#education">
               <a className="block px-4 py-2 no-underline outline-none hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600">
-                EDUCATION
+                EXPERTISE
               </a>
             </Link>
           </li>
           <li>
-            <Link href="/blog">
+            <Link href="/packages">
               <a className="block px-4 py-2 no-underline outline-none hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600">
-                BLOGS
+                BUY
               </a>
             </Link>
           </li>
@@ -56,6 +55,15 @@ function Navbar() {
             <Link href="/#projects">
               <a className="block px-4 py-2 no-underline outline-none hover:no-underline text-sm text-white transition-colors duration-300 hover:text-pink-600">
                 PROJECTS
+              </a>
+            </Link>
+          </li>
+
+          {/* Shopping Cart Icon Link */}
+          <li>
+            <Link href="/cart">
+              <a className="block px-4 py-2 no-underline outline-none hover:no-underline text-white transition-colors duration-300 hover:text-pink-600 flex items-center">
+                <FaShoppingCart size={20} />
               </a>
             </Link>
           </li>
