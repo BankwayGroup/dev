@@ -21,44 +21,40 @@ function ContactForm() {
     }
   };
 
-  const handleSendMessage = async (e) => {
-    e.preventDefault();
+const handleSendMessage = async (e) => {
+  e.preventDefault();
 
-    if (!userInput.email || !userInput.message || !userInput.name) {
-      setError((prev) => ({ ...prev, required: true }));
-      return;
-    }
+  if (!userInput.email || !userInput.message || !userInput.name) {
+    setError((prev) => ({ ...prev, required: true }));
+    return;
+  }
 
-    if (!isValidEmail(userInput.email)) {
-      setError((prev) => ({ ...prev, email: true }));
-      return;
-    }
+  if (!isValidEmail(userInput.email)) {
+    setError((prev) => ({ ...prev, email: true }));
+    return;
+  }
 
-    try {
-      setIsLoading(true);
+  try {
+    setIsLoading(true);
 
-      // Telegram config
-const telegramBotToken = process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN;
-const telegramChatId = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID;
-const topicId = Number(process.env.NEXT_PUBLIC_TELEGRAM_TOPIC_ID);
+    const res = await axios.post("/api/sendMessage", {
+      name: userInput.name,
+      email: userInput.email,
+      message: userInput.message,
+    });
 
-
-      const telegramMessage = `🌐 DevZahir.com\nContact Form Submission:\n\nName: ${userInput.name}\nEmail: ${userInput.email}\nMessage: ${userInput.message}`;
-
-      await axios.post(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
-        chat_id: telegramChatId,
-        message_thread_id: topicId,
-        text: telegramMessage,
-      });
-
+    if (res.status === 200) {
       toast.success("Message sent successfully!");
       setUserInput({ name: "", email: "", message: "" });
-    } catch (error) {
-      toast.error(error?.response?.data?.description || "Failed to send the message.");
-    } finally {
-      setIsLoading(false);
+    } else {
+      toast.error("Failed to send the message.");
     }
-  };
+  } catch (error) {
+    toast.error(error?.response?.data?.error || "Failed to send the message.");
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   return (
     <div>
