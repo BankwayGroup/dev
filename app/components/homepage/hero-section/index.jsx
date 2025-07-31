@@ -16,7 +16,7 @@ function HeroSection() {
 <section className="relative flex flex-col items-center justify-between py-4 lg:py-12">
 <a
   href="/#packages"
-  className="block md:hidden fixed top-4 right-4 z-50 w-10 h-10 flex items-center justify-center rounded-full bg-[#16f2b3] hover:bg-pink-600 transition-all duration-300"
+  className="block md:hidden fixed top-5 right-5 z-50 w-10 h-10 flex items-center justify-center rounded-full bg-[#16f2b3] hover:bg-pink-600 transition-transform duration-300 hover:scale-110"
   aria-label="Packages"
 >
   <FaShoppingCart size={20} className="text-black" />
