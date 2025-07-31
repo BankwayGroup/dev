@@ -115,12 +115,10 @@ function AboutSection() {
   };
 
   return (
-<div id="packages" className="my-12">
-  <h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center">
-    <i className="fas fa-box-open mr-3"></i> Packages
-  </h2>
-</div>
-
+    <div id="packages" className="my-12">
+      <h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center">
+        <i className="fas fa-box-open mr-3"></i> Packages
+      </h2>
 
       {/* Lottie Animation */}
       <div className="flex justify-center mb-8">
@@ -151,14 +149,12 @@ function AboutSection() {
                 </p>
               </div>
 
-<button
-  onClick={() => handleCheckout(plan)}
-  className="mt-auto w-full bg-gradient-to-r from-[#5D3BFE] to-[#7A5CFF] text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:brightness-110 transition transform hover:scale-105"
->
-  Purchase →
-</button>
-
-
+              <button
+                onClick={() => handleCheckout(plan)}
+                className="mt-auto w-full bg-gradient-to-r from-[#5D3BFE] to-[#7A5CFF] text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:brightness-110 transition transform hover:scale-105"
+              >
+                Purchase →
+              </button>
             </div>
           </GlowCard>
         ))}
