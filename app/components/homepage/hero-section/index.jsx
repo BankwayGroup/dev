@@ -73,6 +73,11 @@ function HeroSection() {
 
 
 </div>
+<div className="absolute top-4 right-4 block md:hidden">
+  <Link href="/#packages">
+    <FaShoppingCart size={28} />
+  </Link>
+</div>
 
           {/* Contact Button */}
           <div className="flex items-center gap-3">
