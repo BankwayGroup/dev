@@ -7,7 +7,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { title, price } = body;
+    const { title, price, orderDetails } = body;
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
@@ -24,6 +24,9 @@ export async function POST(request) {
       mode: "payment",
       success_url: "https://devzahir.com/success",
       cancel_url: "https://devzahir.com/cancel",
+      metadata: {
+        orderDetails: orderDetails || "",
+      },
     });
 
     return Response.json({ url: session.url });
