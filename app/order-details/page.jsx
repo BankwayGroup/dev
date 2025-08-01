@@ -72,7 +72,7 @@ function OrderDetailsInner() {
         <p className="text-center text-[#7a5cff] font-semibold mb-2">{plan.price}</p>
         <p className="text-sm text-gray-300 mb-4 text-center">{plan.description}</p>
         <p className="text-sm text-gray-400 mb-6 text-center">
-          <strong>Delivery Time:</strong> {plan.deliveryTime} days
+          <strong>Delivery Time:</strong> {plan.deliveryTime} 
         </p>
 
         <textarea
@@ -85,7 +85,7 @@ function OrderDetailsInner() {
 
         <div className="flex justify-between gap-4">
           <a
-            href="https://devzahir.com/#purchase"
+            href="https://devzahir.com/#packages"
             className="w-1/2 bg-gray-700 hover:bg-gray-600 text-white px-5 py-3 rounded-xl transition-transform duration-200 font-semibold shadow-md hover:scale-105 text-center"
           >
             ← Back to Home
@@ -121,5 +121,6 @@ export default function OrderDetailsPage() {
     </Suspense>
   );
 }
+
 
 
