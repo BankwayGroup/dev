@@ -63,7 +63,7 @@ function OrderDetailsInner() {
         <p className="text-center text-[#7a5cff] font-semibold mb-2">{plan.price}</p>
         <p className="text-sm text-gray-300 mb-4 text-center">{plan.description}</p>
         <p className="text-sm text-gray-400 mb-6 text-center">
-          <strong>Delivery Time:</strong> {plan.deliveryTime}
+          <strong>Delivery Time:</strong> {plan.deliveryTime} days
         </p>
 
         <textarea
@@ -77,16 +77,27 @@ function OrderDetailsInner() {
         <div className="flex justify-between gap-4">
           <a
             href="https://devzahir.com/cancel"
-            className="w-1/2 bg-gray-700 hover:bg-gray-600 px-5 py-3 rounded-md transition-all font-semibold text-center"
+            className="w-1/2 bg-gray-700 hover:bg-gray-600 text-white px-5 py-3 rounded-xl transition-transform duration-200 font-semibold shadow-md hover:scale-105 text-center"
           >
             ← Back
           </a>
           <button
             onClick={handleCheckout}
             disabled={processing}
-            className="w-1/2 bg-[#7A5CFF] hover:bg-[#9b84ff] px-5 py-3 rounded-md transition-all font-semibold"
+            className={`w-1/2 px-5 py-3 rounded-xl font-semibold text-white transition-all duration-200 shadow-md hover:scale-105 ${
+              processing
+                ? "bg-[#5D3BFE] opacity-70 cursor-not-allowed"
+                : "bg-[#7A5CFF] hover:bg-[#9b84ff]"
+            }`}
           >
-            {processing ? "Processing..." : "Proceed to Payment →"}
+            {processing ? (
+              <div className="flex items-center justify-center gap-2">
+                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                Processing...
+              </div>
+            ) : (
+              "Proceed to Payment →"
+            )}
           </button>
         </div>
       </motion.div>
