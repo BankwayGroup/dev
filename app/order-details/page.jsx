@@ -2,10 +2,10 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, Suspense } from "react";
 import { motion } from "framer-motion";
 
-export default function OrderDetailsPage() {
+function OrderDetailsInner() {
   const searchParams = useSearchParams();
   const [orderDetails, setOrderDetails] = useState("");
   const [processing, setProcessing] = useState(false);
@@ -63,7 +63,7 @@ export default function OrderDetailsPage() {
         <p className="text-center text-[#7a5cff] font-semibold mb-2">{plan.price}</p>
         <p className="text-sm text-gray-300 mb-4 text-center">{plan.description}</p>
         <p className="text-sm text-gray-400 mb-6 text-center">
-          <strong>Delivery Time:</strong> {plan.deliveryTime} days
+          <strong>Delivery Time:</strong> {plan.deliveryTime}
         </p>
 
         <textarea
@@ -83,5 +83,13 @@ export default function OrderDetailsPage() {
         </button>
       </motion.div>
     </div>
+  );
+}
+
+export default function OrderDetailsPage() {
+  return (
+    <Suspense fallback={<div className="text-white text-center py-24">Loading...</div>}>
+      <OrderDetailsInner />
+    </Suspense>
   );
 }
