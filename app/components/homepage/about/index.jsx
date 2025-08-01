@@ -28,8 +28,6 @@ const plans = [
     ],
     deliveryTime: "3 days",
     revisions: "2",
-    contact: "@DevZahirRobot",
-    link: "https://devzahir.com/",
   },
   {
     id: 2,
@@ -51,8 +49,6 @@ const plans = [
     ],
     deliveryTime: "5 days",
     revisions: "3",
-    contact: "@DevZahirRobot",
-    link: "https://devzahir.com/",
   },
   {
     id: 3,
@@ -73,8 +69,6 @@ const plans = [
     ],
     deliveryTime: "10 days",
     revisions: "5",
-    contact: "@DevZahirRobot",
-    link: "https://devzahir.com/",
   },
 ];
 
@@ -83,29 +77,36 @@ function AboutSection() {
   const [activePlan, setActivePlan] = useState(null);
   const [orderDetails, setOrderDetails] = useState("");
 
-  // IntersectionObserver for fade-in cards (keep as you had it)
   useEffect(() => {
+    // IntersectionObserver for fade-in cards, throttle with setTimeout on re-entry
+    let timeoutId;
     const cards = document.querySelectorAll(".fade-in-card");
+    if (cards.length === 0) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          clearTimeout(timeoutId);
           if (entry.isIntersecting) {
-            entry.target.classList.add("fade-in-active");
+            timeoutId = setTimeout(() => {
+              entry.target.classList.add("fade-in-active");
+            }, 100);
           } else {
-            entry.target.classList.remove("fade-in-active");
+            timeoutId = setTimeout(() => {
+              entry.target.classList.remove("fade-in-active");
+            }, 100);
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.15 }
     );
 
     cards.forEach((card) => observer.observe(card));
-
     return () => {
       cards.forEach((card) => observer.unobserve(card));
+      clearTimeout(timeoutId);
     };
-  }, []);
+  }, [step]); // Rerun on step change to re-attach for fade-in cards
 
   const handleCheckout = async () => {
     try {
@@ -124,9 +125,9 @@ function AboutSection() {
   };
 
   return (
-    <div className="relative min-h-screen py-12 px-4 max-w-7xl mx-auto">
+    <div className="relative min-h-screen py-12 px-4 max-w-7xl mx-auto select-none">
       <AnimatePresence mode="wait" initial={false}>
-        {/* Packages List View */}
+        {/* Packages List */}
         {step === "packages" && (
           <motion.div
             key="packages"
@@ -156,8 +157,8 @@ function AboutSection() {
                       <p className="text-lg font-semibold text-[#7a5cff] mb-4">{plan.price}</p>
                       <p className="text-sm text-gray-300 mb-4">{plan.description}</p>
                       <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-4">
-                        {plan.features.map((feature, index) => (
-                          <li key={index}>{feature}</li>
+                        {plan.features.map((feature, i) => (
+                          <li key={i}>{feature}</li>
                         ))}
                       </ul>
                       <p className="text-sm text-gray-400 mb-1">
@@ -174,6 +175,7 @@ function AboutSection() {
                         setStep("details");
                       }}
                       className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+                      aria-label={`Purchase ${plan.title}`}
                     >
                       Purchase →
                     </button>
@@ -184,7 +186,7 @@ function AboutSection() {
           </motion.div>
         )}
 
-        {/* Details + Checkout View */}
+        {/* Details + Checkout */}
         {step === "details" && activePlan && (
           <motion.div
             key="details"
@@ -215,12 +217,14 @@ function AboutSection() {
               onChange={(e) => setOrderDetails(e.target.value)}
               placeholder="Add any custom instructions or requirements here..."
               className="w-full rounded-md p-3 bg-[#18153a] border border-[#333] text-white resize-none mb-6"
+              autoFocus
             />
 
             <div className="flex justify-between">
               <button
                 onClick={() => setStep("packages")}
                 className="text-gray-400 hover:underline"
+                aria-label="Back to Packages"
               >
                 ← Back to Packages
               </button>
@@ -228,6 +232,7 @@ function AboutSection() {
               <button
                 onClick={handleCheckout}
                 className="bg-[#7A5CFF] hover:bg-[#9b84ff] px-6 py-3 rounded-md font-semibold shadow-md transition-transform hover:scale-105"
+                aria-label="Continue to Checkout"
               >
                 Continue to Checkout →
               </button>
@@ -235,7 +240,7 @@ function AboutSection() {
           </motion.div>
         )}
 
-        {/* Processing Spinner View */}
+        {/* Processing */}
         {step === "processing" && (
           <motion.div
             key="processing"
