@@ -148,10 +148,16 @@ function AboutSection() {
                       </p>
                     </div>
                     <button
-                      onClick={() => {
-                        setActivePlan(plan);
-                        setStep("details");
-                      }}
+           onClick={() => {
+  const query = new URLSearchParams({
+    plan: plan.title,
+    price: plan.price,
+    description: plan.description,
+    deliveryTime: plan.deliveryTime.toString(),
+  }).toString();
+  router.push(`/order-details?${query}`);
+}}
+
                       className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
                     >
                       Purchase →
