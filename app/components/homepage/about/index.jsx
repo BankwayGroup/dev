@@ -79,46 +79,74 @@ const plans = [
 ];
 
 function AboutSection() {
-  const [step, setStep] = useState("packages");
+  const [step, setStep] = useState("packages"); // 'packages' | 'details' | 'processing'
   const [activePlan, setActivePlan] = useState(null);
-  const [modalInput, setModalInput] = useState("");
+  const [orderDetails, setOrderDetails] = useState("");
 
-  const handleCheckout = async (plan, orderDetails) => {
+  // IntersectionObserver for fade-in cards (keep as you had it)
+  useEffect(() => {
+    const cards = document.querySelectorAll(".fade-in-card");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in-active");
+          } else {
+            entry.target.classList.remove("fade-in-active");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+
+    return () => {
+      cards.forEach((card) => observer.unobserve(card));
+    };
+  }, []);
+
+  const handleCheckout = async () => {
     try {
       setStep("processing");
       const response = await axios.post("/api/checkout", {
-        title: plan.title,
-        price: plan.price,
+        title: activePlan.title,
+        price: activePlan.price,
         orderDetails,
       });
       window.location.href = response.data.url;
     } catch (error) {
       console.error("Checkout Error:", error);
-      alert("Failed to initiate checkout.");
-      setStep("packages");
+      alert("There was an error creating the Stripe checkout session.");
+      setStep("details");
     }
   };
 
-  useEffect(() => {
-    if (step === "details") setModalInput("");
-  }, [step]);
-
   return (
     <div className="relative min-h-screen py-12 px-4 max-w-7xl mx-auto">
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" initial={false}>
+        {/* Packages List View */}
         {step === "packages" && (
           <motion.div
             key="packages"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.3 }}
-            className="space-y-12"
           >
-            <h2 className="text-2xl font-bold text-[#16f2b3] uppercase flex items-center">
+            <h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center">
               <i className="fas fa-box-open mr-3"></i> Packages
             </h2>
 
+            {/* Lottie Animation */}
+            <div className="flex justify-center mb-8">
+              <div className="w-full max-w-lg">
+                <AnimationLottie animationPath={plansAnimation} />
+              </div>
+            </div>
+
+            {/* Plans Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {plans.map((plan) => (
                 <GlowCard key={plan.id} identifier={`plan-${plan.id}`}>
@@ -142,6 +170,7 @@ function AboutSection() {
                     <button
                       onClick={() => {
                         setActivePlan(plan);
+                        setOrderDetails("");
                         setStep("details");
                       }}
                       className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
@@ -155,54 +184,64 @@ function AboutSection() {
           </motion.div>
         )}
 
+        {/* Details + Checkout View */}
         {step === "details" && activePlan && (
           <motion.div
             key="details"
-            initial={{ x: "100%", opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: "-100%", opacity: 0 }}
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "-100%" }}
             transition={{ duration: 0.4 }}
-            className="absolute inset-0 p-6 bg-[#1f1c46] text-white overflow-y-auto max-w-3xl mx-auto rounded-xl"
+            className="absolute inset-0 bg-[#1f1c46] p-8 rounded-xl text-white max-w-3xl mx-auto left-0 right-0 top-20 bottom-20 overflow-auto"
+            style={{ margin: "auto" }}
           >
-            <h2 className="text-2xl font-bold mb-4">Customize Your Order</h2>
-            <p className="text-lg mb-2">
-              {activePlan.title} – {" "}
-              <span className="text-[#7a5cff] font-semibold">{activePlan.price}</span>
-            </p>
+            <h2 className="text-3xl font-bold mb-4">{activePlan.title}</h2>
+            <p className="text-xl text-[#7a5cff] font-semibold mb-6">{activePlan.price}</p>
+            <p className="mb-6 text-gray-300">{activePlan.description}</p>
+
+            <ul className="list-disc list-inside text-gray-400 mb-6 space-y-1">
+              {activePlan.features.map((f, i) => (
+                <li key={i}>{f}</li>
+              ))}
+            </ul>
+
+            <label htmlFor="order-details" className="block mb-2 font-semibold text-gray-400">
+              Additional Order Details (optional):
+            </label>
             <textarea
-              value={modalInput}
-              onChange={(e) => setModalInput(e.target.value)}
-              className="w-full h-32 rounded-md p-3 bg-[#18153a] border border-[#333] text-sm"
-              placeholder="Add any custom instructions or details..."
+              id="order-details"
+              rows={5}
+              value={orderDetails}
+              onChange={(e) => setOrderDetails(e.target.value)}
+              placeholder="Add any custom instructions or requirements here..."
+              className="w-full rounded-md p-3 bg-[#18153a] border border-[#333] text-white resize-none mb-6"
             />
-            <div className="flex justify-between items-center mt-6">
+
+            <div className="flex justify-between">
               <button
-                onClick={() => {
-                  if (window.history.length > 1) {
-                    window.history.back();
-                  } else {
-                    window.location.href = "https://devzahir.com";
-                  }
-                }}
-                className="text-sm text-gray-400 hover:underline"
+                onClick={() => setStep("packages")}
+                className="text-gray-400 hover:underline"
               >
-                ← Back
+                ← Back to Packages
               </button>
+
               <button
-                onClick={() => handleCheckout(activePlan, modalInput)}
-                className="bg-[#7A5CFF] hover:bg-[#9b84ff] text-white px-5 py-2 rounded-md transition-all font-medium"
+                onClick={handleCheckout}
+                className="bg-[#7A5CFF] hover:bg-[#9b84ff] px-6 py-3 rounded-md font-semibold shadow-md transition-transform hover:scale-105"
               >
-                Continue →
+                Continue to Checkout →
               </button>
             </div>
           </motion.div>
         )}
 
+        {/* Processing Spinner View */}
         {step === "processing" && (
           <motion.div
             key="processing"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="flex flex-col items-center justify-center h-[60vh]"
           >
             <div className="w-16 h-16 border-4 border-t-[#7A5CFF] border-[#2c2b55] rounded-full animate-spin" />
