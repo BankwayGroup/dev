@@ -1,7 +1,7 @@
 // @flow strict
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -75,7 +75,7 @@ const plans = [
   },
 ];
 
-function AboutSection() {
+function AboutSectionInner() {
   const searchParams = useSearchParams();
   const [step, setStep] = useState(() => {
     return searchParams.get("plan") ? "details" : "packages";
@@ -238,4 +238,10 @@ function AboutSection() {
   );
 }
 
-export default AboutSection;
+export default function AboutSection() {
+  return (
+    <Suspense fallback={<div className="text-center text-white py-24">Loading...</div>}>
+      <AboutSectionInner />
+    </Suspense>
+  );
+}
