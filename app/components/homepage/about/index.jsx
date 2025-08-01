@@ -218,12 +218,18 @@ function AboutSection() {
             />
 
             <div className="flex justify-between">
-              <button
-                onClick={() => setStep("packages")}
-                className="text-gray-400 hover:underline"
-              >
-                ← Back to Packages
-              </button>
+           <button
+  onClick={() => {
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      window.location.href = "https://devzahir.com";
+    }
+  }}
+  className="text-gray-400 hover:underline"
+>
+  ← Back
+</button>
 
               <button
                 onClick={handleCheckout}
