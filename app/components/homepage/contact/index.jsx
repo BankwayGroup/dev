@@ -29,18 +29,21 @@ function ContactSection() {
 
 <div className="lg:w-3/4">
   {/* Email Row */}
-  <p className="text-sm md:text-xl flex items-center gap-3">
-    <a href={`mailto:${personalData.email}`} target="_blank" rel="noopener noreferrer">
-      <Image
-        src="https://i.ibb.co/1Y2RRWqs/my-image.png"
-        alt="Contact Icon"
-        width={36}
-        height={36}
-        className="rounded-full hover:scale-110 transition-all duration-300 cursor-pointer"
-      />
-    </a>
-    <span>{personalData.email}</span>
-  </p>
+<p className="text-sm md:text-xl flex items-center gap-3">
+  <a
+    href="https://t.me/devzahirbot?start=start"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Image
+      src="https://i.ibb.co/3gT7dWT/my-image-1.png"
+      alt="Contact via Telegram"
+      width={36}
+      height={36}
+      className="rounded-full hover:scale-110 transition-all duration-300 cursor-pointer"
+    />
+  </a>
+</p>
 
 
 
