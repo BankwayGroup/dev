@@ -85,7 +85,7 @@ function OrderDetailsInner() {
 
         <div className="flex justify-between gap-4">
           <a
-            href="https://devzahir.com/cancel"
+            href="https://devzahir.com/#purchase"
             className="w-1/2 bg-gray-700 hover:bg-gray-600 text-white px-5 py-3 rounded-xl transition-transform duration-200 font-semibold shadow-md hover:scale-105 text-center"
           >
             ← Back to Home
@@ -121,4 +121,5 @@ export default function OrderDetailsPage() {
     </Suspense>
   );
 }
+
 
