@@ -218,18 +218,19 @@ function AboutSection() {
             />
 
             <div className="flex justify-between">
-           <button
+<button
   onClick={() => {
-    if (window.history.length > 1) {
-      window.history.back();
+    if (window.location.href === "https://devzahir.com/#packages") {
+      // Do nothing or maybe scroll?
     } else {
-      window.location.href = "https://devzahir.com";
+      window.location.href = "https://devzahir.com/#packages";
     }
   }}
   className="text-gray-400 hover:underline"
 >
   ← Back
 </button>
+
 
               <button
                 onClick={handleCheckout}
