@@ -150,7 +150,7 @@ function AboutSection() {
                     <button
                       onClick={() => {
                         setActivePlan(plan);
-                        setStep("details");
+                        handleContinue();
                       }}
                       className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
                     >
@@ -159,34 +159,6 @@ function AboutSection() {
                   </div>
                 </GlowCard>
               ))}
-            </div>
-          </motion.div>
-        )}
-
-        {step === "details" && activePlan && (
-          <motion.div
-            key="details"
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -100 }}
-            transition={{ duration: 0.4 }}
-            className="fixed inset-0 bg-[#1f1c46] p-6 rounded-xl text-white max-w-md mx-auto top-28 bottom-28 overflow-auto shadow-2xl z-50"
-          >
-            <h2 className="text-xl font-bold mb-2 text-center">{activePlan.title}</h2>
-            <p className="text-[#7a5cff] text-center mb-6">{activePlan.price}</p>
-            <div className="flex justify-between items-center">
-              <button
-                onClick={() => setStep("packages")}
-                className="text-gray-400 hover:underline"
-              >
-                ← Back
-              </button>
-              <button
-                onClick={handleContinue}
-                className="bg-[#7A5CFF] hover:bg-[#9b84ff] text-white px-5 py-2 rounded-md transition-all font-medium"
-              >
-                Add Order Details →
-              </button>
             </div>
           </motion.div>
         )}
