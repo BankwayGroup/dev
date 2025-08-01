@@ -83,31 +83,26 @@ function AboutSection() {
   const [activePlan, setActivePlan] = useState(null);
 
   useEffect(() => {
-    const cards = document.querySelectorAll(".fade-in-card");
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("fade-in-active");
-          } else {
-            entry.target.classList.remove("fade-in-active");
-          }
+          entry.target.classList.toggle("fade-in-active", entry.isIntersecting);
         });
       },
       { threshold: 0.1 }
     );
 
+    const cards = document.querySelectorAll(".fade-in-card");
     cards.forEach((card) => observer.observe(card));
 
-    return () => {
-      cards.forEach((card) => observer.unobserve(card));
-    };
+    return () => observer.disconnect();
   }, []);
 
   const handleContinue = () => {
     if (activePlan) {
-      window.location.href = `/order-details?plan=${encodeURIComponent(activePlan.title)}&price=${encodeURIComponent(activePlan.price)}`;
+      window.location.href = `/order-details?plan=${encodeURIComponent(
+        activePlan.title
+      )}&price=${encodeURIComponent(activePlan.price)}`;
     }
   };
 
@@ -175,7 +170,7 @@ function AboutSection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -100 }}
             transition={{ duration: 0.4 }}
-            className="absolute inset-0 bg-[#1f1c46] p-6 rounded-xl text-white max-w-md mx-auto top-28 bottom-28 overflow-auto shadow-2xl"
+            className="fixed inset-0 bg-[#1f1c46] p-6 rounded-xl text-white max-w-md mx-auto top-28 bottom-28 overflow-auto shadow-2xl z-50"
           >
             <h2 className="text-xl font-bold mb-2 text-center">{activePlan.title}</h2>
             <p className="text-[#7a5cff] text-center mb-6">{activePlan.price}</p>
