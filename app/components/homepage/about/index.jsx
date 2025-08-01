@@ -7,6 +7,7 @@ import axios from "axios";
 import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
 import plansAnimation from "/public/lottie/code.json";
+import { useRouter } from "next/navigation"; // ✅ Add this
 
 const plans = [
   {
@@ -78,7 +79,9 @@ const plans = [
   },
 ];
 
+
 function AboutSection() {
+  const router = useRouter(); // ✅ Add this
   const [step, setStep] = useState("packages");
   const [activePlan, setActivePlan] = useState(null);
 
