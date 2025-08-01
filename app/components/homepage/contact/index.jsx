@@ -11,6 +11,7 @@ import { IoLogoGithub, IoMdCall } from 'react-icons/io';
 import { MdAlternateEmail } from 'react-icons/md';
 import { SiTelegram } from 'react-icons/si';
 import ContactForm from './contact-form';
+import Image from 'next/image'; // Make sure this is at the top
 
 function ContactSection() {
   return (
@@ -23,19 +24,25 @@ function ContactSection() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-        <ContactForm />
 
-        <div className="lg:w-3/4">
-          {/* Email Row */}
-          <p className="text-sm md:text-xl flex items-center gap-3">
-            <a href={`mailto:${personalData.email}`} target="_blank" rel="noopener noreferrer">
-              <MdAlternateEmail
-                className="bg-[#8b98a5] p-2 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
-                size={36}
-              />
-            </a>
-            <span>{personalData.email}</span>
-          </p>
+<ContactForm />
+
+<div className="lg:w-3/4">
+  {/* Email Row */}
+  <p className="text-sm md:text-xl flex items-center gap-3">
+    <a href={`mailto:${personalData.email}`} target="_blank" rel="noopener noreferrer">
+      <Image
+        src="https://i.ibb.co/1Y2RRWqs/my-image.png"
+        alt="Contact Icon"
+        width={36}
+        height={36}
+        className="rounded-full hover:scale-110 transition-all duration-300 cursor-pointer"
+      />
+    </a>
+    <span>{personalData.email}</span>
+  </p>
+
+
 
           {/* Social Icons */}
           <div className="mt-8 lg:mt-16 flex items-center gap-5 lg:gap-10">
