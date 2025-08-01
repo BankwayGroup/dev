@@ -51,23 +51,23 @@ function OrderDetailsInner() {
     }
   };
 
-return (
+  return (
     <div className="min-h-screen py-20 px-4 max-w-xl mx-auto text-white">
-      {/* Logo */}
-      <div className="absolute top-6 left-6">
-        <img
-          src="https://i.ibb.co/k2Q9R4w9/photo-2025-07-31-22-40-16.jpg"
-          alt="Dev Zahir Logo"
-          className="h-10 w-auto rounded-md shadow-md"
-        />
-      </div>
-
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
         className="bg-[#1f1c46] p-6 rounded-xl shadow-2xl"
       >
+        {/* Centered Logo */}
+        <div className="flex justify-center mb-6">
+          <img
+            src="https://i.ibb.co/k2Q9R4w9/photo-2025-07-31-22-40-16.jpg"
+            alt="Dev Zahir Logo"
+            className="h-12 w-auto rounded-md shadow-md"
+          />
+        </div>
+
         <h1 className="text-2xl font-bold text-center mb-2">{plan.title}</h1>
         <p className="text-center text-[#7a5cff] font-semibold mb-2">{plan.price}</p>
         <p className="text-sm text-gray-300 mb-4 text-center">{plan.description}</p>
@@ -121,5 +121,3 @@ export default function OrderDetailsPage() {
     </Suspense>
   );
 }
-
-
