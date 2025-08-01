@@ -79,9 +79,8 @@ const plans = [
 ];
 
 function AboutSection() {
-  const [step, setStep] = useState("packages"); // 'packages' | 'details' | 'processing'
+  const [step, setStep] = useState("packages");
   const [activePlan, setActivePlan] = useState(null);
-  const [orderDetails, setOrderDetails] = useState("");
 
   useEffect(() => {
     const cards = document.querySelectorAll(".fade-in-card");
@@ -106,19 +105,9 @@ function AboutSection() {
     };
   }, []);
 
-  const handleCheckout = async () => {
-    try {
-      setStep("processing");
-      const response = await axios.post("/api/checkout", {
-        title: activePlan.title,
-        price: activePlan.price,
-        orderDetails,
-      });
-      window.location.href = response.data.url;
-    } catch (error) {
-      console.error("Checkout Error:", error);
-      alert("There was an error creating the Stripe checkout session.");
-      setStep("details");
+  const handleContinue = () => {
+    if (activePlan) {
+      window.location.href = `/order-details?plan=${encodeURIComponent(activePlan.title)}&price=${encodeURIComponent(activePlan.price)}`;
     }
   };
 
@@ -166,7 +155,6 @@ function AboutSection() {
                     <button
                       onClick={() => {
                         setActivePlan(plan);
-                        setOrderDetails("");
                         setStep("details");
                       }}
                       className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
@@ -189,39 +177,20 @@ function AboutSection() {
             transition={{ duration: 0.4 }}
             className="absolute inset-0 bg-[#1f1c46] p-6 rounded-xl text-white max-w-md mx-auto top-28 bottom-28 overflow-auto shadow-2xl"
           >
-            <h2 className="text-xl font-bold mb-2 text-center">
-              {activePlan.title}
-            </h2>
-            <p className="text-[#7a5cff] text-center mb-4">{activePlan.price}</p>
-
-            <textarea
-              id="order-details"
-              rows={4}
-              value={orderDetails}
-              onChange={(e) => setOrderDetails(e.target.value)}
-              placeholder="Add any custom instructions..."
-              className="w-full rounded-md p-3 bg-[#18153a] border border-[#333] text-white resize-none mb-4 text-sm"
-            />
-
+            <h2 className="text-xl font-bold mb-2 text-center">{activePlan.title}</h2>
+            <p className="text-[#7a5cff] text-center mb-6">{activePlan.price}</p>
             <div className="flex justify-between items-center">
-<button
-  onClick={() => {
-    if (window.location.href === "https://devzahir.com/") {
-      // Do nothing or maybe scroll?
-    } else {
-      window.location.href = "https://devzahir.com/#packages";
-    }
-  }}
-  className="text-gray-400 hover:underline"
->
-  ← Back
-</button>
-
               <button
-                onClick={handleCheckout}
+                onClick={() => setStep("packages")}
+                className="text-gray-400 hover:underline"
+              >
+                ← Back
+              </button>
+              <button
+                onClick={handleContinue}
                 className="bg-[#7A5CFF] hover:bg-[#9b84ff] text-white px-5 py-2 rounded-md transition-all font-medium"
               >
-                Continue →
+                Add Order Details →
               </button>
             </div>
           </motion.div>
