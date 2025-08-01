@@ -1,101 +1,86 @@
 // @flow strict
 "use client";
 
-import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
 
-const plans = [
-  {
-    id: 1,
-    title: "Starter Website or Bot",
-    price: "$80",
-    description:
-      "A basic bot with essential features OR a simple 1-page static website tailored to your needs!",
-    deliveryTime: 3,
-  },
-  {
-    id: 2,
-    title: "Multi-Page Website or Bot",
-    price: "$165",
-    description:
-      "Get a multi-page responsive website with dynamic features and user-friendly navigation.",
-    deliveryTime: 5,
-  },
-  {
-    id: 3,
-    title: "E-Commerce Website or Bot",
-    price: "$425",
-    description:
-      "Get a fully functional e-commerce website or an advanced site with backend integration.",
-    deliveryTime: 10,
-  },
-];
+export default function OrderDetailsPage() {
+  const searchParams = useSearchParams();
+  const [orderDetails, setOrderDetails] = useState("");
+  const [processing, setProcessing] = useState(false);
 
-export default function AboutSection() {
-  const router = useRouter();
+  const plan = {
+    title: searchParams.get("plan") || "",
+    price: searchParams.get("price") || "",
+    description: searchParams.get("description") || "",
+    deliveryTime: searchParams.get("deliveryTime") || "",
+  };
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          entry.target.classList.toggle("fade-in-active", entry.isIntersecting);
-        });
-      },
-      { threshold: 0.1 }
-    );
+  const handleCheckout = async () => {
+    if (!orderDetails.trim()) {
+      alert("Please enter order details.");
+      return;
+    }
 
-    const cards = document.querySelectorAll(".fade-in-card");
-    cards.forEach((card) => observer.observe(card));
+    setProcessing(true);
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: plan.title,
+          price: plan.price,
+          orderDetails,
+        }),
+      });
 
-    return () => observer.disconnect();
-  }, []);
-
-  const handleNavigate = (plan) => {
-    const query = new URLSearchParams({
-      plan: plan.title,
-      price: plan.price,
-      description: plan.description,
-      deliveryTime: plan.deliveryTime.toString(),
-    }).toString();
-    router.push(`/order-details?${query}`);
+      const data = await response.json();
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        alert("Failed to create checkout session.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("An error occurred during checkout.");
+    } finally {
+      setProcessing(false);
+    }
   };
 
   return (
-    <div id="packages" className="relative min-h-screen py-12 px-4 max-w-7xl mx-auto">
+    <div className="min-h-screen py-20 px-4 max-w-xl mx-auto text-white">
       <motion.div
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -50 }}
-        transition={{ duration: 0.3 }}
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="bg-[#1f1c46] p-6 rounded-xl shadow-2xl"
       >
-        <h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center">
-          <i className="fas fa-box-open mr-3"></i> Packages
-        </h2>
+        <h1 className="text-2xl font-bold text-center mb-2">{plan.title}</h1>
+        <p className="text-center text-[#7a5cff] font-semibold mb-2">{plan.price}</p>
+        <p className="text-sm text-gray-300 mb-4 text-center">{plan.description}</p>
+        <p className="text-sm text-gray-400 mb-6 text-center">
+          <strong>Delivery Time:</strong> {plan.deliveryTime} days
+        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {plans.map((plan) => (
-            <div
-              key={plan.id}
-              className="fade-in-card h-full flex flex-col justify-between rounded-2xl border border-[#2c2b55] bg-gradient-to-br from-[#18153a] to-[#1f1c46] p-6 text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/20"
-            >
-              <div className="mb-6">
-                <h3 className="text-2xl font-bold mb-2">{plan.title}</h3>
-                <p className="text-lg font-semibold text-[#7a5cff] mb-4">{plan.price}</p>
-                <p className="text-sm text-gray-300 mb-4">{plan.description}</p>
-                <p className="text-sm text-gray-400">
-                  <strong>Delivery Time:</strong> {plan.deliveryTime} days
-                </p>
-              </div>
-              <button
-                onClick={() => handleNavigate(plan)}
-                className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
-              >
-                Purchase →
-              </button>
-            </div>
-          ))}
-        </div>
+        <textarea
+          rows={4}
+          value={orderDetails}
+          onChange={(e) => setOrderDetails(e.target.value)}
+          placeholder="Add any custom instructions (required)"
+          className="w-full p-3 mb-4 rounded-md bg-[#2c2b55] border border-[#444] resize-none text-sm text-white"
+        />
+
+        <button
+          onClick={handleCheckout}
+          disabled={processing}
+          className="w-full bg-[#7A5CFF] hover:bg-[#9b84ff] px-5 py-3 rounded-md transition-all font-semibold"
+        >
+          {processing ? "Processing..." : "Proceed to Payment →"}
+        </button>
       </motion.div>
     </div>
   );
