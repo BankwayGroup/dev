@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import GlowCard from "@/components/helper/glow-card";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const plans = [
   {
@@ -77,8 +77,25 @@ const plans = [
 ];
 
 function AboutSection() {
-  const [step, setStep] = useState("packages");
-  const [activePlan, setActivePlan] = useState(null);
+  const searchParams = useSearchParams();
+  const [step, setStep] = useState(() => {
+    return searchParams.get("plan") ? "details" : "packages";
+  });
+  const [activePlan, setActivePlan] = useState(() => {
+    const plan = searchParams.get("plan");
+    const price = searchParams.get("price");
+    const description = searchParams.get("description");
+    const deliveryTime = searchParams.get("deliveryTime");
+
+    return plan && price && description && deliveryTime
+      ? {
+          title: decodeURIComponent(plan),
+          price: decodeURIComponent(price),
+          description: decodeURIComponent(description),
+          deliveryTime: parseInt(deliveryTime),
+        }
+      : null;
+  });
   const [orderDetails, setOrderDetails] = useState("");
   const [processing, setProcessing] = useState(false);
   const router = useRouter();
