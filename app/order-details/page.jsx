@@ -51,8 +51,17 @@ function OrderDetailsInner() {
     }
   };
 
-  return (
+return (
     <div className="min-h-screen py-20 px-4 max-w-xl mx-auto text-white">
+      {/* Logo */}
+      <div className="absolute top-6 left-6">
+        <img
+          src="https://i.ibb.co/k2Q9R4w9/photo-2025-07-31-22-40-16.jpg"
+          alt="Dev Zahir Logo"
+          className="h-10 w-auto rounded-md shadow-md"
+        />
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -63,7 +72,7 @@ function OrderDetailsInner() {
         <p className="text-center text-[#7a5cff] font-semibold mb-2">{plan.price}</p>
         <p className="text-sm text-gray-300 mb-4 text-center">{plan.description}</p>
         <p className="text-sm text-gray-400 mb-6 text-center">
-          <strong>Delivery Time:</strong> {plan.deliveryTime} 
+          <strong>Delivery Time:</strong> {plan.deliveryTime} days
         </p>
 
         <textarea
@@ -112,4 +121,5 @@ export default function OrderDetailsPage() {
     </Suspense>
   );
 }
+
 
