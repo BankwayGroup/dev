@@ -1,7 +1,7 @@
 // @flow strict
 "use client";
 
-import { useEffect, useState } from "react";  // <-- import useState
+import { useEffect, useState } from "react";
 import axios from "axios";
 import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
@@ -78,44 +78,47 @@ const plans = [
 ];
 
 function AboutSection() {
-  const [orderDetails, setOrderDetails] = useState({}); // State to track user input per plan
+  const [orderDetails, setOrderDetails] = useState({});
+  const [activePlan, setActivePlan] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalInput, setModalInput] = useState("");
 
   useEffect(() => {
     const cards = document.querySelectorAll(".fade-in-card");
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("fade-in-active");
-          } else {
-            entry.target.classList.remove("fade-in-active");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("fade-in-active");
+        } else {
+          entry.target.classList.remove("fade-in-active");
+        }
+      });
+    }, { threshold: 0.1 });
     cards.forEach((card) => observer.observe(card));
-
-    return () => {
-      cards.forEach((card) => observer.unobserve(card));
-    };
+    return () => cards.forEach((card) => observer.unobserve(card));
   }, []);
 
-  // Handler for input changes
-  const handleOrderDetailsChange = (planId, value) => {
-    setOrderDetails((prev) => ({ ...prev, [planId]: value }));
+  const openModal = (plan) => {
+    setActivePlan(plan);
+    setModalInput(orderDetails[plan.id] || "");
+    setIsModalOpen(true);
   };
 
-  const handleCheckout = async (plan) => {
-    try {
-      const customOrderDetails = orderDetails[plan.id] || "";
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setActivePlan(null);
+    setModalInput("");
+  };
 
+  const submitOrderDetails = async () => {
+    if (!activePlan) return;
+    setOrderDetails((prev) => ({ ...prev, [activePlan.id]: modalInput }));
+    closeModal();
+    try {
       const response = await axios.post("/api/checkout", {
-        title: plan.title,
-        price: plan.price,
-        orderDetails: customOrderDetails, // Send this to backend
+        title: activePlan.title,
+        price: activePlan.price,
+        orderDetails: modalInput,
       });
       window.location.href = response.data.url;
     } catch (error) {
@@ -130,14 +133,12 @@ function AboutSection() {
         <i className="fas fa-box-open mr-3"></i> Packages
       </h2>
 
-      {/* Lottie Animation */}
       <div className="flex justify-center mb-8">
         <div className="w-full max-w-lg">
           <AnimationLottie animationPath={plansAnimation} />
         </div>
       </div>
 
-      {/* Plans Section */}
       <div id="packages" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {plans.map((plan) => (
           <GlowCard key={plan.id} identifier={`plan-${plan.id}`}>
@@ -157,26 +158,9 @@ function AboutSection() {
                 <p className="text-sm text-gray-400 mb-4">
                   <strong>Revisions:</strong> {plan.revisions}
                 </p>
-
-                {/* Custom order details input */}
-                <label
-                  htmlFor={`order-details-${plan.id}`}
-                  className="block mb-1 text-sm text-gray-400"
-                >
-                  Order Details (optional):
-                </label>
-                <textarea
-                  id={`order-details-${plan.id}`}
-                  rows={3}
-                  className="w-full rounded-md border border-gray-600 bg-[#1f1c46] text-white p-2 resize-none"
-                  placeholder="Enter your custom requirements or details here"
-                  value={orderDetails[plan.id] || ""}
-                  onChange={(e) => handleOrderDetailsChange(plan.id, e.target.value)}
-                />
               </div>
-
               <button
-                onClick={() => handleCheckout(plan)}
+                onClick={() => openModal(plan)}
                 className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
                 Purchase →
@@ -185,6 +169,34 @@ function AboutSection() {
           </GlowCard>
         ))}
       </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="bg-[#1f1c46] text-white rounded-2xl p-6 w-full max-w-md">
+            <h3 className="text-xl font-bold mb-4">Custom Order Details</h3>
+            <textarea
+              className="w-full h-32 p-3 rounded-md bg-[#18153a] text-sm text-white border border-[#333] mb-4"
+              placeholder="Enter your requirements or details here..."
+              value={modalInput}
+              onChange={(e) => setModalInput(e.target.value)}
+            ></textarea>
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={closeModal}
+                className="px-4 py-2 rounded-md bg-gray-600 hover:bg-gray-500 text-sm"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={submitOrderDetails}
+                className="px-4 py-2 rounded-md bg-[#7A5CFF] hover:bg-[#9b84ff] text-white text-sm"
+              >
+                Submit & Checkout
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
