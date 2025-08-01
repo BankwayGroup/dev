@@ -83,7 +83,6 @@ function AboutSection() {
   const [activePlan, setActivePlan] = useState(null);
   const [orderDetails, setOrderDetails] = useState("");
 
-  // IntersectionObserver for fade-in cards (keep as you had it)
   useEffect(() => {
     const cards = document.querySelectorAll(".fade-in-card");
 
@@ -126,7 +125,6 @@ function AboutSection() {
   return (
     <div className="relative min-h-screen py-12 px-4 max-w-7xl mx-auto">
       <AnimatePresence mode="wait" initial={false}>
-        {/* Packages List View */}
         {step === "packages" && (
           <motion.div
             key="packages"
@@ -139,14 +137,12 @@ function AboutSection() {
               <i className="fas fa-box-open mr-3"></i> Packages
             </h2>
 
-            {/* Lottie Animation */}
             <div className="flex justify-center mb-8">
               <div className="w-full max-w-lg">
                 <AnimationLottie animationPath={plansAnimation} />
               </div>
             </div>
 
-            {/* Plans Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {plans.map((plan) => (
                 <GlowCard key={plan.id} identifier={`plan-${plan.id}`}>
@@ -184,43 +180,33 @@ function AboutSection() {
           </motion.div>
         )}
 
-        {/* Details + Checkout View */}
         {step === "details" && activePlan && (
           <motion.div
             key="details"
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "-100%" }}
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -100 }}
             transition={{ duration: 0.4 }}
-            className="absolute inset-0 bg-[#1f1c46] p-8 rounded-xl text-white max-w-3xl mx-auto left-0 right-0 top-20 bottom-20 overflow-auto"
-            style={{ margin: "auto" }}
+            className="absolute inset-0 bg-[#1f1c46] p-6 rounded-xl text-white max-w-md mx-auto top-28 bottom-28 overflow-auto shadow-2xl"
           >
-            <h2 className="text-3xl font-bold mb-4">{activePlan.title}</h2>
-            <p className="text-xl text-[#7a5cff] font-semibold mb-6">{activePlan.price}</p>
-            <p className="mb-6 text-gray-300">{activePlan.description}</p>
+            <h2 className="text-xl font-bold mb-2 text-center">
+              {activePlan.title}
+            </h2>
+            <p className="text-[#7a5cff] text-center mb-4">{activePlan.price}</p>
 
-            <ul className="list-disc list-inside text-gray-400 mb-6 space-y-1">
-              {activePlan.features.map((f, i) => (
-                <li key={i}>{f}</li>
-              ))}
-            </ul>
-
-            <label htmlFor="order-details" className="block mb-2 font-semibold text-gray-400">
-              Additional Order Details (optional):
-            </label>
             <textarea
               id="order-details"
-              rows={5}
+              rows={4}
               value={orderDetails}
               onChange={(e) => setOrderDetails(e.target.value)}
-              placeholder="Add any custom instructions or requirements here..."
-              className="w-full rounded-md p-3 bg-[#18153a] border border-[#333] text-white resize-none mb-6"
+              placeholder="Add any custom instructions..."
+              className="w-full rounded-md p-3 bg-[#18153a] border border-[#333] text-white resize-none mb-4 text-sm"
             />
 
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
 <button
   onClick={() => {
-    if (window.location.href === "https://devzahir.com/#packages") {
+    if (window.location.href === "https://devzahir.com/") {
       // Do nothing or maybe scroll?
     } else {
       window.location.href = "https://devzahir.com/#packages";
@@ -231,18 +217,16 @@ function AboutSection() {
   ← Back
 </button>
 
-
               <button
                 onClick={handleCheckout}
-                className="bg-[#7A5CFF] hover:bg-[#9b84ff] px-6 py-3 rounded-md font-semibold shadow-md transition-transform hover:scale-105"
+                className="bg-[#7A5CFF] hover:bg-[#9b84ff] text-white px-5 py-2 rounded-md transition-all font-medium"
               >
-                Continue to Checkout →
+                Continue →
               </button>
             </div>
           </motion.div>
         )}
 
-        {/* Processing Spinner View */}
         {step === "processing" && (
           <motion.div
             key="processing"
