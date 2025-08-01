@@ -27,25 +27,25 @@ function ContactSection() {
 
 <ContactForm />
 
-<div className="lg:w-3/4">
-  {/* Email Row */}
-<p className="flex items-center gap-3 text-base sm:text-xl p-2">
+<div className="lg:w-3/4 flex justify-center p-4">
+  {/* Telegram Contact Image */}
   <a
     href="https://t.me/devzahirbot?start=start"
     target="_blank"
     rel="noopener noreferrer"
-    className="inline-flex"
+    className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg inline-block"
   >
     <Image
       src="https://i.ibb.co/3gT7dWT/my-image-1.png"
       alt="Contact via Telegram"
-      width={40}
-      height={40}
-      className="rounded-full hover:scale-110 transition-transform duration-300 cursor-pointer"
-      priority // if you want it to load faster
+      width={500}
+      height={500}
+      className="w-full h-auto rounded-full cursor-pointer hover:scale-110 transition-transform duration-300"
+      priority
     />
   </a>
-</p>
+</div>
+
 
 
 
