@@ -2,7 +2,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { motion } from "framer-motion";
 
 function OrderDetailsInner() {
@@ -74,13 +74,21 @@ function OrderDetailsInner() {
           className="w-full p-3 mb-4 rounded-md bg-[#2c2b55] border border-[#444] resize-none text-sm text-white"
         />
 
-        <button
-          onClick={handleCheckout}
-          disabled={processing}
-          className="w-full bg-[#7A5CFF] hover:bg-[#9b84ff] px-5 py-3 rounded-md transition-all font-semibold"
-        >
-          {processing ? "Processing..." : "Proceed to Payment →"}
-        </button>
+        <div className="flex justify-between gap-4">
+          <a
+            href="https://devzahir.com/cancel"
+            className="w-1/2 bg-gray-700 hover:bg-gray-600 px-5 py-3 rounded-md transition-all font-semibold text-center"
+          >
+            ← Back
+          </a>
+          <button
+            onClick={handleCheckout}
+            disabled={processing}
+            className="w-1/2 bg-[#7A5CFF] hover:bg-[#9b84ff] px-5 py-3 rounded-md transition-all font-semibold"
+          >
+            {processing ? "Processing..." : "Proceed to Payment →"}
+          </button>
+        </div>
       </motion.div>
     </div>
   );
