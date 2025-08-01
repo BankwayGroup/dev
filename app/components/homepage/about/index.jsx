@@ -3,10 +3,10 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import axios from "axios";
 import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
 import plansAnimation from "/public/lottie/code.json";
+import { useRouter } from "next/navigation";
 
 const plans = [
   {
@@ -26,7 +26,7 @@ const plans = [
       "Hosting setup support",
       "1 beautifully designed page",
     ],
-    deliveryTime: "3 days",
+    deliveryTime: 3,
     revisions: "2",
     contact: "@DevZahirRobot",
     link: "https://devzahir.com/",
@@ -49,7 +49,7 @@ const plans = [
       "Hosting setup assistance",
       "Social media icons for branding",
     ],
-    deliveryTime: "5 days",
+    deliveryTime: 5,
     revisions: "3",
     contact: "@DevZahirRobot",
     link: "https://devzahir.com/",
@@ -71,7 +71,7 @@ const plans = [
       "Social media icons",
       "Up to 10 pages",
     ],
-    deliveryTime: "10 days",
+    deliveryTime: 10,
     revisions: "5",
     contact: "@DevZahirRobot",
     link: "https://devzahir.com/",
@@ -81,6 +81,7 @@ const plans = [
 function AboutSection() {
   const [step, setStep] = useState("packages");
   const [activePlan, setActivePlan] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -99,15 +100,18 @@ function AboutSection() {
   }, []);
 
   const handleContinue = () => {
-    if (activePlan) {
-      window.location.href = `/order-details?plan=${encodeURIComponent(
-        activePlan.title
-      )}&price=${encodeURIComponent(activePlan.price)}`;
-    }
+    if (!activePlan) return;
+    const query = new URLSearchParams({
+      plan: activePlan.title,
+      price: activePlan.price,
+      description: activePlan.description,
+      deliveryTime: activePlan.deliveryTime.toString(),
+    }).toString();
+    router.push(`/order-details?${query}`);
   };
 
   return (
-    <div className="relative min-h-screen py-12 px-4 max-w-7xl mx-auto">
+    <div id="packages" className="relative min-h-screen py-12 px-4 max-w-7xl mx-auto">
       <AnimatePresence mode="wait" initial={false}>
         {step === "packages" && (
           <motion.div
@@ -141,7 +145,7 @@ function AboutSection() {
                         ))}
                       </ul>
                       <p className="text-sm text-gray-400 mb-1">
-                        <strong>Delivery Time:</strong> {plan.deliveryTime}
+                        <strong>Delivery Time:</strong> {plan.deliveryTime} days
                       </p>
                       <p className="text-sm text-gray-400 mb-4">
                         <strong>Revisions:</strong> {plan.revisions}
