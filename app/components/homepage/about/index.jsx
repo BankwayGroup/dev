@@ -120,9 +120,13 @@ function AboutSection() {
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.3 }}
           >
-            <h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center">
-              <i className="fas fa-box-open mr-3"></i> Packages
-            </h2>
+<h2
+  id="packages"
+  className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center"
+>
+  <i className="fas fa-box-open mr-3"></i> Packages
+</h2>
+
 
             <div className="flex justify-center mb-8">
               <div className="w-full max-w-lg">
