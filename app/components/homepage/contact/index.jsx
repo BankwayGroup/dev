@@ -29,18 +29,20 @@ function ContactSection() {
 
 <div className="lg:w-3/4">
   {/* Email Row */}
-<p className="text-sm md:text-xl flex items-center gap-3">
+<p className="flex items-center gap-3 text-base sm:text-xl p-2">
   <a
     href="https://t.me/devzahirbot?start=start"
     target="_blank"
     rel="noopener noreferrer"
+    className="inline-flex"
   >
     <Image
       src="https://i.ibb.co/3gT7dWT/my-image-1.png"
       alt="Contact via Telegram"
-      width={36}
-      height={36}
-      className="rounded-full hover:scale-110 transition-all duration-300 cursor-pointer"
+      width={40}
+      height={40}
+      className="rounded-full hover:scale-110 transition-transform duration-300 cursor-pointer"
+      priority // if you want it to load faster
     />
   </a>
 </p>
