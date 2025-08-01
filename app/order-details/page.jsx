@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import GlowCard from "@/components/app/helper/glow-card";
+import GlowCard from "@/app/components/helper/glow-card";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const plans = [
@@ -255,4 +255,5 @@ function AboutSection() {
 }
 
 export default AboutSection;
+
 
