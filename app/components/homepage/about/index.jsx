@@ -78,19 +78,6 @@ const plans = [
   },
 ];
 
-// @flow strict
-"use client";
-
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import axios from "axios";
-import GlowCard from "../../helper/glow-card";
-import plansAnimation from "/public/lottie/code.json";
-
-const plans = [
-  // ... (same plan objects, no changes needed)
-];
-
 function AboutSection() {
   const [step, setStep] = useState("packages");
   const [activePlan, setActivePlan] = useState(null);
@@ -179,7 +166,7 @@ function AboutSection() {
           >
             <h2 className="text-2xl font-bold mb-4">Customize Your Order</h2>
             <p className="text-lg mb-2">
-              {activePlan.title} –{" "}
+              {activePlan.title} – {" "}
               <span className="text-[#7a5cff] font-semibold">{activePlan.price}</span>
             </p>
             <textarea
