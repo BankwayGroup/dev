@@ -24,40 +24,34 @@ function ContactSection() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <ContactForm />
 
-<ContactForm />
-
-
-
-
-
-          {/* Social Icons */}
-          <div className="mt-8 lg:mt-16 flex items-center gap-5 lg:gap-10">
-            <Link target="_blank" href="https://github.com/devzahirx3/DevZahir">
-              <IoLogoGithub
-                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
-                size={48}
-              />
-            </Link>
-            <Link target="_blank" href="https://t.me/devzahirbot?start=start">
-              <SiTelegram
-                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
-                size={48}
-              />
-            </Link>
-            <Link target="_blank" href="https://www.facebook.com/share/1gjjhoY2Vn/?mibextid=wwXIfr">
-              <FaFacebook
-                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
-                size={48}
-              />
-            </Link>
-            <Link target="_blank" href="https://x.com/devzahirjs">
-              <FaXTwitter
-                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
-                size={48}
-              />
-            </Link>
-          </div>
+        {/* Social Icons */}
+        <div className="mt-8 lg:mt-16 flex items-center gap-5 lg:gap-10">
+          <Link target="_blank" href="https://github.com/devzahirx3/DevZahir">
+            <IoLogoGithub
+              className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+              size={48}
+            />
+          </Link>
+          <Link target="_blank" href="https://t.me/devzahirbot?start=start">
+            <SiTelegram
+              className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+              size={48}
+            />
+          </Link>
+          <Link target="_blank" href="https://www.facebook.com/share/1gjjhoY2Vn/?mibextid=wwXIfr">
+            <FaFacebook
+              className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+              size={48}
+            />
+          </Link>
+          <Link target="_blank" href="https://x.com/devzahirjs">
+            <FaXTwitter
+              className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+              size={48}
+            />
+          </Link>
         </div>
       </div>
     </div>
