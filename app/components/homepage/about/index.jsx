@@ -4,10 +4,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
-import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
 import plansAnimation from "/public/lottie/code.json";
-import processingAnimation from "/public/lottie/processing.json";
 
 const plans = [
   {
@@ -115,12 +113,6 @@ function AboutSection() {
               <i className="fas fa-box-open mr-3"></i> Packages
             </h2>
 
-            <div className="flex justify-center mb-8">
-              <div className="w-full max-w-lg">
-                <AnimationLottie animationPath={plansAnimation} />
-              </div>
-            </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {plans.map((plan) => (
                 <GlowCard key={plan.id} identifier={`plan-${plan.id}`}>
@@ -199,7 +191,7 @@ function AboutSection() {
             animate={{ opacity: 1 }}
             className="flex flex-col items-center justify-center h-[60vh]"
           >
-            <AnimationLottie animationPath={processingAnimation} />
+            <div className="w-16 h-16 border-4 border-t-[#7A5CFF] border-[#2c2b55] rounded-full animate-spin" />
             <p className="text-white mt-4">Processing your invoice...</p>
           </motion.div>
         )}
