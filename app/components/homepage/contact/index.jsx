@@ -28,26 +28,10 @@ function ContactSection() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
         <ContactForm />
 
-        {/* Right column: Social + Buy Me a Coffee */}
+        {/* Right column: Buy Me a Coffee + Social Icons */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
-          {/* Social Icons */}
-          <div className="mt-8 lg:mt-16 flex flex-wrap justify-center lg:justify-start gap-5 lg:gap-10">
-            <Link target="_blank" href="https://github.com/devzahirx3/DevZahir">
-              <IoLogoGithub className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer" size={48} />
-            </Link>
-            <Link target="_blank" href="https://t.me/devzahirbot?start=start">
-              <SiTelegram className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer" size={48} />
-            </Link>
-            <Link target="_blank" href="https://www.facebook.com/share/1gjjhoY2Vn/?mibextid=wwXIfr">
-              <FaFacebook className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer" size={48} />
-            </Link>
-            <Link target="_blank" href="https://x.com/devzahirjs">
-              <FaXTwitter className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer" size={48} />
-            </Link>
-          </div>
-
           {/* Buy Me a Coffee Section */}
-          <div className="mt-10 flex flex-col items-center lg:items-start gap-4">
+          <div className="flex flex-col items-center lg:items-start gap-4">
             {/* QR Code */}
             <Image
               src="https://i.ibb.co/DXwdPKd/bmc-qr.png"
@@ -69,6 +53,34 @@ function ContactSection() {
                 className="w-auto h-12 hover:scale-105 transition-all duration-300"
               />
             </a>
+          </div>
+
+          {/* Social Icons */}
+          <div className="mt-10 flex flex-wrap justify-center lg:justify-start gap-5 lg:gap-10">
+            <Link target="_blank" href="https://github.com/devzahirx3/DevZahir">
+              <IoLogoGithub
+                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                size={48}
+              />
+            </Link>
+            <Link target="_blank" href="https://t.me/devzahirbot?start=start">
+              <SiTelegram
+                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                size={48}
+              />
+            </Link>
+            <Link target="_blank" href="https://www.facebook.com/share/1gjjhoY2Vn/?mibextid=wwXIfr">
+              <FaFacebook
+                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                size={48}
+              />
+            </Link>
+            <Link target="_blank" href="https://x.com/devzahirjs">
+              <FaXTwitter
+                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
+                size={48}
+              />
+            </Link>
           </div>
         </div>
       </div>
