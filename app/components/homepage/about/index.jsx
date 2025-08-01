@@ -1,9 +1,9 @@
 // @flow strict
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";  // <-- import useState
 import axios from "axios";
+import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
 import plansAnimation from "/public/lottie/code.json";
 
@@ -78,124 +78,113 @@ const plans = [
 ];
 
 function AboutSection() {
-  const [step, setStep] = useState("packages");
-  const [activePlan, setActivePlan] = useState(null);
-  const [modalInput, setModalInput] = useState("");
+  const [orderDetails, setOrderDetails] = useState({}); // State to track user input per plan
 
-  const handleCheckout = async (plan, orderDetails) => {
+  useEffect(() => {
+    const cards = document.querySelectorAll(".fade-in-card");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in-active");
+          } else {
+            entry.target.classList.remove("fade-in-active");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+
+    return () => {
+      cards.forEach((card) => observer.unobserve(card));
+    };
+  }, []);
+
+  // Handler for input changes
+  const handleOrderDetailsChange = (planId, value) => {
+    setOrderDetails((prev) => ({ ...prev, [planId]: value }));
+  };
+
+  const handleCheckout = async (plan) => {
     try {
-      setStep("processing");
+      const customOrderDetails = orderDetails[plan.id] || "";
+
       const response = await axios.post("/api/checkout", {
         title: plan.title,
         price: plan.price,
-        orderDetails,
+        orderDetails: customOrderDetails, // Send this to backend
       });
       window.location.href = response.data.url;
     } catch (error) {
       console.error("Checkout Error:", error);
-      alert("Failed to initiate checkout.");
-      setStep("packages");
+      alert("There was an error creating the Stripe checkout session.");
     }
   };
 
   return (
-    <div className="relative min-h-screen py-12">
-      <AnimatePresence mode="wait">
-        {step === "packages" && (
-          <motion.div
-            key="packages"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="space-y-12"
-          >
-            <h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center">
-              <i className="fas fa-box-open mr-3"></i> Packages
-            </h2>
+    <div className="my-12">
+      <h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center">
+        <i className="fas fa-box-open mr-3"></i> Packages
+      </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {plans.map((plan) => (
-                <GlowCard key={plan.id} identifier={`plan-${plan.id}`}>
-                  <div className="fade-in-card h-full flex flex-col justify-between rounded-2xl border border-[#2c2b55] bg-gradient-to-br from-[#18153a] to-[#1f1c46] p-6 text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/20">
-                    <div className="mb-6">
-                      <h3 className="text-2xl font-bold mb-2">{plan.title}</h3>
-                      <p className="text-lg font-semibold text-[#7a5cff] mb-4">{plan.price}</p>
-                      <p className="text-sm text-gray-300 mb-4">{plan.description}</p>
-                      <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-4">
-                        {plan.features.map((feature, index) => (
-                          <li key={index}>{feature}</li>
-                        ))}
-                      </ul>
-                      <p className="text-sm text-gray-400 mb-1">
-                        <strong>Delivery Time:</strong> {plan.deliveryTime}
-                      </p>
-                      <p className="text-sm text-gray-400 mb-4">
-                        <strong>Revisions:</strong> {plan.revisions}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => {
-                        setActivePlan(plan);
-                        setStep("details");
-                      }}
-                      className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
-                    >
-                      Purchase →
-                    </button>
-                  </div>
-                </GlowCard>
-              ))}
-            </div>
-          </motion.div>
-        )}
+      {/* Lottie Animation */}
+      <div className="flex justify-center mb-8">
+        <div className="w-full max-w-lg">
+          <AnimationLottie animationPath={plansAnimation} />
+        </div>
+      </div>
 
-        {step === "details" && activePlan && (
-          <motion.div
-            key="details"
-            initial={{ x: "100%", opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: "-100%", opacity: 0 }}
-            className="absolute inset-0 p-6 bg-[#1f1c46] text-white"
-          >
-            <h2 className="text-xl font-semibold mb-4">Customize Your Order</h2>
-            <p className="text-lg mb-2">
-              {activePlan.title} – <span className="text-[#7a5cff]">{activePlan.price}</span>
-            </p>
-            <textarea
-              value={modalInput}
-              onChange={(e) => setModalInput(e.target.value)}
-              className="w-full h-32 rounded-md p-3 bg-[#18153a] border border-[#333] text-sm"
-              placeholder="Add details or custom notes..."
-            />
-            <div className="flex justify-between mt-6">
+      {/* Plans Section */}
+      <div id="packages" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {plans.map((plan) => (
+          <GlowCard key={plan.id} identifier={`plan-${plan.id}`}>
+            <div className="fade-in-card h-full flex flex-col justify-between rounded-2xl border border-[#2c2b55] bg-gradient-to-br from-[#18153a] to-[#1f1c46] p-6 text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/20">
+              <div className="mb-6">
+                <h3 className="text-2xl font-bold mb-2">{plan.title}</h3>
+                <p className="text-lg font-semibold text-[#7a5cff] mb-4">{plan.price}</p>
+                <p className="text-sm text-gray-300 mb-4">{plan.description}</p>
+                <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-4">
+                  {plan.features.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                  ))}
+                </ul>
+                <p className="text-sm text-gray-400 mb-1">
+                  <strong>Delivery Time:</strong> {plan.deliveryTime}
+                </p>
+                <p className="text-sm text-gray-400 mb-4">
+                  <strong>Revisions:</strong> {plan.revisions}
+                </p>
+
+                {/* Custom order details input */}
+                <label
+                  htmlFor={`order-details-${plan.id}`}
+                  className="block mb-1 text-sm text-gray-400"
+                >
+                  Order Details (optional):
+                </label>
+                <textarea
+                  id={`order-details-${plan.id}`}
+                  rows={3}
+                  className="w-full rounded-md border border-gray-600 bg-[#1f1c46] text-white p-2 resize-none"
+                  placeholder="Enter your custom requirements or details here"
+                  value={orderDetails[plan.id] || ""}
+                  onChange={(e) => handleOrderDetailsChange(plan.id, e.target.value)}
+                />
+              </div>
+
               <button
-                onClick={() => setStep("packages")}
-                className="text-sm text-gray-400 hover:underline"
+                onClick={() => handleCheckout(plan)}
+                className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
               >
-                ← Back
-              </button>
-              <button
-                onClick={() => handleCheckout(activePlan, modalInput)}
-                className="bg-[#7A5CFF] hover:bg-[#9b84ff] text-white px-4 py-2 rounded-md"
-              >
-                Continue
+                Purchase →
               </button>
             </div>
-          </motion.div>
-        )}
-
-        {step === "processing" && (
-          <motion.div
-            key="processing"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex flex-col items-center justify-center h-[60vh]"
-          >
-            <div className="w-16 h-16 border-4 border-t-[#7A5CFF] border-[#2c2b55] rounded-full animate-spin" />
-            <p className="text-white mt-4">Processing your invoice...</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </GlowCard>
+        ))}
+      </div>
     </div>
   );
 }
