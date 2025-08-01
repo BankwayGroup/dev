@@ -3,8 +3,8 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import AnimationLottie from "../../helper/animation-lottie";
-import GlowCard from "../../helper/glow-card";
+import AnimationLottie from "@/components/helper/animation-lottie";
+import GlowCard from "@/components/helper/glow-card";
 import plansAnimation from "/public/lottie/code.json";
 import { useRouter } from "next/navigation";
 
