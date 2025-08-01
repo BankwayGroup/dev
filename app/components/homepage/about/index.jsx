@@ -1,11 +1,8 @@
-// @flow strict
 "use client";
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import AnimationLottie from "../../helper/animation-lottie";
-import GlowCard from "../../helper/glow-card";
-import plansAnimation from "/public/lottie/code.json";
+import GlowCard from "@/components/helper/glow-card";
 import { useRouter } from "next/navigation";
 
 const plans = [
@@ -28,8 +25,6 @@ const plans = [
     ],
     deliveryTime: 3,
     revisions: "2",
-    contact: "@DevZahirRobot",
-    link: "https://devzahir.com/",
   },
   {
     id: 2,
@@ -51,8 +46,6 @@ const plans = [
     ],
     deliveryTime: 5,
     revisions: "3",
-    contact: "@DevZahirRobot",
-    link: "https://devzahir.com/",
   },
   {
     id: 3,
@@ -73,41 +66,56 @@ const plans = [
     ],
     deliveryTime: 10,
     revisions: "5",
-    contact: "@DevZahirRobot",
-    link: "https://devzahir.com/",
   },
 ];
 
 function AboutSection() {
   const [step, setStep] = useState("packages");
   const [activePlan, setActivePlan] = useState(null);
+  const [orderDetails, setOrderDetails] = useState("");
+  const [processing, setProcessing] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          entry.target.classList.toggle("fade-in-active", entry.isIntersecting);
-        });
-      },
-      { threshold: 0.1 }
-    );
+  const handleContinue = async () => {
+    if (!activePlan || !orderDetails.trim()) {
+      alert("Please enter additional instructions for your order.");
+      return;
+    }
 
-    const cards = document.querySelectorAll(".fade-in-card");
-    cards.forEach((card) => observer.observe(card));
+    try {
+      setProcessing(true);
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: activePlan.title,
+          price: activePlan.price,
+          orderDetails,
+        }),
+      });
+      const data = await res.json();
 
-    return () => observer.disconnect();
-  }, []);
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        alert("Checkout failed.");
+        setProcessing(false);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("An error occurred. Please try again.");
+      setProcessing(false);
+    }
+  };
 
-  const handleContinue = () => {
-    if (!activePlan) return;
-    const query = new URLSearchParams({
-      plan: activePlan.title,
-      price: activePlan.price,
-      description: activePlan.description,
-      deliveryTime: activePlan.deliveryTime.toString(),
-    }).toString();
-    router.push(`/order-details?${query}`);
+  const getETA = (days) => {
+    const date = new Date();
+    date.setDate(date.getDate() + days);
+    return date.toLocaleDateString(undefined, {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+    });
   };
 
   return (
@@ -125,12 +133,6 @@ function AboutSection() {
               <i className="fas fa-box-open mr-3"></i> Packages
             </h2>
 
-            <div className="flex justify-center mb-8">
-              <div className="w-full max-w-lg">
-                <AnimationLottie animationPath={plansAnimation} />
-              </div>
-            </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {plans.map((plan) => (
                 <GlowCard key={plan.id} identifier={`plan-${plan.id}`}>
@@ -147,22 +149,65 @@ function AboutSection() {
                       <p className="text-sm text-gray-400 mb-1">
                         <strong>Delivery Time:</strong> {plan.deliveryTime} days
                       </p>
-                      <p className="text-sm text-gray-400 mb-4">
+                      <p className="text-sm text-gray-400 mb-1">
+                        <strong>Estimated by:</strong> {getETA(plan.deliveryTime)}
+                      </p>
+                      <p className="text-sm text-gray-400">
                         <strong>Revisions:</strong> {plan.revisions}
                       </p>
                     </div>
                     <button
+                      aria-label={`Purchase ${plan.title}`}
                       onClick={() => {
                         setActivePlan(plan);
-                        handleContinue();
+                        setStep("details");
                       }}
-                      className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+                      className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7A5CFF]"
                     >
                       Purchase →
                     </button>
                   </div>
                 </GlowCard>
               ))}
+            </div>
+          </motion.div>
+        )}
+
+        {step === "details" && activePlan && (
+          <motion.div
+            key="details"
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -100 }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 bg-[#1f1c46] p-6 rounded-xl text-white max-w-md mx-auto top-28 bottom-28 overflow-auto shadow-2xl"
+          >
+            <h2 className="text-xl font-bold mb-2 text-center">{activePlan.title}</h2>
+            <p className="text-[#7a5cff] text-center mb-4">{activePlan.price}</p>
+            <p className="text-sm text-gray-300 text-center mb-6">
+              Estimated delivery: <strong>{getETA(activePlan.deliveryTime)}</strong>
+            </p>
+            <textarea
+              rows={5}
+              value={orderDetails}
+              onChange={(e) => setOrderDetails(e.target.value)}
+              placeholder="Add any custom instructions (required)"
+              className="w-full p-3 rounded-md bg-[#2c2b55] border border-[#444] resize-none text-sm text-white"
+            />
+            <div className="flex justify-between items-center mt-4">
+              <button
+                onClick={() => setStep("packages")}
+                className="text-gray-400 hover:underline"
+              >
+                ← Back
+              </button>
+              <button
+                onClick={handleContinue}
+                disabled={processing}
+                className="bg-[#7A5CFF] hover:bg-[#9b84ff] px-5 py-2 rounded-md transition-all font-medium"
+              >
+                {processing ? "Processing..." : "Proceed to Payment →"}
+              </button>
             </div>
           </motion.div>
         )}
