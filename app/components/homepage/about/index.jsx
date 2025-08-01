@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import GlowCard from "@/components/helper/glow-card";
+import GlowCard from "@/components/app/helper/glow-card";
 import { useRouter } from "next/navigation";
 
 const plans = [
