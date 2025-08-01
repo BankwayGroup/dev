@@ -1,9 +1,12 @@
+// @flow strict
 "use client";
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
+import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
-import { useRouter } from "next/navigation";
+import plansAnimation from "/public/lottie/code.json";
 
 const plans = [
   {
@@ -23,8 +26,10 @@ const plans = [
       "Hosting setup support",
       "1 beautifully designed page",
     ],
-    deliveryTime: 3,
+    deliveryTime: "3 days",
     revisions: "2",
+    contact: "@DevZahirRobot",
+    link: "https://devzahir.com/",
   },
   {
     id: 2,
@@ -44,8 +49,10 @@ const plans = [
       "Hosting setup assistance",
       "Social media icons for branding",
     ],
-    deliveryTime: 5,
+    deliveryTime: "5 days",
     revisions: "3",
+    contact: "@DevZahirRobot",
+    link: "https://devzahir.com/",
   },
   {
     id: 3,
@@ -64,62 +71,43 @@ const plans = [
       "Social media icons",
       "Up to 10 pages",
     ],
-    deliveryTime: 10,
+    deliveryTime: "10 days",
     revisions: "5",
+    contact: "@DevZahirRobot",
+    link: "https://devzahir.com/",
   },
 ];
 
 function AboutSection() {
   const [step, setStep] = useState("packages");
   const [activePlan, setActivePlan] = useState(null);
-  const [orderDetails, setOrderDetails] = useState("");
-  const [processing, setProcessing] = useState(false);
-  const router = useRouter();
 
-  const handleContinue = async () => {
-    if (!activePlan || !orderDetails.trim()) {
-      alert("Please enter additional instructions for your order.");
-      return;
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle("fade-in-active", entry.isIntersecting);
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const cards = document.querySelectorAll(".fade-in-card");
+    cards.forEach((card) => observer.observe(card));
+
+    return () => observer.disconnect();
+  }, []);
+
+  const handleContinue = () => {
+    if (activePlan) {
+      window.location.href = `/order-details?plan=${encodeURIComponent(
+        activePlan.title
+      )}&price=${encodeURIComponent(activePlan.price)}`;
     }
-
-    try {
-      setProcessing(true);
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: activePlan.title,
-          price: activePlan.price,
-          orderDetails,
-        }),
-      });
-      const data = await res.json();
-
-      if (data?.url) {
-        window.location.href = data.url;
-      } else {
-        alert("Checkout failed.");
-        setProcessing(false);
-      }
-    } catch (err) {
-      console.error(err);
-      alert("An error occurred. Please try again.");
-      setProcessing(false);
-    }
-  };
-
-  const getETA = (days) => {
-    const date = new Date();
-    date.setDate(date.getDate() + days);
-    return date.toLocaleDateString(undefined, {
-      weekday: "short",
-      month: "short",
-      day: "numeric",
-    });
   };
 
   return (
-    <div id="packages" className="relative min-h-screen py-12 px-4 max-w-7xl mx-auto">
+    <div className="relative min-h-screen py-12 px-4 max-w-7xl mx-auto">
       <AnimatePresence mode="wait" initial={false}>
         {step === "packages" && (
           <motion.div
@@ -132,6 +120,12 @@ function AboutSection() {
             <h2 className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center">
               <i className="fas fa-box-open mr-3"></i> Packages
             </h2>
+
+            <div className="flex justify-center mb-8">
+              <div className="w-full max-w-lg">
+                <AnimationLottie animationPath={plansAnimation} />
+              </div>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {plans.map((plan) => (
@@ -147,22 +141,18 @@ function AboutSection() {
                         ))}
                       </ul>
                       <p className="text-sm text-gray-400 mb-1">
-                        <strong>Delivery Time:</strong> {plan.deliveryTime} days
+                        <strong>Delivery Time:</strong> {plan.deliveryTime}
                       </p>
-                      <p className="text-sm text-gray-400 mb-1">
-                        <strong>Estimated by:</strong> {getETA(plan.deliveryTime)}
-                      </p>
-                      <p className="text-sm text-gray-400">
+                      <p className="text-sm text-gray-400 mb-4">
                         <strong>Revisions:</strong> {plan.revisions}
                       </p>
                     </div>
                     <button
-                      aria-label={`Purchase ${plan.title}`}
                       onClick={() => {
                         setActivePlan(plan);
                         setStep("details");
                       }}
-                      className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#7A5CFF]"
+                      className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
                     >
                       Purchase →
                     </button>
@@ -180,21 +170,11 @@ function AboutSection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -100 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 bg-[#1f1c46] p-6 rounded-xl text-white max-w-md mx-auto top-28 bottom-28 overflow-auto shadow-2xl"
+            className="fixed inset-0 bg-[#1f1c46] p-6 rounded-xl text-white max-w-md mx-auto top-28 bottom-28 overflow-auto shadow-2xl z-50"
           >
             <h2 className="text-xl font-bold mb-2 text-center">{activePlan.title}</h2>
-            <p className="text-[#7a5cff] text-center mb-4">{activePlan.price}</p>
-            <p className="text-sm text-gray-300 text-center mb-6">
-              Estimated delivery: <strong>{getETA(activePlan.deliveryTime)}</strong>
-            </p>
-            <textarea
-              rows={5}
-              value={orderDetails}
-              onChange={(e) => setOrderDetails(e.target.value)}
-              placeholder="Add any custom instructions (required)"
-              className="w-full p-3 rounded-md bg-[#2c2b55] border border-[#444] resize-none text-sm text-white"
-            />
-            <div className="flex justify-between items-center mt-4">
+            <p className="text-[#7a5cff] text-center mb-6">{activePlan.price}</p>
+            <div className="flex justify-between items-center">
               <button
                 onClick={() => setStep("packages")}
                 className="text-gray-400 hover:underline"
@@ -203,10 +183,9 @@ function AboutSection() {
               </button>
               <button
                 onClick={handleContinue}
-                disabled={processing}
-                className="bg-[#7A5CFF] hover:bg-[#9b84ff] px-5 py-2 rounded-md transition-all font-medium"
+                className="bg-[#7A5CFF] hover:bg-[#9b84ff] text-white px-5 py-2 rounded-md transition-all font-medium"
               >
-                {processing ? "Processing..." : "Proceed to Payment →"}
+                Add Order Details →
               </button>
             </div>
           </motion.div>
