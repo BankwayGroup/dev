@@ -1,7 +1,7 @@
 // @flow strict
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";  // <-- import useState
 import axios from "axios";
 import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
@@ -78,6 +78,8 @@ const plans = [
 ];
 
 function AboutSection() {
+  const [orderDetails, setOrderDetails] = useState({}); // State to track user input per plan
+
   useEffect(() => {
     const cards = document.querySelectorAll(".fade-in-card");
 
@@ -101,11 +103,19 @@ function AboutSection() {
     };
   }, []);
 
+  // Handler for input changes
+  const handleOrderDetailsChange = (planId, value) => {
+    setOrderDetails((prev) => ({ ...prev, [planId]: value }));
+  };
+
   const handleCheckout = async (plan) => {
     try {
+      const customOrderDetails = orderDetails[plan.id] || "";
+
       const response = await axios.post("/api/checkout", {
         title: plan.title,
         price: plan.price,
+        orderDetails: customOrderDetails, // Send this to backend
       });
       window.location.href = response.data.url;
     } catch (error) {
@@ -129,36 +139,50 @@ function AboutSection() {
 
       {/* Plans Section */}
       <div id="packages" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
         {plans.map((plan) => (
-<GlowCard key={plan.id} identifier={`plan-${plan.id}`}>
-  <div className="fade-in-card h-full flex flex-col justify-between rounded-2xl border border-[#2c2b55] bg-gradient-to-br from-[#18153a] to-[#1f1c46] p-6 text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/20">
-    <div className="mb-6">
-      <h3 className="text-2xl font-bold mb-2">{plan.title}</h3>
-      <p className="text-lg font-semibold text-[#7a5cff] mb-4">{plan.price}</p>
-      <p className="text-sm text-gray-300 mb-4">{plan.description}</p>
-      <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-4">
-        {plan.features.map((feature, index) => (
-          <li key={index}>{feature}</li>
-        ))}
-      </ul>
-      <p className="text-sm text-gray-400 mb-1">
-        <strong>Delivery Time:</strong> {plan.deliveryTime}
-      </p>
-      <p className="text-sm text-gray-400">
-        <strong>Revisions:</strong> {plan.revisions}
-      </p>
-    </div>
+          <GlowCard key={plan.id} identifier={`plan-${plan.id}`}>
+            <div className="fade-in-card h-full flex flex-col justify-between rounded-2xl border border-[#2c2b55] bg-gradient-to-br from-[#18153a] to-[#1f1c46] p-6 text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/20">
+              <div className="mb-6">
+                <h3 className="text-2xl font-bold mb-2">{plan.title}</h3>
+                <p className="text-lg font-semibold text-[#7a5cff] mb-4">{plan.price}</p>
+                <p className="text-sm text-gray-300 mb-4">{plan.description}</p>
+                <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-4">
+                  {plan.features.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                  ))}
+                </ul>
+                <p className="text-sm text-gray-400 mb-1">
+                  <strong>Delivery Time:</strong> {plan.deliveryTime}
+                </p>
+                <p className="text-sm text-gray-400 mb-4">
+                  <strong>Revisions:</strong> {plan.revisions}
+                </p>
 
-    <button
-      onClick={() => handleCheckout(plan)}
-      className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
-    >
-      Purchase →
-    </button>
-  </div>
-</GlowCard>
+                {/* Custom order details input */}
+                <label
+                  htmlFor={`order-details-${plan.id}`}
+                  className="block mb-1 text-sm text-gray-400"
+                >
+                  Order Details (optional):
+                </label>
+                <textarea
+                  id={`order-details-${plan.id}`}
+                  rows={3}
+                  className="w-full rounded-md border border-gray-600 bg-[#1f1c46] text-white p-2 resize-none"
+                  placeholder="Enter your custom requirements or details here"
+                  value={orderDetails[plan.id] || ""}
+                  onChange={(e) => handleOrderDetailsChange(plan.id, e.target.value)}
+                />
+              </div>
 
+              <button
+                onClick={() => handleCheckout(plan)}
+                className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+              >
+                Purchase →
+              </button>
+            </div>
+          </GlowCard>
         ))}
       </div>
     </div>
