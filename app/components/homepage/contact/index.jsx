@@ -38,18 +38,7 @@ function ContactSection() {
               className="rounded-md shadow-md"
             />
 
-            {/* Button */}
-            <a
-              href="https://www.buymeacoffee.com/DevZahir"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=DevZahir&button_colour=1a1443&font_colour=ffffff&font_family=Cookie&outline_colour=ffffff&coffee_colour=FFDD00"
-                alt="Buy Me a Coffee"
-                className="w-auto h-12 hover:scale-105 transition-all duration-300"
-              />
-            </a>
+          <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="DevZahir" data-color="#1a1443" data-emoji="☕"  data-font="Cookie" data-text="Buy me a coffee" data-outline-color="#ffffff" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
           </div>
 
           {/* Social Icons */}
