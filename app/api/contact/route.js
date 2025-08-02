@@ -5,7 +5,7 @@ import nodemailer from 'nodemailer';
 import axios from 'axios';
 import path from 'path';
 
-// Email transporter
+// Setup email transporter
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -14,44 +14,45 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Telegram message sender
+// Helper: Send Telegram message
 async function sendTelegramMessage(token, chat_id, message, topic_id) {
   const url = `https://api.telegram.org/bot${token}/sendMessage`;
   try {
     const res = await axios.post(url, {
-      text: message,
       chat_id,
       message_thread_id: topic_id,
+      text: message,
     });
     return res.data.ok;
-  } catch (error) {
-    console.error('Telegram Error:', error.response?.data || error.message);
+  } catch (err) {
+    console.error('Telegram Error:', err.response?.data || err.message);
     return false;
   }
 }
 
-// Email template
+// Helper: Generate HTML email
 function generateEmailTemplate(name, email, msg) {
   return `
-    <div style="font-family: Arial; padding: 20px;">
+    <div style="font-family: Arial, sans-serif; padding: 20px;">
       <h2>New Message from ${name}</h2>
       <p><strong>Email:</strong> ${email}</p>
       <p><strong>Message:</strong></p>
-      <blockquote>${msg}</blockquote>
+      <blockquote style="border-left: 3px solid #ccc; padding-left: 10px;">${msg}</blockquote>
     </div>
   `;
 }
 
-// Email sender
-async function sendEmail(payload, textMessage) {
+// Helper: Send email
+async function sendEmail(payload, plainText) {
   const { name, email, message } = payload;
+
   try {
     await transporter.sendMail({
-      from: "Portfolio",
+      from: `"Portfolio" <${process.env.EMAIL_ADDRESS}>`,
       to: process.env.EMAIL_ADDRESS,
       subject: `New Message from ${name}`,
       html: generateEmailTemplate(name, email, message),
-      text: textMessage,
+      text: plainText,
       replyTo: email,
     });
     return true;
@@ -61,8 +62,8 @@ async function sendEmail(payload, textMessage) {
   }
 }
 
-// SQLite logic
-async function hasSubmittedRecently(ip: string) {
+// Helper: Check SQLite IP submission limit
+async function hasSubmittedRecently(ip) {
   const db = await open({
     filename: path.resolve(process.cwd(), 'contact.sqlite'),
     driver: sqlite3.Database,
@@ -75,50 +76,84 @@ async function hasSubmittedRecently(ip: string) {
     );
   `);
 
-  const existing = await db.get("SELECT last_submission FROM contact_submissions WHERE ip = ?", ip);
+  const result = await db.get(
+    `SELECT last_submission FROM contact_submissions WHERE ip = ?`,
+    ip
+  );
+
   const now = new Date();
 
-  if (existing) {
-    const last = new Date(existing.last_submission);
-    const hoursPassed = (now.getTime() - last.getTime()) / (1000 * 60 * 60);
-    if (hoursPassed < 24) return true;
+  if (result) {
+    const last = new Date(result.last_submission);
+    const hours = (now - last) / 1000 / 60 / 60;
+    if (hours < 24) return true;
   }
 
-  await db.run("REPLACE INTO contact_submissions (ip, last_submission) VALUES (?, ?)", ip, now.toISOString());
+  await db.run(
+    `REPLACE INTO contact_submissions (ip, last_submission) VALUES (?, ?)`,
+    ip,
+    now.toISOString()
+  );
+
   return false;
 }
 
-// API handler
+// POST handler
 export async function POST(request) {
   try {
     const payload = await request.json();
     const { name, email, message } = payload;
 
-    const ip = request.headers.get('x-forwarded-for') || 'unknown';
-    const submitted = await hasSubmittedRecently(ip);
-    if (submitted) {
-      return NextResponse.json({
-        success: false,
-        message: 'You can only submit once per day.',
-      }, { status: 429 });
+    if (!name || !email || !message) {
+      return NextResponse.json(
+        { success: false, message: 'Missing fields.' },
+        { status: 400 }
+      );
     }
 
-    const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    const ip =
+      request.headers.get('x-forwarded-for') ||
+      request.headers.get('x-real-ip') ||
+      'unknown';
+
+    const blocked = await hasSubmittedRecently(ip);
+    if (blocked) {
+      return NextResponse.json(
+        { success: false, message: 'You can only submit once per day.' },
+        { status: 429 }
+      );
+    }
+
+    const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
     const topicId = 153;
-    const fullMessage = `🌐 DevZahir.com\nContact Form Submission:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`;
+    const formattedMessage = `🌐 DevZahir.com\nContact Form Submission:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`;
 
-    const telegramSuccess = await sendTelegramMessage(botToken, chatId, fullMessage, topicId);
-    const emailSuccess = await sendEmail(payload, fullMessage);
+    const telegramSuccess = await sendTelegramMessage(
+      telegramToken,
+      chatId,
+      formattedMessage,
+      topicId
+    );
+
+    const emailSuccess = await sendEmail(payload, formattedMessage);
 
     if (telegramSuccess && emailSuccess) {
-      return NextResponse.json({ success: true, message: 'Sent successfully!' });
-    } else {
-      return NextResponse.json({ success: false, message: 'Failed to send via one or more channels.' }, { status: 500 });
+      return NextResponse.json({
+        success: true,
+        message: 'Message sent successfully!',
+      });
     }
 
+    return NextResponse.json(
+      { success: false, message: 'Failed to send via one or more channels.' },
+      { status: 500 }
+    );
   } catch (err) {
-    console.error('API Error:', err.message);
-    return NextResponse.json({ success: false, message: 'Server error.' }, { status: 500 });
+    console.error('Contact API Error:', err);
+    return NextResponse.json(
+      { success: false, message: 'Server error occurred.' },
+      { status: 500 }
+    );
   }
 }
