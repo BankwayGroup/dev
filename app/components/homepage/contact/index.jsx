@@ -1,6 +1,6 @@
 // @flow strict
 'use client';
-
+import TestimonialSlider from "@/components/portfolio/TestimonialSlider";
 import { personalData } from '@/utils/data/personal-data';
 import Link from 'next/link';
 import { BiLogoLinkedin } from 'react-icons/bi';
@@ -72,13 +72,15 @@ function ContactSection() {
               />
             </Link>
             <Link target="_blank" href="https://x.com/devzahirjs">
-              <FaXTwitter
-                className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer"
-                size={48}
-              />
+              <FaXTwitter className="bg-[#8b98a5] p-3 rounded-full hover:bg-[#16f2b3] hover:scale-110 transition-all duration-300 text-gray-800 cursor-pointer" size={48} />
             </Link>
           </div>
         </div>
+      </div>
+
+      {/* Testimonials section under contact form */}
+      <div className="mt-20">
+        <TestimonialSlider />
       </div>
     </div>
   );
