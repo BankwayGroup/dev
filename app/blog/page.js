@@ -41,7 +41,7 @@ async function page() {
 
       {/* Back button container */}
       <div className="flex justify-center mt-10 mb-4">
-        <Link href="/">
+        <Link href="/#blog">
           <button className="bg-[#1a1443] text-white px-6 py-2 rounded-md hover:bg-[#332f6e] transition">
             Back to Home
           </button>
@@ -52,3 +52,4 @@ async function page() {
 };
 
 export default page;
+
