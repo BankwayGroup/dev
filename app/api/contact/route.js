@@ -21,7 +21,7 @@ async function sendTelegramMessage(token, chat_id, message) {
     const res = await axios.post(url, {
       text: message,
       chat_id,
-    });
+    }); 
     return res.data.ok;
   } catch (error) {
     console.error('Error sending Telegram message:', error.response?.data || error.message);
