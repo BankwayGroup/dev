@@ -1,21 +1,22 @@
-// utils/data/testimonials.js
 export const testimonials = [
   {
-    name: "Alice Johnson",
-    role: "Startup Founder",
-    quote: "Zahir delivered our MVP faster than expected and it looked amazing!",
-    image: "/testimonials/alice.jpg",
+    name: "Ava Mitchell",
+    role: "Founder, CodeAva.io",
+    text: "Working with Zahir was an absolute pleasure. He delivered everything ahead of schedule with perfect communication and execution.",
   },
   {
-    name: "Mike Chen",
-    role: "CTO @ FinTech",
-    quote: "His API integrations were rock-solid. Highly recommend him.",
-    image: "/testimonials/mike.jpg",
+    name: "Liam Carter",
+    role: "CTO, StackBridge",
+    text: "His understanding of both front-end and back-end technologies was top-tier. Our project wouldn't be the same without him.",
   },
   {
-    name: "Laura Gomez",
-    role: "Marketing Lead",
-    quote: "The website design and responsiveness blew us away. 10/10.",
-    image: "/testimonials/laura.jpg",
+    name: "Sophia Ray",
+    role: "Product Designer, Freelance",
+    text: "Zahir brings your ideas to life with elegance and efficiency. I highly recommend him for any freelance or startup work.",
+  },
+  {
+    name: "Marcus Jin",
+    role: "DevOps Lead, CloudForge",
+    text: "I’ve worked with many developers, but Zahir’s dedication and speed are unmatched. He's a real asset.",
   },
 ];
