@@ -1,10 +1,20 @@
 import { NextResponse } from 'next/server';
-import Database from 'better-sqlite3';
 import nodemailer from 'nodemailer';
 import axios from 'axios';
-import path from 'path';
 
-// Setup email transporter
+// In-memory IP tracking (resets on server restart)
+const recentIPs = new Map();
+
+function hasSubmittedRecently(ip) {
+  const now = Date.now();
+  const last = recentIPs.get(ip);
+  if (last && now - last < 1000 * 60 * 60 * 24) return true;
+
+  recentIPs.set(ip, now);
+  return false;
+}
+
+// Email setup
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -13,23 +23,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Helper: Send Telegram message
-async function sendTelegramMessage(token, chat_id, message, topic_id) {
-  const url = `https://api.telegram.org/bot${token}/sendMessage`;
-  try {
-    const res = await axios.post(url, {
-      chat_id,
-      message_thread_id: topic_id,
-      text: message,
-    });
-    return res.data.ok;
-  } catch (err) {
-    console.error('Telegram Error:', err.response?.data || err.message);
-    return false;
-  }
-}
-
-// Helper: Generate HTML email
+// Email template
 function generateEmailTemplate(name, email, msg) {
   return `
     <div style="font-family: Arial, sans-serif; padding: 20px;">
@@ -41,7 +35,7 @@ function generateEmailTemplate(name, email, msg) {
   `;
 }
 
-// Helper: Send email
+// Send email
 async function sendEmail(payload, plainText) {
   const { name, email, message } = payload;
 
@@ -61,42 +55,23 @@ async function sendEmail(payload, plainText) {
   }
 }
 
-// SQLite IP submission limit logic
-function hasSubmittedRecently(ip) {
-  const dbPath = path.resolve(process.cwd(), 'contact.sqlite');
-  const db = new Database(dbPath);
-
-  db.exec(`
-    CREATE TABLE IF NOT EXISTS contact_submissions (
-      ip TEXT PRIMARY KEY,
-      last_submission TEXT
-    );
-  `);
-
-  const stmt = db.prepare(`SELECT last_submission FROM contact_submissions WHERE ip = ?`);
-  const row = stmt.get(ip);
-  const now = new Date();
-
-  if (row) {
-    const last = new Date(row.last_submission);
-    const hours = (now - last) / (1000 * 60 * 60);
-    if (hours < 24) {
-      db.close();
-      return true;
-    }
+// Send Telegram
+async function sendTelegramMessage(token, chat_id, message, topic_id) {
+  const url = `https://api.telegram.org/bot${token}/sendMessage`;
+  try {
+    const res = await axios.post(url, {
+      chat_id,
+      message_thread_id: topic_id,
+      text: message,
+    });
+    return res.data.ok;
+  } catch (err) {
+    console.error('Telegram Error:', err.response?.data || err.message);
+    return false;
   }
-
-  const upsert = db.prepare(`
-    INSERT INTO contact_submissions (ip, last_submission) VALUES (?, ?)
-    ON CONFLICT(ip) DO UPDATE SET last_submission = excluded.last_submission;
-  `);
-  upsert.run(ip, now.toISOString());
-  db.close();
-
-  return false;
 }
 
-// POST handler
+// API handler
 export async function POST(request) {
   try {
     const payload = await request.json();
@@ -114,8 +89,7 @@ export async function POST(request) {
       request.headers.get('x-real-ip') ||
       'unknown';
 
-    const blocked = hasSubmittedRecently(ip);
-    if (blocked) {
+    if (hasSubmittedRecently(ip)) {
       return NextResponse.json(
         { success: false, message: 'You can only submit once per day.' },
         { status: 429 }
@@ -125,6 +99,7 @@ export async function POST(request) {
     const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
     const topicId = 153;
+
     const formattedMessage = `🌐 DevZahir.com\nContact Form Submission:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`;
 
     const telegramSuccess = await sendTelegramMessage(
@@ -148,7 +123,7 @@ export async function POST(request) {
       { status: 500 }
     );
   } catch (err) {
-    console.error('Contact API Error:', err);
+    console.error('Contact API Error:', err.stack || err.message || err);
     return NextResponse.json(
       { success: false, message: 'Server error occurred.' },
       { status: 500 }
