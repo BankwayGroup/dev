@@ -1,6 +1,6 @@
 // @flow strict
 'use client';
-import TestimonialSlider from "@/components/portfolio/TestimonialSlider";
+import TestimonialSlider from "@/app/components/portfolio/TestimonialSlider";
 import { personalData } from '@/utils/data/personal-data';
 import Link from 'next/link';
 import { BiLogoLinkedin } from 'react-icons/bi';
