@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import sqlite3 from 'sqlite3';
-import { open } from 'sqlite';
+import Database from 'better-sqlite3';
 import nodemailer from 'nodemailer';
 import axios from 'axios';
 import path from 'path';
@@ -62,38 +61,37 @@ async function sendEmail(payload, plainText) {
   }
 }
 
-// Helper: Check SQLite IP submission limit
-async function hasSubmittedRecently(ip) {
-  const db = await open({
-    filename: path.resolve(process.cwd(), 'contact.sqlite'),
-    driver: sqlite3.Database,
-  });
+// SQLite IP submission limit logic
+function hasSubmittedRecently(ip) {
+  const dbPath = path.resolve(process.cwd(), 'contact.sqlite');
+  const db = new Database(dbPath);
 
-  await db.exec(`
+  db.exec(`
     CREATE TABLE IF NOT EXISTS contact_submissions (
       ip TEXT PRIMARY KEY,
       last_submission TEXT
     );
   `);
 
-  const result = await db.get(
-    `SELECT last_submission FROM contact_submissions WHERE ip = ?`,
-    ip
-  );
-
+  const stmt = db.prepare(`SELECT last_submission FROM contact_submissions WHERE ip = ?`);
+  const row = stmt.get(ip);
   const now = new Date();
 
-  if (result) {
-    const last = new Date(result.last_submission);
-    const hours = (now - last) / 1000 / 60 / 60;
-    if (hours < 24) return true;
+  if (row) {
+    const last = new Date(row.last_submission);
+    const hours = (now - last) / (1000 * 60 * 60);
+    if (hours < 24) {
+      db.close();
+      return true;
+    }
   }
 
-  await db.run(
-    `REPLACE INTO contact_submissions (ip, last_submission) VALUES (?, ?)`,
-    ip,
-    now.toISOString()
-  );
+  const upsert = db.prepare(`
+    INSERT INTO contact_submissions (ip, last_submission) VALUES (?, ?)
+    ON CONFLICT(ip) DO UPDATE SET last_submission = excluded.last_submission;
+  `);
+  upsert.run(ip, now.toISOString());
+  db.close();
 
   return false;
 }
@@ -116,7 +114,7 @@ export async function POST(request) {
       request.headers.get('x-real-ip') ||
       'unknown';
 
-    const blocked = await hasSubmittedRecently(ip);
+    const blocked = hasSubmittedRecently(ip);
     if (blocked) {
       return NextResponse.json(
         { success: false, message: 'You can only submit once per day.' },
