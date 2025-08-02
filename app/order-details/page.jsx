@@ -1,6 +1,8 @@
 // @flow strict
 "use client";
 
+import { FaSpinner } from "react-icons/fa";
+
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect, Suspense } from "react";
 import { motion } from "framer-motion";
@@ -99,14 +101,15 @@ function OrderDetailsInner() {
                 : "bg-[#7A5CFF] hover:bg-[#9b84ff]"
             }`}
           >
-            {processing ? (
-              <div className="flex items-center justify-center gap-2">
-                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                Processing...
-              </div>
-            ) : (
-              "Proceed to Payment →"
-            )}
+  {processing ? (
+  <div className="flex items-center justify-center gap-2">
+    <FaSpinner className="animate-spin text-white w-4 h-4" />
+    Processing...
+  </div>
+) : (
+  "Proceed to Payment →"
+)}
+
           </button>
         </div>
       </motion.div>
@@ -121,6 +124,7 @@ export default function OrderDetailsPage() {
     </Suspense>
   );
 }
+
 
 
 
