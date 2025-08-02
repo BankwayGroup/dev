@@ -1,111 +1,124 @@
-import axios from 'axios';
 import { NextResponse } from 'next/server';
+import sqlite3 from 'sqlite3';
+import { open } from 'sqlite';
 import nodemailer from 'nodemailer';
+import axios from 'axios';
+import path from 'path';
 
-// Create and configure Nodemailer transporter
+// Email transporter
 const transporter = nodemailer.createTransport({
   service: 'gmail',
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false, 
   auth: {
     user: process.env.EMAIL_ADDRESS,
-    pass: process.env.GMAIL_PASSKEY, 
+    pass: process.env.GMAIL_PASSKEY,
   },
 });
 
-// Helper function to send a message via Telegram
-async function sendTelegramMessage(token, chat_id, message) {
+// Telegram message sender
+async function sendTelegramMessage(token, chat_id, message, topic_id) {
   const url = `https://api.telegram.org/bot${token}/sendMessage`;
   try {
     const res = await axios.post(url, {
       text: message,
       chat_id,
+      message_thread_id: topic_id,
     });
     return res.data.ok;
   } catch (error) {
-    console.error('Error sending Telegram message:', error.response?.data || error.message);
+    console.error('Telegram Error:', error.response?.data || error.message);
     return false;
   }
-};
+}
 
-// HTML email template
-const generateEmailTemplate = (name, email, userMessage) => `
-  <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; background-color: #f4f4f4;">
-    <div style="max-width: 600px; margin: auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-      <h2 style="color: #007BFF;">New Message Received</h2>
-      <p><strong>Name:</strong> ${name}</p>
+// Email template
+function generateEmailTemplate(name, email, msg) {
+  return `
+    <div style="font-family: Arial; padding: 20px;">
+      <h2>New Message from ${name}</h2>
       <p><strong>Email:</strong> ${email}</p>
       <p><strong>Message:</strong></p>
-      <blockquote style="border-left: 4px solid #007BFF; padding-left: 10px; margin-left: 0;">
-        ${userMessage}
-      </blockquote>
-      <p style="font-size: 12px; color: #888;">Click reply to respond to the sender.</p>
+      <blockquote>${msg}</blockquote>
     </div>
-  </div>
-`;
+  `;
+}
 
-// Helper function to send an email via Nodemailer
-async function sendEmail(payload, message) {
-  const { name, email, message: userMessage } = payload;
-  
-  const mailOptions = {
-    from: "Portfolio", 
-    to: process.env.EMAIL_ADDRESS, 
-    subject: `New Message From ${name}`, 
-    text: message, 
-    html: generateEmailTemplate(name, email, userMessage), 
-    replyTo: email, 
-  };
-  
+// Email sender
+async function sendEmail(payload, textMessage) {
+  const { name, email, message } = payload;
   try {
-    await transporter.sendMail(mailOptions);
+    await transporter.sendMail({
+      from: "Portfolio",
+      to: process.env.EMAIL_ADDRESS,
+      subject: `New Message from ${name}`,
+      html: generateEmailTemplate(name, email, message),
+      text: textMessage,
+      replyTo: email,
+    });
     return true;
-  } catch (error) {
-    console.error('Error while sending email:', error.message);
+  } catch (err) {
+    console.error('Email Error:', err.message);
     return false;
   }
-};
+}
 
+// SQLite logic
+async function hasSubmittedRecently(ip: string) {
+  const db = await open({
+    filename: path.resolve(process.cwd(), 'contact.sqlite'),
+    driver: sqlite3.Database,
+  });
+
+  await db.exec(`
+    CREATE TABLE IF NOT EXISTS contact_submissions (
+      ip TEXT PRIMARY KEY,
+      last_submission TEXT
+    );
+  `);
+
+  const existing = await db.get("SELECT last_submission FROM contact_submissions WHERE ip = ?", ip);
+  const now = new Date();
+
+  if (existing) {
+    const last = new Date(existing.last_submission);
+    const hoursPassed = (now.getTime() - last.getTime()) / (1000 * 60 * 60);
+    if (hoursPassed < 24) return true;
+  }
+
+  await db.run("REPLACE INTO contact_submissions (ip, last_submission) VALUES (?, ?)", ip, now.toISOString());
+  return false;
+}
+
+// API handler
 export async function POST(request) {
   try {
     const payload = await request.json();
-    const { name, email, message: userMessage } = payload;
-    const token = process.env.TELEGRAM_BOT_TOKEN;
-    const chat_id = process.env.TELEGRAM_CHAT_ID;
+    const { name, email, message } = payload;
 
-    // Validate environment variables
-    if (!token || !chat_id) {
+    const ip = request.headers.get('x-forwarded-for') || 'unknown';
+    const submitted = await hasSubmittedRecently(ip);
+    if (submitted) {
       return NextResponse.json({
         success: false,
-        message: 'Telegram token or chat ID is missing.',
-      }, { status: 400 });
+        message: 'You can only submit once per day.',
+      }, { status: 429 });
     }
 
-    const message = `New message from ${name}\n\nEmail: ${email}\n\nMessage:\n\n${userMessage}\n\n`;
+    const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    const chatId = process.env.TELEGRAM_CHAT_ID;
+    const topicId = 153;
+    const fullMessage = `🌐 DevZahir.com\nContact Form Submission:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`;
 
-    // Send Telegram message
-    const telegramSuccess = await sendTelegramMessage(token, chat_id, message);
-
-    // Send email
-    const emailSuccess = await sendEmail(payload, message);
+    const telegramSuccess = await sendTelegramMessage(botToken, chatId, fullMessage, topicId);
+    const emailSuccess = await sendEmail(payload, fullMessage);
 
     if (telegramSuccess && emailSuccess) {
-      return NextResponse.json({
-        success: true,
-        message: 'Message and email sent successfully!',
-      }, { status: 200 });
+      return NextResponse.json({ success: true, message: 'Sent successfully!' });
+    } else {
+      return NextResponse.json({ success: false, message: 'Failed to send via one or more channels.' }, { status: 500 });
     }
 
-    return NextResponse.json({
-      success: false,
-      message: 'Failed to send message or email.',
-    }, { status: 500 });
-  } catch (error) {
-    console.error('API Error:', error.message);
-    return NextResponse.json({
-      success: false,
-      message: 'Server error occurred.',
-    }, { status: 500 });
+  } catch (err) {
+    console.error('API Error:', err.message);
+    return NextResponse.json({ success: false, message: 'Server error.' }, { status: 500 });
   }
-};
+}
