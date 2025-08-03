@@ -26,20 +26,25 @@ const transporter = nodemailer.createTransport({
 // Email template
 function generateEmailTemplate(name, email, msg) {
   return `
-  <div style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: auto; padding: 24px; background-color: #f9f9f9; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+  <div style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: auto; padding: 24px; background-color: #eaf4ff; border-radius: 16px; box-shadow: 0 6px 16px rgba(0,0,0,0.08); border: 1px solid #cce7ff;">
     <header style="text-align: center; margin-bottom: 24px;">
-      <h2 style="color: #16f2b3; margin: 0;">📬 New Contact Message</h2>
-      <p style="color: #444;">from <strong>${name}</strong></p>
+      <h2 style="color: #229ed9; font-size: 24px; margin: 0;">📨 New Message Received</h2>
+      <p style="color: #333; font-weight: 500;">from <strong>${name}</strong></p>
     </header>
-    <section style="background: white; border-radius: 8px; padding: 20px; border: 1px solid #eee;">
-      <p style="margin: 0 0 8px;"><strong>Email:</strong> <a href="mailto:${email}" style="color: #007acc;">${email}</a></p>
-      <p style="margin: 12px 0 4px;"><strong>Message:</strong></p>
-      <blockquote style="margin: 0; padding: 12px 16px; background-color: #f0f0f0; border-left: 4px solid #16f2b3; border-radius: 6px; color: #333; font-style: italic;">
+
+    <section style="background: #ffffff; border-radius: 12px; padding: 20px 24px; border: 1px solid #d0e7ff;">
+      <p style="margin: 0 0 12px; font-size: 14px;">
+        <strong>Email:</strong> 
+        <a href="mailto:${email}" style="color: #229ed9; text-decoration: none;">${email}</a>
+      </p>
+      <p style="margin: 16px 0 6px; font-weight: 600;">Message:</p>
+      <blockquote style="margin: 0; padding: 14px 18px; background-color: #f5faff; border-left: 4px solid #229ed9; border-radius: 8px; color: #222; font-style: normal; line-height: 1.6;">
         ${msg.replace(/\n/g, "<br>")}
       </blockquote>
     </section>
-    <footer style="text-align: center; margin-top: 24px; font-size: 12px; color: #999;">
-      <p>Sent via <a href="https://devzahir.com" target="_blank" style="color: #16f2b3;">DevZahir.com</a></p>
+
+    <footer style="text-align: center; margin-top: 30px; font-size: 12px; color: #777;">
+      <p>Delivered via <a href="https://devzahir.com" target="_blank" style="color: #229ed9; font-weight: 500;">DevZahir.com</a></p>
     </footer>
   </div>
   `;
