@@ -1,14 +1,5 @@
 // @flow strict
 'use client';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  Cell,
-} from 'recharts';
 import TestimonialSlider from "@/app/components/portfolio/TestimonialSlider";
 import { personalData } from '@/utils/data/personal-data';
 import Link from 'next/link';
@@ -21,16 +12,27 @@ import { MdAlternateEmail } from 'react-icons/md';
 import { SiTelegram } from 'react-icons/si';
 import ContactForm from './contact-form';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const skills = [
-  { name: 'JavaScript', level: 95 },
-  { name: 'React', level: 90 },
-  { name: 'Next.js', level: 88 },
-  { name: 'Node.js', level: 85 },
-  { name: 'MongoDB', level: 80 },
+  'React', 'NextJS', 'Redux', 'Express', 'NestJS',
+  'MySQL', 'MongoDB', 'Docker', 'AWS',
+  'JavaScript', 'TypeScript', 'Python',
+  'HTML', 'CSS',
 ];
 
-const colors = ['#16f2b3', '#1a1443', '#facc15', '#3b82f6', '#ec4899'];
+const skillLevels = skills.map((skill, index) => ({
+  name: skill,
+  intensity: Math.floor(Math.random() * 5) + 1, // 1 to 5 like GitHub grid
+}));
+
+const colorMap = {
+  1: '#2c2f4a',
+  2: '#3f4463',
+  3: '#57607c',
+  4: '#16f2b3',
+  5: '#6affd6',
+};
 
 function ContactSection() {
   return (
@@ -43,21 +45,23 @@ function ContactSection() {
         <span className="h-36 w-[2px] bg-[#1a1443]"></span>
       </div>
 
-      {/* Bar Chart Section */}
+      {/* Skill Grid Section */}
       <div className="mb-20 bg-[#0e0c2b] p-6 rounded-xl shadow-xl">
         <h2 className="text-3xl font-bold text-center mb-6">Tech Stack Overview</h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={skills}>
-            <XAxis dataKey="name" tick={{ fill: '#fff' }} />
-            <YAxis tick={{ fill: '#fff' }} />
-            <Tooltip />
-            <Bar dataKey="level" radius={[10, 10, 0, 0]}>
-              {skills.map((entry, index) => (
-                <Cell key={index} fill={colors[index % colors.length]} />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 px-4">
+          {skillLevels.map((skill, i) => (
+            <motion.div
+              key={skill.name}
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: i * 0.05, type: "spring" }}
+              className="flex items-center justify-center h-20 rounded-lg shadow-lg font-semibold"
+              style={{ backgroundColor: colorMap[skill.intensity] }}
+            >
+              {skill.name}
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       {/* Contact Form + Socials */}
