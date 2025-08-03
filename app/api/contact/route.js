@@ -26,14 +26,25 @@ const transporter = nodemailer.createTransport({
 // Email template
 function generateEmailTemplate(name, email, msg) {
   return `
-    <div style="font-family: Arial, sans-serif; padding: 20px;">
-      <h2>New Message from ${name}</h2>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Message:</strong></p>
-      <blockquote style="border-left: 3px solid #ccc; padding-left: 10px;">${msg}</blockquote>
-    </div>
+  <div style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: auto; padding: 24px; background-color: #f9f9f9; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+    <header style="text-align: center; margin-bottom: 24px;">
+      <h2 style="color: #16f2b3; margin: 0;">📬 New Contact Message</h2>
+      <p style="color: #444;">from <strong>${name}</strong></p>
+    </header>
+    <section style="background: white; border-radius: 8px; padding: 20px; border: 1px solid #eee;">
+      <p style="margin: 0 0 8px;"><strong>Email:</strong> <a href="mailto:${email}" style="color: #007acc;">${email}</a></p>
+      <p style="margin: 12px 0 4px;"><strong>Message:</strong></p>
+      <blockquote style="margin: 0; padding: 12px 16px; background-color: #f0f0f0; border-left: 4px solid #16f2b3; border-radius: 6px; color: #333; font-style: italic;">
+        ${msg.replace(/\n/g, "<br>")}
+      </blockquote>
+    </section>
+    <footer style="text-align: center; margin-top: 24px; font-size: 12px; color: #999;">
+      <p>Sent via <a href="https://devzahir.com" target="_blank" style="color: #16f2b3;">DevZahir.com</a></p>
+    </footer>
+  </div>
   `;
 }
+
 
 // Send email
 async function sendEmail(payload, plainText) {
@@ -98,7 +109,7 @@ export async function POST(request) {
 
     const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
-    const topicId = 153;
+    const topicId = 253;
 
     const formattedMessage = `🌐 DevZahir.com\nContact Form Submission:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`;
 
