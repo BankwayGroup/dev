@@ -11,7 +11,7 @@ function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-center">
           <p className="text-sm text-center">
             2025 ©{' '}
-            <Link href="https://devzahir.com/#skills" className="text-[#16f2b3]">
+            <Link href="https://devzahir.com/#contact" className="text-[#16f2b3]">
               Dev Zahir
             </Link>
           </p>
