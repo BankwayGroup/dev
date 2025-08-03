@@ -114,7 +114,7 @@ export async function POST(request) {
 
     const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
-    const topicId = 253;
+    const topicId = 254;
 
     const formattedMessage = `🌐 DevZahir.com\nContact Form Submission:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`;
 
