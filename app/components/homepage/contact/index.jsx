@@ -42,8 +42,8 @@ function ContactSection() {
       </div>
 
       {/* GitHub Style Skill Bars */}
-      <div className="mb-20 bg-[#16f2b3] p-6 rounded-xl shadow-xl max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-8">Tech Stack Overview</h2>
+      <div className="mb-20 bg-[#0e0c2b] p-6 rounded-xl shadow-xl max-w-4xl mx-auto">
+<h2 className="text-3xl text-[#16f2b3] font-bold text-center mb-8">Tech Stack Overview</h2>
 
         <div className="flex flex-col gap-6">
           {skills.map(({ name, percentage }, i) => (
