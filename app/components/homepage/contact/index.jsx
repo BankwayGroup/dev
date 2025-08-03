@@ -17,18 +17,15 @@ import ContactForm from './contact-form';
 import Image from 'next/image';
 
 const skills = [
-  { name: 'CSS', percentage: 49.4 },
-  { name: 'JavaScript', percentage: 34.4 },
-  { name: 'Python', percentage: 13.7 },
-  { name: 'HTML', percentage: 2.5 },
+  { name: 'JavaScript', percentage: 94.8 },
+  { name: 'SCSS', percentage: 5.2 },
 ];
 
 const barColors = {
-  CSS: '#563d7c',
-  JavaScript: '#f1e05a',
-  Python: '#3572A5',
-  HTML: '#e34c26',
+  JavaScript: '#f1e05a', // GitHub JS yellow
+  SCSS: '#c6538c',        // SCSS pink
 };
+
 
 function ContactSection() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
@@ -51,7 +48,7 @@ function ContactSection() {
         className="mb-16 bg-[#0e0c2b] p-6 rounded-xl shadow-lg max-w-3xl mx-auto"
       >
         <h2 className="text-lg text-[#16f2b3] font-bold text-center mb-4">
-          Tech Stack Overview
+          DevZahir.com
         </h2>
         <div className="flex flex-col gap-4">
           {skills.map(({ name, percentage }, i) => (
