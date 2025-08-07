@@ -134,45 +134,77 @@ function AboutSection() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {plans.map((plan) => (
-                <GlowCard key={plan.id} identifier={`plan-${plan.id}`}>
-                  <div className="fade-in-card h-full flex flex-col justify-between rounded-2xl border border-[#2c2b55] bg-gradient-to-br from-[#18153a] to-[#1f1c46] p-6 text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/20">
-                    <div className="mb-6">
-                      <h3 className="text-2xl font-bold mb-2">{plan.title}</h3>
-                      <p className="text-lg font-semibold text-[#7a5cff] mb-4">{plan.price}</p>
-                      <p className="text-sm text-gray-300 mb-4">{plan.description}</p>
-                      <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-4">
-                        {plan.features.map((feature, index) => (
-                          <li key={index}>{feature}</li>
-                        ))}
-                      </ul>
-                      <p className="text-sm text-gray-400 mb-1">
-                        <strong>Delivery Time:</strong> {plan.deliveryTime}
-                      </p>
-                      <p className="text-sm text-gray-400 mb-4">
-                        <strong>Revisions:</strong> {plan.revisions}
-                      </p>
-                    </div>
-                    <button
-           onClick={() => {
-  const query = new URLSearchParams({
-    plan: plan.title,
-    price: plan.price,
-    description: plan.description,
-    deliveryTime: plan.deliveryTime.toString(),
-  }).toString();
-  router.push(`/order-details?${query}`);
-}}
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {plans.map((plan) => (
+    <GlowCard key={plan.id} identifier={`plan-${plan.id}`}>
+      <div className="fade-in-card h-full flex flex-col justify-between rounded-2xl border border-[#2c2b55] bg-gradient-to-br from-[#18153a] to-[#1f1c46] p-6 text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/20">
+        <div className="mb-6">
+          <h3 className="text-2xl font-bold mb-2">{plan.title}</h3>
+          <p className="text-lg font-semibold text-[#7a5cff] mb-4">{plan.price}</p>
+          <p className="text-sm text-gray-300 mb-4">{plan.description}</p>
+          <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-4">
+            {plan.features.map((feature, index) => (
+              <li key={index}>{feature}</li>
+            ))}
+          </ul>
+          <p className="text-sm text-gray-400 mb-1">
+            <strong>Delivery Time:</strong> {plan.deliveryTime}
+          </p>
+          <p className="text-sm text-gray-400 mb-4">
+            <strong>Revisions:</strong> {plan.revisions}
+          </p>
+        </div>
+        <button
+          onClick={() => {
+            const query = new URLSearchParams({
+              plan: plan.title,
+              price: plan.price,
+              description: plan.description,
+              deliveryTime: plan.deliveryTime.toString(),
+            }).toString();
+            router.push(`/order-details?${query}`);
+          }}
+          className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+        >
+          Purchase →
+        </button>
+      </div>
+    </GlowCard>
+  ))}
 
-                      className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
-                    >
-                      Purchase →
-                    </button>
-                  </div>
-                </GlowCard>
-              ))}
-            </div>
+  {/* Custom Project Card */}
+  <GlowCard identifier="custom-plan">
+    <div className="fade-in-card h-full flex flex-col justify-between rounded-2xl border border-[#2c2b55] bg-gradient-to-br from-[#18153a] to-[#1f1c46] p-6 text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/20">
+      <div className="mb-6">
+        <h3 className="text-2xl font-bold mb-2">Custom Project</h3>
+        <p className="text-lg font-semibold text-[#7a5cff] mb-4">Starting at $250+</p>
+        <p className="text-sm text-gray-300 mb-4">
+          Need something more advanced or tailored? Let's build your dream app, dashboard, bot, or automation.
+        </p>
+        <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-4">
+          <li>Fully tailored to your needs</li>
+          <li>Scalable & maintainable code</li>
+          <li>Ongoing support available</li>
+        </ul>
+        <p className="text-sm text-gray-400 mb-1">
+          <strong>Delivery Time:</strong> Varies
+        </p>
+        <p className="text-sm text-gray-400 mb-4">
+          <strong>Revisions:</strong> Unlimited (in consultation)
+        </p>
+      </div>
+      <button
+        onClick={() => {
+          router.push("/custom-project");
+        }}
+        className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+      >
+        Start Custom Inquiry →
+      </button>
+    </div>
+  </GlowCard>
+</div>
+
           </motion.div>
         )}
 
