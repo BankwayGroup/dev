@@ -14,15 +14,15 @@ const Projects = () => {
 
   return (
     <section className="relative z-10 px-6 py-16 max-w-6xl mx-auto">
-      {/* Optional subtle grid background */}
-      <div className="absolute inset-0 z-0 bg-grid-pattern opacity-10 pointer-events-none" />
+      {/* Optional subtle grid pattern */}
+      <div className="absolute inset-0 z-0 bg-grid-pattern opacity-5 pointer-events-none" />
 
       <div className="relative z-10">
         <h3 className="text-4xl font-bold text-center text-white mb-12">
           GitHub Projects
         </h3>
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
           {repos.map((repo, index) => (
             <div
               key={repo.id}
@@ -30,7 +30,7 @@ const Projects = () => {
                 animation: `fadeIn 0.6s ease ${index * 0.1}s forwards`,
                 opacity: 0,
               }}
-              className="bg-gradient-to-br from-[#1e1e2f] to-[#181828] border border-purple-900/40 backdrop-blur-md rounded-2xl p-6 shadow-lg hover:shadow-purple-900/40 transition-all duration-300"
+              className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-6 shadow-lg hover:shadow-purple-900/40 transition-all duration-300"
             >
               <a
                 href={repo.html_url}
@@ -40,15 +40,15 @@ const Projects = () => {
               >
                 {repo.name}
               </a>
-              <p className="text-gray-400 mt-3 min-h-[3rem]">
+              <p className="text-gray-300 mt-3 min-h-[3rem]">
                 {repo.description || 'No description available.'}
               </p>
-              <div className="flex justify-between text-sm text-gray-500 mt-4">
+              <div className="flex justify-between text-sm text-gray-400 mt-4">
                 <span>{repo.language || 'Unknown'}</span>
                 <span>🗓 {new Date(repo.updated_at).toLocaleDateString()}</span>
               </div>
               {repo.license && (
-                <div className="mt-2 text-xs text-gray-600">
+                <div className="mt-2 text-xs text-gray-500">
                   🪪 {repo.license.name}
                 </div>
               )}
@@ -75,5 +75,3 @@ const Projects = () => {
 };
 
 export default Projects;
-
-
