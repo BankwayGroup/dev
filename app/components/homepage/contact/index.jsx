@@ -15,6 +15,7 @@ import { MdAlternateEmail } from 'react-icons/md';
 import { SiTelegram } from 'react-icons/si';
 import ContactForm from './contact-form';
 import Image from 'next/image';
+import Projects from '../github/Projects';
 
 const skills = [
   { name: 'JavaScript', percentage: 94.8 },
@@ -31,15 +32,10 @@ function ContactSection() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
-    <div id="contact" className="my-12 lg:my-16 relative mt-24 text-white">
-      <div className="hidden lg:flex flex-col items-center absolute top-24 -right-8">
-        <span className="bg-[#1a1443] w-fit text-white rotate-90 p-2 px-5 text-xl rounded-md">
-          CONTACT
-        </span>
-        <span className="h-36 w-[2px] bg-[#1a1443]"></span>
-      </div>
-
-      {/* Sleek GitHub-style skill bars */}
+          <section id="projects" className="mt-20">
+  <Projects />
+</section>
+          {/* Sleek GitHub-style skill bars */}
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 50 }}
@@ -68,6 +64,16 @@ function ContactSection() {
           ))}
         </div>
       </motion.div>
+        
+    <div id="contact" className="my-12 lg:my-16 relative mt-24 text-white">
+      <div className="hidden lg:flex flex-col items-center absolute top-24 -right-8">
+        <span className="bg-[#1a1443] w-fit text-white rotate-90 p-2 px-5 text-xl rounded-md">
+          CONTACT
+        </span>
+        <span className="h-36 w-[2px] bg-[#1a1443]"></span>
+      </div>
+
+
 
       {/* Contact Form + Socials */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
