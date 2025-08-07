@@ -208,8 +208,7 @@ function AboutSection() {
         </div>
       </motion.div>
     )}
-  </AnimatePresence>
-</div>
+
 
 
         {step === "details" && activePlan && (
