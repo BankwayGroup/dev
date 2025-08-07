@@ -197,7 +197,7 @@ function AboutSection() {
                     }}
                     className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
                   >
-                    Start Custom Inquiry →
+                    Custom Inquiry →
                   </button>
                 </div>
               </GlowCard>
