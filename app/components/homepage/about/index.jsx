@@ -113,12 +113,6 @@ function AboutSection() {
   return (
 
 
-    <div className="space-y-16">
-  <AboutSection />
-  <Services />
-  <Projects /> {/* ← Add it here */}
-</div>
-
     <div className="relative min-h-screen py-12 px-4 max-w-7xl mx-auto">
       <AnimatePresence mode="wait" initial={false}>
         {step === "packages" && (
@@ -258,8 +252,12 @@ function AboutSection() {
           </motion.div>
         )}
       </AnimatePresence>
+      <section id="projects" className="mt-20">
+  <Projects />
+</section>
     </div>
   );
 }
+
 
 export default AboutSection;
