@@ -109,105 +109,108 @@ function AboutSection() {
   };
 
   return (
-    <div className="relative min-h-screen py-12 px-4 max-w-7xl mx-auto">
-      <AnimatePresence mode="wait" initial={false}>
-        {step === "packages" && (
-          <motion.div
-            key="packages"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.3 }}
-          >
-            <h2
-              id="packages"
-              className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center"
-            >
-              <i className="fas fa-box-open mr-3"></i> Packages
-            </h2>
+<div className="relative min-h-screen py-12 px-4 max-w-7xl mx-auto">
+  <AnimatePresence mode="wait" initial={false}>
+    {step === "packages" && (
+      <motion.div
+        key="packages"
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -50 }}
+        transition={{ duration: 0.3 }}
+      >
+        <h2
+          id="packages"
+          className="text-2xl font-bold text-[#16f2b3] uppercase mb-8 flex items-center"
+        >
+          <i className="fas fa-box-open mr-3"></i> Packages
+        </h2>
 
-            <div className="flex justify-center mb-8">
-              <div className="w-full max-w-lg">
-                <AnimationLottie animationPath={plansAnimation} />
-              </div>
-            </div>
+        <div className="flex justify-center mb-8">
+          <div className="w-full max-w-lg">
+            <AnimationLottie animationPath={plansAnimation} />
+          </div>
+        </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
-              {plans.map((plan) => (
-                <div key={plan.id} className="h-full flex flex-col">
-                  <GlowCard identifier={`plan-${plan.id}`}>
-                    <div className="fade-in-card h-full flex flex-col justify-between rounded-2xl border border-[#2c2b55] bg-gradient-to-br from-[#18153a] to-[#1f1c46] p-6 text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/20">
-                      <div className="mb-6">
-                        <h3 className="text-2xl font-bold mb-2">{plan.title}</h3>
-                        <p className="text-lg font-semibold text-[#7a5cff] mb-4">{plan.price}</p>
-                        <p className="text-sm text-gray-300 mb-4">{plan.description}</p>
-                        <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-4">
-                          {plan.features.map((feature, index) => (
-                            <li key={index}>{feature}</li>
-                          ))}
-                        </ul>
-                        <p className="text-sm text-gray-400 mb-1">
-                          <strong>Delivery Time:</strong> {plan.deliveryTime}
-                        </p>
-                        <p className="text-sm text-gray-400 mb-4">
-                          <strong>Revisions:</strong> {plan.revisions}
-                        </p>
-                      </div>
-                      <button
-                        onClick={() => {
-                          const query = new URLSearchParams({
-                            plan: plan.title,
-                            price: plan.price,
-                            description: plan.description,
-                            deliveryTime: plan.deliveryTime.toString(),
-                          }).toString();
-                          router.push(`/order-details?${query}`);
-                        }}
-                        className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
-                      >
-                        Purchase →
-                      </button>
-                    </div>
-                  </GlowCard>
-                </div>
-              ))}
-
-              {/* Custom Project Card */}
-              <div className="h-full flex flex-col">
-                <GlowCard identifier="custom-plan">
-                  <div className="fade-in-card h-full flex flex-col justify-between rounded-2xl border border-[#2c2b55] bg-gradient-to-br from-[#18153a] to-[#1f1c46] p-6 text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/20">
-                    <div className="mb-6">
-                      <h3 className="text-2xl font-bold mb-2">Custom Project</h3>
-                      <p className="text-lg font-semibold text-[#7a5cff] mb-4">Starting at $800+</p>
-                      <p className="text-sm text-gray-300 mb-4">
-                        Need something more advanced or tailored? Let&apos;s build your dream app, dashboard, bot, or automation.
-                      </p>
-                      <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-4">
-                        <li>Fully tailored to your needs</li>
-                        <li>Scalable & maintainable code</li>
-                        <li>Ongoing support available</li>
-                      </ul>
-                      <p className="text-sm text-gray-400 mb-1">
-                        <strong>Delivery Time:</strong> Varies
-                      </p>
-                      <p className="text-sm text-gray-400 mb-4">
-                        <strong>Revisions:</strong> Unlimited (in consultation)
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => {
-                        router.push("https://devzahir.com/#contact");
-                      }}
-                      className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
-                    >
-                      Custom Inquiry →
-                    </button>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
+          {plans.map((plan) => (
+            <div key={plan.id} className="h-full flex flex-col">
+              <GlowCard identifier={`plan-${plan.id}`}>
+                <div className="fade-in-card h-full flex flex-col justify-between rounded-2xl border border-[#2c2b55] bg-gradient-to-br from-[#18153a] to-[#1f1c46] p-6 text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/20">
+                  <div className="mb-6">
+                    <h3 className="text-2xl font-bold mb-2">{plan.title}</h3>
+                    <p className="text-lg font-semibold text-[#7a5cff] mb-4">{plan.price}</p>
+                    <p className="text-sm text-gray-300 mb-4">{plan.description}</p>
+                    <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-4">
+                      {plan.features.map((feature, index) => (
+                        <li key={index}>{feature}</li>
+                      ))}
+                    </ul>
+                    <p className="text-sm text-gray-400 mb-1">
+                      <strong>Delivery Time:</strong> {plan.deliveryTime}
+                    </p>
+                    <p className="text-sm text-gray-400 mb-4">
+                      <strong>Revisions:</strong> {plan.revisions}
+                    </p>
                   </div>
-                </GlowCard>
-              </div>
+                  <button
+                    onClick={() => {
+                      const query = new URLSearchParams({
+                        plan: plan.title,
+                        price: plan.price,
+                        description: plan.description,
+                        deliveryTime: plan.deliveryTime.toString(),
+                      }).toString();
+                      router.push(`/order-details?${query}`);
+                    }}
+                    className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+                  >
+                    Purchase →
+                  </button>
+                </div>
+              </GlowCard>
             </div>
-          </motion.div>
-        )}
+          ))}
+
+          {/* Custom Project Card */}
+          <div className="h-full flex flex-col">
+            <GlowCard identifier="custom-plan">
+              <div className="fade-in-card h-full flex flex-col justify-between rounded-2xl border border-[#2c2b55] bg-gradient-to-br from-[#18153a] to-[#1f1c46] p-6 text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/20">
+                <div className="mb-6">
+                  <h3 className="text-2xl font-bold mb-2">Custom Project</h3>
+                  <p className="text-lg font-semibold text-[#7a5cff] mb-4">Starting at $800+</p>
+                  <p className="text-sm text-gray-300 mb-4">
+                    Need something more advanced or tailored? Let&apos;s build your dream app, dashboard, bot, or automation.
+                  </p>
+                  <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-4">
+                    <li>Fully tailored to your needs</li>
+                    <li>Scalable & maintainable code</li>
+                    <li>Ongoing support available</li>
+                  </ul>
+                  <p className="text-sm text-gray-400 mb-1">
+                    <strong>Delivery Time:</strong> Varies
+                  </p>
+                  <p className="text-sm text-gray-400 mb-4">
+                    <strong>Revisions:</strong> Unlimited (in consultation)
+                  </p>
+                </div>
+                <button
+                  onClick={() => {
+                    router.push("https://devzahir.com/#contact");
+                  }}
+                  className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+                >
+                  Custom Inquiry →
+                </button>
+              </div>
+            </GlowCard>
+          </div>
+        </div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+</div>
+
 
         {step === "details" && activePlan && (
           <motion.div
