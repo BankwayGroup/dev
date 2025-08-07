@@ -1,11 +1,72 @@
-// @flow strict
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { SiTwitter } from "react-icons/si";
-import Link from "next/link";
 
-export default function TwitterApiSection() {
+type Tweet = {
+  id: string;
+  text: string;
+  created_at: string;
+};
+
+export default function RecentTweets() {
+  const [tweets, setTweets] = useState<Tweet[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Your Twitter username
+  const username = "devzahirx3";
+
+  // Twitter API URLs
+  const userByUsernameUrl = `https://api.twitter.com/2/users/by/username/${username}`;
+  // You can adjust tweet fields & expansions as needed
+  const tweetsUrl = (userId: string) =>
+    `https://api.twitter.com/2/users/${userId}/tweets?max_results=5&tweet.fields=created_at`;
+
+  useEffect(() => {
+    async function fetchTweets() {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const bearerToken = process.env.NEXT_PUBLIC_TWITTER_BEARER_TOKEN;
+        if (!bearerToken) {
+          setError("Twitter API token not found. Please set it in environment variables.");
+          setLoading(false);
+          return;
+        }
+
+        // 1. Get user ID by username
+        const userRes = await fetch(userByUsernameUrl, {
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+          },
+        });
+        if (!userRes.ok) throw new Error("Failed to fetch user data");
+        const userData = await userRes.json();
+
+        if (!userData.data?.id) throw new Error("User ID not found");
+
+        // 2. Get recent tweets by user ID
+        const tweetsRes = await fetch(tweetsUrl(userData.data.id), {
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+          },
+        });
+        if (!tweetsRes.ok) throw new Error("Failed to fetch tweets");
+        const tweetsData = await tweetsRes.json();
+
+        setTweets(tweetsData.data || []);
+      } catch (err: any) {
+        setError(err.message || "An error occurred");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchTweets();
+  }, []);
+
   return (
     <section className="mt-20 px-6 md:px-0 max-w-3xl mx-auto">
       <motion.div
@@ -19,27 +80,34 @@ export default function TwitterApiSection() {
           <div className="w-[30px] h-[30px] flex items-center justify-center rounded-full border border-white/20">
             <SiTwitter size={18} color="#1DA1F2" />
           </div>
-          <h2 className="text-lg font-bold text-white">Twitter / X API v2</h2>
+          <h2 className="text-lg font-bold text-white">Recent Tweets - @{username}</h2>
         </div>
-        <p className="text-gray-300 text-sm mb-4">
-          You can fetch <strong className="text-white">tweets</strong>, <strong className="text-white">user profiles</strong>, <strong className="text-white">timelines</strong>, <strong className="text-white">likes</strong>, and more using the official X (formerly Twitter) API.
-        </p>
-        <ul className="text-sm text-gray-400 list-disc pl-6 space-y-1 mb-4">
-          <li>
-            Requires an account with{" "}
-            <Link
-              href="https://developer.x.com/devzahirx3"
-              target="_blank"
-              className="text-[#1DA1F2] hover:underline"
-            >
-              @devzahirx3
-            </Link>
-          </li>
-          <li>Free Tier: Only allows access to recent tweets from your own account</li>
+
+        {loading && <p className="text-gray-400">Loading tweets...</p>}
+        {error && <p className="text-red-500">{error}</p>}
+
+        {!loading && !error && tweets.length === 0 && (
+          <p className="text-gray-400">No tweets found.</p>
+        )}
+
+        <ul className="space-y-4 text-gray-300 text-sm">
+          {tweets.map(({ id, text, created_at }) => (
+            <li key={id} className="border border-[#25213b] rounded-lg p-4 hover:bg-[#25213b] transition">
+              <p>{text}</p>
+              <a
+                href={`https://twitter.com/${username}/status/${id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#1DA1F2] mt-2 inline-block text-xs"
+              >
+                View on Twitter &rarr;
+              </a>
+              <p className="text-xs text-gray-500 mt-1">
+                {new Date(created_at).toLocaleString()}
+              </p>
+            </li>
+          ))}
         </ul>
-        <div className="text-xs text-gray-500 italic">
-          Perfect for integrating your own tweets or timeline into your portfolio or dashboard.
-        </div>
       </motion.div>
     </section>
   );
