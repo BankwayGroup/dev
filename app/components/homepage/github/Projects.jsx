@@ -1,49 +1,76 @@
-import React, { useEffect, useState } from 'react';
+'use client';
 
-const Projects = () => {
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import axios from 'axios';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i = 1) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  }),
+};
+
+function Projects() {
   const [repos, setRepos] = useState([]);
 
   useEffect(() => {
-    fetch('https://api.github.com/users/devzahirx3/repos')
-      .then(res => res.json())
-      .then(data => {
-        const sorted = data.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+    axios
+      .get('https://api.github.com/users/devzahirx3/repos')
+      .then((res) => {
+        const sorted = res.data.sort(
+          (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
+        );
         setRepos(sorted);
-      });
+      })
+      .catch((err) => console.error('GitHub API error:', err));
   }, []);
 
   return (
-    <section className="relative z-10 px-6 py-16 max-w-6xl mx-auto">
-      {/* Optional subtle grid pattern */}
-      <div className="absolute inset-0 z-0 bg-grid-pattern opacity-5 pointer-events-none" />
+    <div className="relative z-10 px-4 py-12 max-w-7xl mx-auto">
+      <motion.h2
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeUp}
+        className="text-2xl font-bold text-[#16f2b3] uppercase mb-12 flex items-center"
+      >
+        <i className="fab fa-github mr-3"></i> GitHub Projects
+      </motion.h2>
 
-      <div className="relative z-10">
-        <h3 className="text-4xl font-bold text-center text-white mb-12">
-          GitHub Projects
-        </h3>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-          {repos.map((repo, index) => (
-            <div
-              key={repo.id}
-              style={{
-                animation: `fadeIn 0.6s ease ${index * 0.1}s forwards`,
-                opacity: 0,
-              }}
-              className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-3xl p-6 shadow-lg hover:shadow-purple-900/40 transition-all duration-300"
-            >
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {repos.map((repo, index) => (
+          <motion.div
+            key={repo.id}
+            custom={index}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="fade-in-card flex flex-col justify-between rounded-2xl border border-[#2c2b55] bg-gradient-to-br from-[#18153a] to-[#1f1c46] p-6 text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/20"
+          >
+            <div className="mb-4">
               <a
                 href={repo.html_url}
                 target="_blank"
-                rel="noreferrer"
-                className="text-2xl font-semibold text-white hover:text-purple-400 transition"
+                rel="noopener noreferrer"
+                className="text-xl font-semibold text-white hover:text-[#7a5cff] transition"
               >
                 {repo.name}
               </a>
-              <p className="text-gray-300 mt-3 min-h-[3rem]">
+              <p className="text-sm text-gray-300 mt-2 min-h-[3rem]">
                 {repo.description || 'No description available.'}
               </p>
-              <div className="flex justify-between text-sm text-gray-400 mt-4">
+            </div>
+
+            <div className="text-sm text-gray-400 mt-auto pt-4 border-t border-[#2c2b55]">
+              <div className="flex justify-between items-center mt-2">
                 <span>{repo.language || 'Unknown'}</span>
                 <span>🗓 {new Date(repo.updated_at).toLocaleDateString()}</span>
               </div>
@@ -53,25 +80,11 @@ const Projects = () => {
                 </div>
               )}
             </div>
-          ))}
-        </div>
+          </motion.div>
+        ))}
       </div>
-
-      {/* Fade In Animation */}
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
-    </section>
+    </div>
   );
-};
+}
 
 export default Projects;
