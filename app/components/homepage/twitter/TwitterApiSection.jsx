@@ -60,12 +60,12 @@ export default function TwitterApiSection() {
 <motion.p variants={itemVariants} className="text-gray-300 text-sm mb-4">
   Displaying recent posts from{" "}
   <Link
-    href="https://twitter.com/devzahirx3"
+    href="https://twitter.com/devzahirjs"
     target="_blank"
     rel="noopener noreferrer"
     className="text-[#1DA1F2] hover:underline"
   >
-    @devzahirx3
+    @devzahirjs
   </Link>
   .
 </motion.p>
@@ -97,4 +97,5 @@ export default function TwitterApiSection() {
     </section>
   );
 }
+
 
