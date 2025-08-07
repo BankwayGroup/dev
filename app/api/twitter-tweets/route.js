@@ -1,6 +1,9 @@
+// @flow strict
 let cachedTweets = null;
 let cacheTimestamp = 0;
-const CACHE_DURATION_MS = 1000 * 60 * 5; // 5 minutes cache
+let isFetching = false;
+let pendingResolvers = [];
+const CACHE_DURATION_MS = 1000 * 60 * 5; // 5 minutes
 
 export async function GET() {
   const BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN;
@@ -13,7 +16,7 @@ export async function GET() {
 
   const now = Date.now();
 
-  // Return cached data if not expired
+  // ✅ Serve from cache if valid
   if (cachedTweets && now - cacheTimestamp < CACHE_DURATION_MS) {
     return new Response(JSON.stringify(cachedTweets), {
       status: 200,
@@ -21,9 +24,19 @@ export async function GET() {
     });
   }
 
+  // ✅ Prevent duplicate fetches by queueing pending requests
+  if (isFetching) {
+    return new Promise((resolve) => {
+      pendingResolvers.push(resolve);
+    });
+  }
+
+  isFetching = true;
+
   try {
     const username = "devzahirjs";
 
+    // 🔍 Step 1: Get user ID
     const userRes = await fetch(
       `https://api.twitter.com/2/users/by/username/${username}`,
       {
@@ -41,6 +54,7 @@ export async function GET() {
     const userData = await userRes.json();
     const userId = userData.data.id;
 
+    // 🔍 Step 2: Get tweets
     const tweetsRes = await fetch(
       `https://api.twitter.com/2/users/${userId}/tweets?max_results=5&tweet.fields=created_at`,
       {
@@ -57,23 +71,36 @@ export async function GET() {
 
     const tweetsData = await tweetsRes.json();
 
-    // Cache the tweets and update timestamp
+    // ✅ Update cache
     cachedTweets = tweetsData.data || [];
     cacheTimestamp = now;
 
-    return new Response(JSON.stringify(cachedTweets), {
+    const response = new Response(JSON.stringify(cachedTweets), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
+
+    // ✅ Resolve all waiting requests
+    pendingResolvers.forEach((resolve) => resolve(response.clone()));
+    pendingResolvers = [];
+
+    return response;
   } catch (error) {
     console.error("[Twitter API]", error.message);
-    return new Response(
-      JSON.stringify({ error: "n/a" }),
-      {
-        status: 500,
+
+    // 🛡️ Fallback: Serve stale cache if available
+    if (cachedTweets) {
+      return new Response(JSON.stringify(cachedTweets), {
+        status: 200,
         headers: { "Content-Type": "application/json" },
-      }
-    );
+      });
+    }
+
+    return new Response(JSON.stringify({ error: "n/a" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  } finally {
+    isFetching = false;
   }
 }
-
