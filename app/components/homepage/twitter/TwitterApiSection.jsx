@@ -22,6 +22,7 @@ const itemVariants = {
 export default function TwitterApiSection() {
   const [tweets, setTweets] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchTweets() {
@@ -31,7 +32,9 @@ export default function TwitterApiSection() {
         const data = await res.json();
         setTweets(data);
       } catch (err) {
-        setError(err.message);
+        setError(err.message || "Something went wrong");
+      } finally {
+        setLoading(false);
       }
     }
     fetchTweets();
@@ -68,8 +71,9 @@ export default function TwitterApiSection() {
           <motion.li variants={itemVariants}>
             Requires an account with{" "}
             <Link
-              href="https://developer.x.com/devzahirx3"
+              href="https://twitter.com/devzahirx3"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-[#1DA1F2] hover:underline"
             >
               @devzahirx3
@@ -87,17 +91,24 @@ export default function TwitterApiSection() {
         {/* Tweets List */}
         <motion.div variants={itemVariants} className="text-white">
           {error && <p className="text-red-500 mb-2">Error: {error}</p>}
-          {!error && tweets.length === 0 && <p>Loading tweets...</p>}
-          <ul className="space-y-3 max-h-64 overflow-y-auto">
-            {tweets.map((tweet) => (
-              <li key={tweet.id} className="p-3 bg-[#1a1a2e] rounded-md shadow-sm">
-                <p>{tweet.text}</p>
-                <small className="text-gray-400 text-xs">
-                  {new Date(tweet.created_at).toLocaleString()}
-                </small>
-              </li>
-            ))}
-          </ul>
+          {!error && loading && <p className="text-gray-400">Loading tweets...</p>}
+          {!error && !loading && tweets.length === 0 && (
+            <p className="text-gray-400">No tweets found.</p>
+          )}
+          {!error && tweets.length > 0 && (
+            <ul className="space-y-3 max-h-64 overflow-y-auto">
+              {tweets.map((tweet) => (
+                <li key={tweet.id} className="p-3 bg-[#1a1a2e] rounded-md shadow-sm">
+                  <p>{tweet.text}</p>
+                  <small className="text-gray-400 text-xs block mt-1">
+                    {tweet.created_at
+                      ? new Date(tweet.created_at).toLocaleString()
+                      : "Unknown date"}
+                  </small>
+                </li>
+              ))}
+            </ul>
+          )}
         </motion.div>
       </motion.div>
     </section>
