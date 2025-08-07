@@ -36,7 +36,7 @@ const Projects = () => {
                 href={repo.html_url}
                 target="_blank"
                 rel="noreferrer"
-                className="text-2xl font-semibold text-purple-300 hover:text-purple-500 transition"
+                className="text-2xl font-semibold text-white hover:text-purple-400 transition"
               >
                 {repo.name}
               </a>
@@ -75,4 +75,5 @@ const Projects = () => {
 };
 
 export default Projects;
+
 
