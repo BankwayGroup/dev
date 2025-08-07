@@ -12,6 +12,7 @@ import { SiTelegram } from 'react-icons/si';
 import ContactForm from './contact-form';
 import Image from 'next/image';
 import Projects from '../github/Projects';
+import TwitterApiSection from "@/components/homepage/twitter/TwitterApiSection";
 
 const skills = [
   { name: 'JavaScript', percentage: 94.8 },
@@ -62,7 +63,8 @@ function ContactSection() {
       ))}
     </div>
   </motion.div>
-
+  {/* Add your Twitter API Section here */}
+            <TwitterApiSection />
 
 
       {/* Contact Section */}
