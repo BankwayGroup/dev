@@ -55,7 +55,7 @@ function HeroSection() {
 
 
 
-<div className="w-[32px] h-[32px] flex items-center justify-center rounded-full border border-pink-500/30">
+<div className="w-[33px] h-[33px] flex items-center justify-center rounded-full border border-pink-500/30">
   <Link
     href="https://devzahir.com/#github"
     rel="noopener noreferrer"
