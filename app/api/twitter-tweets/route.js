@@ -68,7 +68,7 @@ export async function GET() {
   } catch (error) {
     console.error("[Twitter API]", error.message);
     return new Response(
-      JSON.stringify({ error: "Failed to fetch tweets" }),
+      JSON.stringify({ error: "n/a" }),
       {
         status: 500,
         headers: { "Content-Type": "application/json" },
@@ -76,3 +76,4 @@ export async function GET() {
     );
   }
 }
+
