@@ -13,19 +13,22 @@ const Projects = () => {
   }, []);
 
   return (
-    <div className="p-6 bg-[#121217] rounded-xl shadow-lg max-w-5xl mx-auto">
-      <h2 className="text-3xl font-extrabold text-white mb-6">🚀 My GitHub Projects</h2>
+    <div className="p-6 backdrop-blur-xl bg-white/5 rounded-2xl shadow-2xl max-w-5xl mx-auto border border-white/10">
+      <h2 className="text-3xl font-extrabold text-white mb-6 text-center">
+        🚀 My GitHub Projects
+      </h2>
       <div className="grid gap-6 md:grid-cols-2">
-        {repos.map(repo => (
+        {repos.map((repo, index) => (
           <div
             key={repo.id}
-            className="p-5 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-xl border border-gray-700 shadow-md hover:shadow-xl transition-shadow duration-300"
+            className="p-5 rounded-xl bg-white/10 backdrop-blur-lg border border-white/10 shadow transition duration-500 hover:shadow-xl animate-fadeIn opacity-0 animate-delay-[200ms] animate-fill-forwards"
+            style={{ animationDelay: `${index * 100}ms` }}
           >
             <a
               href={repo.html_url}
               target="_blank"
               rel="noreferrer"
-              className="text-xl font-semibold text-indigo-400 hover:text-indigo-600 transition-colors"
+              className="text-xl font-semibold text-indigo-300 hover:text-indigo-500 transition-colors"
             >
               {repo.name}
             </a>
@@ -33,8 +36,8 @@ const Projects = () => {
               {repo.description || 'No description available.'}
             </p>
             <div className="flex justify-between text-sm text-gray-400 mt-4">
-              <span>🌐 {repo.language || 'Unknown'}</span>
-              <span>📅 Updated: {new Date(repo.updated_at).toLocaleDateString()}</span>
+              <span>{repo.language || 'Unknown'}</span>
+              <span>📅 {new Date(repo.updated_at).toLocaleDateString()}</span>
             </div>
             {repo.license && (
               <div className="mt-2 text-xs text-gray-500">
