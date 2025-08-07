@@ -29,7 +29,7 @@ function ContactSection() {
   return (
     <>
       {/* Projects Section */}
-      <section id="projects" className="mt-20">
+      <section id="github" className="mt-20">
         <Projects />
       </section>
 
