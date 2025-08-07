@@ -13,60 +13,65 @@ const Projects = () => {
   }, []);
 
   return (
-    <div className="p-6 backdrop-blur-xl bg-white/5 rounded-2xl shadow-2xl max-w-5xl mx-auto border border-white/10">
-      <h3 className="text-3xl font-extrabold text-white mb-6 text-center">
-        My GitHub Projects
-      </h3>
-      <div className="grid gap-6 md:grid-cols-2">
-        {repos.map((repo, index) => (
-          <div
-            key={repo.id}
-            style={{
-              animation: `fadeIn 0.5s ease ${index * 0.1}s forwards`,
-              opacity: 0,
-            }}
-            className="p-5 rounded-xl bg-white/10 backdrop-blur-lg border border-white/10 shadow transition duration-500 hover:shadow-xl"
-          >
-            <a
-              href={repo.html_url}
-              target="_blank"
-              rel="noreferrer"
-              className="text-xl font-semibold text-indigo-300 hover:text-indigo-500 transition-colors"
+    <section className="relative z-10 px-6 py-16 max-w-6xl mx-auto">
+      {/* Optional subtle grid background */}
+      <div className="absolute inset-0 z-0 bg-grid-pattern opacity-10 pointer-events-none" />
+
+      <div className="relative z-10">
+        <h3 className="text-4xl font-bold text-center text-white mb-12">
+          🚀 GitHub Projects
+        </h3>
+
+        <div className="grid gap-8 md:grid-cols-2">
+          {repos.map((repo, index) => (
+            <div
+              key={repo.id}
+              style={{
+                animation: `fadeIn 0.6s ease ${index * 0.1}s forwards`,
+                opacity: 0,
+              }}
+              className="bg-gradient-to-br from-[#1e1e2f] to-[#181828] border border-purple-900/40 backdrop-blur-md rounded-2xl p-6 shadow-lg hover:shadow-purple-900/40 transition-all duration-300"
             >
-              {repo.name}
-            </a>
-            <p className="text-gray-300 mt-2 min-h-[3rem]">
-              {repo.description || 'No description available.'}
-            </p>
-            <div className="flex justify-between text-sm text-gray-400 mt-4">
-              <span>{repo.language || 'Unknown'}</span>
-              <span>{new Date(repo.updated_at).toLocaleDateString()}</span>
-            </div>
-            {repo.license && (
-              <div className="mt-2 text-xs text-gray-500">
-                {repo.license.name}
+              <a
+                href={repo.html_url}
+                target="_blank"
+                rel="noreferrer"
+                className="text-2xl font-semibold text-purple-300 hover:text-purple-500 transition"
+              >
+                {repo.name}
+              </a>
+              <p className="text-gray-400 mt-3 min-h-[3rem]">
+                {repo.description || 'No description available.'}
+              </p>
+              <div className="flex justify-between text-sm text-gray-500 mt-4">
+                <span>{repo.language || 'Unknown'}</span>
+                <span>🗓 {new Date(repo.updated_at).toLocaleDateString()}</span>
               </div>
-            )}
-          </div>
-        ))}
+              {repo.license && (
+                <div className="mt-2 text-xs text-gray-600">
+                  🪪 {repo.license.name}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Inline Keyframes */}
+      {/* Fade In Animation */}
       <style jsx>{`
         @keyframes fadeIn {
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
           from {
             opacity: 0;
             transform: translateY(20px);
           }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
       `}</style>
-    </div>
+    </section>
   );
 };
 
 export default Projects;
-
