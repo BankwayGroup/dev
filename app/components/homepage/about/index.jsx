@@ -8,7 +8,6 @@ import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
 import plansAnimation from "/public/lottie/code.json";
 import { useRouter } from "next/navigation"; // ✅ Add this
-import Projects from '../github/Projects';
 
 const plans = [
   {
@@ -252,9 +251,7 @@ function AboutSection() {
           </motion.div>
         )}
       </AnimatePresence>
-      <section id="projects" className="mt-20">
-  <Projects />
-</section>
+
     </div>
   );
 }
