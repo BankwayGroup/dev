@@ -19,7 +19,7 @@ const Projects = () => {
 
       <div className="relative z-10">
         <h3 className="text-4xl font-bold text-center text-white mb-12">
-          🚀 GitHub Projects
+          GitHub Projects
         </h3>
 
         <div className="grid gap-8 md:grid-cols-2">
@@ -75,3 +75,4 @@ const Projects = () => {
 };
 
 export default Projects;
+
