@@ -10,6 +10,7 @@ import { RiContactsFill } from "react-icons/ri";
 import { SiWhatsapp } from "react-icons/si";
 import { SiLeetcode } from "react-icons/si";
 import { SiTelegram } from 'react-icons/si';
+import { SiGithub} from 'react-icons/si';
 
 function HeroSection() {
   return (
@@ -72,7 +73,14 @@ function HeroSection() {
   >
     <SiWhatsapp size={30} />
   </Link>
-
+<Link
+  href="https://devzahir.com/#github"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="transition-all hover:scale-125 duration-300"
+>
+  <SiGithub size={30} color="#181717" />
+</Link>
 
 </div>
 
