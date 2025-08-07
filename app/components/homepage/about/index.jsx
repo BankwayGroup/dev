@@ -240,9 +240,25 @@ function AboutSection() {
             </div>
           </GlowCard>
         </div>
+
+        {/* Scrollbar styles for all scrollable ULs */}
+        <style jsx>{`
+          ul::-webkit-scrollbar {
+            width: 6px;
+          }
+          ul::-webkit-scrollbar-track {
+            background: transparent;
+          }
+          ul::-webkit-scrollbar-thumb {
+            background-color: #7a5cff;
+            border-radius: 3px;
+          }
+          ul::-webkit-scrollbar-thumb:hover {
+            background-color: #a18cff;
+          }
+        `}</style>
       </motion.div>
     )}
-
 
 
 
