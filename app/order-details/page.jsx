@@ -11,6 +11,7 @@ function OrderDetailsInner() {
   const searchParams = useSearchParams();
   const [orderDetails, setOrderDetails] = useState("");
   const [processing, setProcessing] = useState(false);
+const [error, setError] = useState("");
 
   const plan = {
     title: searchParams.get("plan") || "",
@@ -23,16 +24,18 @@ const handleCheckout = async () => {
   const trimmed = orderDetails.trim();
 
   if (!trimmed) {
-    alert("Please enter order details.");
+    setError("Please enter order details.");
     return;
   }
 
   if (trimmed.length < 100) {
-    alert("Order details must be at least 100 characters long.");
+    setError("Order details must be at least 100 characters long.");
     return;
   }
 
+  setError(""); // Clear error if valid
   setProcessing(true);
+  
   try {
     const response = await fetch("/api/checkout", {
       method: "POST",
@@ -60,6 +63,7 @@ const handleCheckout = async () => {
   }
 };
 
+
   return (
     <div className="min-h-screen py-20 px-4 max-w-xl mx-auto text-white">
       <motion.div
@@ -84,13 +88,39 @@ const handleCheckout = async () => {
           <strong>Delivery Time:</strong> {plan.deliveryTime} 
         </p>
 
-        <textarea
-          rows={4}
-          value={orderDetails}
-          onChange={(e) => setOrderDetails(e.target.value)}
-          placeholder="Add any custom instructions (required)"
-          className="w-full p-3 mb-4 rounded-md bg-[#2c2b55] border border-[#444] resize-none text-sm text-white"
-        />
+<textarea
+  rows={4}
+  value={orderDetails}
+  onChange={(e) => setOrderDetails(e.target.value)}
+  placeholder="Add any custom instructions (required)"
+className={`w-full p-3 mb-1 rounded-md border resize-none text-sm text-white transition-all duration-200
+  bg-[#2c2b55] focus:outline-none focus:ring-2 ${
+    error
+      ? "border-red-500 ring-red-500 placeholder-red-300"
+      : orderDetails.length >= 100
+      ? "border-green-500 ring-green-500 placeholder-green-300"
+      : "border-[#444] focus:ring-[#7a5cff]"
+  }`}
+
+/>
+
+<div className="flex justify-between text-xs text-gray-400 mb-3">
+  <span>
+    {error && (
+      <motion.span
+        initial={{ opacity: 0, y: -5 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-red-400"
+      >
+        {error}
+      </motion.span>
+    )}
+  </span>
+  <span className={`${orderDetails.length < 100 ? "text-red-400" : "text-green-400"}`}>
+    {orderDetails.length} / 100
+  </span>
+</div>
+
 
         <div className="flex justify-between gap-4">
           <a
@@ -131,6 +161,7 @@ export default function OrderDetailsPage() {
     </Suspense>
   );
 }
+
 
 
 
