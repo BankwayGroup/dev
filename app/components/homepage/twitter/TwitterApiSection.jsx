@@ -67,7 +67,7 @@ export default function TwitterApiSection() {
   >
     @devzahirjs
   </Link>
-  .
+
 </motion.p>
 
 
@@ -97,5 +97,6 @@ export default function TwitterApiSection() {
     </section>
   );
 }
+
 
 
