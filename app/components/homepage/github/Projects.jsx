@@ -72,11 +72,11 @@ function Projects() {
             <div className="text-sm text-gray-400 mt-auto pt-4 border-t border-[#2c2b55]">
               <div className="flex justify-between items-center mt-2">
                 <span>{repo.language || 'Unknown'}</span>
-                <span>🗓 {new Date(repo.updated_at).toLocaleDateString()}</span>
+                <span>{new Date(repo.updated_at).toLocaleDateString()}</span>
               </div>
               {repo.license && (
                 <div className="mt-2 text-xs text-gray-500">
-                  🪪 {repo.license.name}
+                  {repo.license.name}
                 </div>
               )}
             </div>
@@ -88,3 +88,4 @@ function Projects() {
 }
 
 export default Projects;
+
