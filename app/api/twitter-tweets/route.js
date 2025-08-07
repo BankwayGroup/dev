@@ -1,4 +1,6 @@
-// app/api/twitter-tweets/route.js
+let cachedTweets = null;
+let cacheTimestamp = 0;
+const CACHE_DURATION_MS = 1000 * 60 * 5; // 5 minutes cache
 
 export async function GET() {
   const BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN;
@@ -9,10 +11,19 @@ export async function GET() {
     });
   }
 
+  const now = Date.now();
+
+  // Return cached data if not expired
+  if (cachedTweets && now - cacheTimestamp < CACHE_DURATION_MS) {
+    return new Response(JSON.stringify(cachedTweets), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
   try {
     const username = "devzahirjs";
 
-    // Step 1: Get user ID from username
     const userRes = await fetch(
       `https://api.twitter.com/2/users/by/username/${username}`,
       {
@@ -30,7 +41,6 @@ export async function GET() {
     const userData = await userRes.json();
     const userId = userData.data.id;
 
-    // Step 2: Get tweets from user ID
     const tweetsRes = await fetch(
       `https://api.twitter.com/2/users/${userId}/tweets?max_results=5&tweet.fields=created_at`,
       {
@@ -47,11 +57,14 @@ export async function GET() {
 
     const tweetsData = await tweetsRes.json();
 
-    return new Response(JSON.stringify(tweetsData.data || []), {
+    // Cache the tweets and update timestamp
+    cachedTweets = tweetsData.data || [];
+    cacheTimestamp = now;
+
+    return new Response(JSON.stringify(cachedTweets), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
-
   } catch (error) {
     console.error("[Twitter API]", error.message);
     return new Response(
@@ -63,4 +76,3 @@ export async function GET() {
     );
   }
 }
-
