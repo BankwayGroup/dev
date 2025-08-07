@@ -8,7 +8,6 @@ import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
 import plansAnimation from "/public/lottie/code.json";
 import { useRouter } from "next/navigation"; // ✅ Add this
-import TwitterApiSection from "@/components/homepage/twitter/TwitterApiSection";
 
 const plans = [
   {
@@ -242,8 +241,7 @@ function AboutSection() {
           </GlowCard>
           
         </div>
-         {/* Add your Twitter API Section here */}
-            <TwitterApiSection />
+       
         {/* Scrollbar styles for all scrollable ULs */}
         <style jsx>{`
           ul::-webkit-scrollbar {
