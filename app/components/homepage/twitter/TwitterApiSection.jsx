@@ -50,43 +50,26 @@ export default function TwitterApiSection() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="bg-[#0e0c2b]/70 p-6 rounded-xl shadow-lg"
       >
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-[30px] h-[30px] flex items-center justify-center rounded-full border border-white/20">
-            <SiTwitter size={18} color="#1DA1F2" />
-          </div>
-          <h2 className="text-lg font-bold text-white">Twitter / X API v2</h2>
-        </div>
+<div className="flex items-center gap-3 mb-4">
+  <div className="w-[30px] h-[30px] flex items-center justify-center rounded-full border border-white/20">
+    <SiTwitter size={18} color="#1DA1F2" />
+  </div>
+  <h2 className="text-lg font-bold text-white">Latest Tweets</h2>
+</div>
 
-        <motion.p variants={itemVariants} className="text-gray-300 text-sm mb-4">
-          You can fetch <strong className="text-white">tweets</strong>,{" "}
-          <strong className="text-white">user profiles</strong>,{" "}
-          <strong className="text-white">timelines</strong>,{" "}
-          <strong className="text-white">likes</strong>, and more using the official X (formerly Twitter) API.
-        </motion.p>
+<motion.p variants={itemVariants} className="text-gray-300 text-sm mb-4">
+  Displaying recent posts from{" "}
+  <Link
+    href="https://twitter.com/devzahirx3"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-[#1DA1F2] hover:underline"
+  >
+    @devzahirx3
+  </Link>
+  .
+</motion.p>
 
-        <motion.ul
-          variants={containerVariants}
-          className="text-sm text-gray-400 list-disc pl-6 space-y-1 mb-4"
-        >
-          <motion.li variants={itemVariants}>
-            Requires an account with{" "}
-            <Link
-              href="https://twitter.com/devzahirx3"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#1DA1F2] hover:underline"
-            >
-              @devzahirx3
-            </Link>
-          </motion.li>
-          <motion.li variants={itemVariants}>
-            Free Tier: Only allows access to recent tweets from your own account
-          </motion.li>
-        </motion.ul>
-
-        <motion.div variants={itemVariants} className="text-xs text-gray-500 italic mb-4">
-          Perfect for integrating your own tweets or timeline into your portfolio or dashboard.
-        </motion.div>
 
         {/* Tweets List */}
         <motion.div variants={itemVariants} className="text-white">
@@ -114,3 +97,4 @@ export default function TwitterApiSection() {
     </section>
   );
 }
+
