@@ -109,163 +109,112 @@ function AboutSection() {
   };
 
   return (
-<div className="min-h-screen py-12 px-6 max-w-7xl mx-auto bg-gray-50">
+<div className="relative min-h-screen py-12 px-4 max-w-7xl mx-auto">
   <AnimatePresence mode="wait" initial={false}>
     {step === "packages" && (
       <motion.div
         key="packages"
-        initial={{ opacity: 0, x: 40 }}
+        initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -40 }}
-        transition={{ duration: 0.35 }}
+        exit={{ opacity: 0, x: -50 }}
+        transition={{ duration: 0.3 }}
       >
         <h2
           id="packages"
-          className="text-3xl font-extrabold text-gray-900 mb-10 flex items-center space-x-3"
+          className="text-2xl font-bold text-[#16f2b3] uppercase mb-10 flex items-center space-x-3"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-8 w-8 text-indigo-600"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3 7v4a2 2 0 002 2h4m10 0h4v4a2 2 0 01-2 2h-4m-6 0H5v-4a2 2 0 012-2h4m4 0h4v-4a2 2 0 00-2-2h-4m-2 2v4"
-            />
-          </svg>
-          <span className="uppercase tracking-wide text-indigo-600">Packages</span>
+          <i className="fas fa-box-open text-[#16f2b3]"></i>
+          <span>Packages</span>
         </h2>
 
-        <div className="flex justify-center mb-12">
-          <div className="w-full max-w-xl">
+        <div className="flex justify-center mb-10">
+          <div className="w-full max-w-lg">
             <AnimationLottie animationPath={plansAnimation} />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 auto-rows-fr">
           {plans.map((plan) => (
-            <div key={plan.id} className="flex flex-col bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-              <GlowCard identifier={`plan-${plan.id}`}>
-                <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{plan.title}</h3>
-                  <p className="text-3xl font-extrabold text-indigo-600 mb-4">{plan.price}</p>
-                  <p className="text-gray-600 mb-6 flex-grow">{plan.description}</p>
+            <GlowCard key={plan.id} identifier={`plan-${plan.id}`}>
+              <div className="fade-in-card h-full flex flex-col justify-between rounded-2xl border border-[#2c2b55] bg-gradient-to-br from-[#18153a] to-[#1f1c46] p-6 text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/20">
+                {/* Header */}
+                <div className="mb-6">
+                  <h3 className="text-2xl font-bold mb-1">{plan.title}</h3>
+                  <p className="text-lg font-semibold text-[#7a5cff] mb-4">{plan.price}</p>
+                  <p className="text-sm text-gray-300 mb-5">{plan.description}</p>
 
-                  <ul className="mb-6 space-y-2 text-gray-700 text-sm">
-                    {plan.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center">
-                        <svg
-                          className="w-5 h-5 text-indigo-500 mr-2 flex-shrink-0"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          viewBox="0 0 24 24"
-                          aria-hidden="true"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                        {feature}
-                      </li>
+                  {/* Features list with some spacing */}
+                  <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-6 max-h-36 overflow-auto pr-2">
+                    {plan.features.map((feature, index) => (
+                      <li key={index}>{feature}</li>
                     ))}
                   </ul>
-
-                  <div className="text-gray-500 text-sm mb-6 space-y-1">
-                    <p><strong>Delivery Time:</strong> {plan.deliveryTime}</p>
-                    <p><strong>Revisions:</strong> {plan.revisions}</p>
-                  </div>
-
-                  <button
-                    onClick={() => {
-                      const query = new URLSearchParams({
-                        plan: plan.title,
-                        price: plan.price,
-                        description: plan.description,
-                        deliveryTime: plan.deliveryTime.toString(),
-                      }).toString();
-                      router.push(`/order-details?${query}`);
-                    }}
-                    className="mt-auto w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-md transition-transform transform hover:scale-105 shadow-md"
-                  >
-                    Purchase →
-                  </button>
-                </div>
-              </GlowCard>
-            </div>
-          ))}
-
-          {/* Custom Project Card */}
-          <div className="flex flex-col bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-            <GlowCard identifier="custom-plan">
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Custom Project</h3>
-                <p className="text-3xl font-extrabold text-indigo-600 mb-4">Starting at $800+</p>
-                <p className="text-gray-600 mb-6 flex-grow">
-                  Need something more advanced or tailored? Let&apos;s build your dream app, dashboard, bot, or automation.
-                </p>
-                <ul className="mb-6 space-y-2 text-gray-700 text-sm">
-                  <li className="flex items-center">
-                    <svg
-                      className="w-5 h-5 text-indigo-500 mr-2 flex-shrink-0"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    Fully tailored to your needs
-                  </li>
-                  <li className="flex items-center">
-                    <svg
-                      className="w-5 h-5 text-indigo-500 mr-2 flex-shrink-0"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    Scalable & maintainable code
-                  </li>
-                  <li className="flex items-center">
-                    <svg
-                      className="w-5 h-5 text-indigo-500 mr-2 flex-shrink-0"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    Ongoing support available
-                  </li>
-                </ul>
-
-                <div className="text-gray-500 text-sm mb-6 space-y-1">
-                  <p><strong>Delivery Time:</strong> Varies</p>
-                  <p><strong>Revisions:</strong> Unlimited (in consultation)</p>
                 </div>
 
+                {/* Footer with delivery & revisions info */}
+                <div className="mb-6 text-sm text-gray-400 space-y-1">
+                  <p>
+                    <strong>Delivery Time:</strong> {plan.deliveryTime}
+                  </p>
+                  <p>
+                    <strong>Revisions:</strong> {plan.revisions}
+                  </p>
+                </div>
+
+                {/* Button aligned bottom */}
                 <button
-                  onClick={() => router.push("https://devzahir.com/#contact")}
-                  className="mt-auto w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-md transition-transform transform hover:scale-105 shadow-md"
+                  onClick={() => {
+                    const query = new URLSearchParams({
+                      plan: plan.title,
+                      price: plan.price,
+                      description: plan.description,
+                      deliveryTime: plan.deliveryTime.toString(),
+                    }).toString();
+                    router.push(`/order-details?${query}`);
+                  }}
+                  className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
                 >
-                  Custom Inquiry →
+                  Purchase →
                 </button>
               </div>
             </GlowCard>
-          </div>
+          ))}
+
+          {/* Custom Project Card */}
+          <GlowCard identifier="custom-plan">
+            <div className="fade-in-card h-full flex flex-col justify-between rounded-2xl border border-[#2c2b55] bg-gradient-to-br from-[#18153a] to-[#1f1c46] p-6 text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/20">
+              <div className="mb-6">
+                <h3 className="text-2xl font-bold mb-1">Custom Project</h3>
+                <p className="text-lg font-semibold text-[#7a5cff] mb-4">Starting at $800+</p>
+                <p className="text-sm text-gray-300 mb-5">
+                  Need something more advanced or tailored? Let&apos;s build your dream app, dashboard, bot, or automation.
+                </p>
+                <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-6 max-h-36 overflow-auto pr-2">
+                  <li>Fully tailored to your needs</li>
+                  <li>Scalable & maintainable code</li>
+                  <li>Ongoing support available</li>
+                </ul>
+              </div>
+              <div className="mb-6 text-sm text-gray-400 space-y-1">
+                <p>
+                  <strong>Delivery Time:</strong> Varies
+                </p>
+                <p>
+                  <strong>Revisions:</strong> Unlimited (in consultation)
+                </p>
+              </div>
+              <button
+                onClick={() => router.push("https://devzahir.com/#contact")}
+                className="mt-auto w-full bg-gradient-to-r from-[#7A5CFF] to-[#5D3BFE] hover:from-[#a18cff] hover:to-[#7f66ff] text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+              >
+                Custom Inquiry →
+              </button>
+            </div>
+          </GlowCard>
         </div>
       </motion.div>
     )}
+
 
 
 
