@@ -21,8 +21,11 @@ const Projects = () => {
         {repos.map((repo, index) => (
           <div
             key={repo.id}
-            className="p-5 rounded-xl bg-white/10 backdrop-blur-lg border border-white/10 shadow transition duration-500 hover:shadow-xl animate-fadeIn opacity-0 animate-delay-[200ms] animate-fill-forwards"
-            style={{ animationDelay: `${index * 100}ms` }}
+            style={{
+              animation: `fadeIn 0.5s ease ${index * 0.1}s forwards`,
+              opacity: 0,
+            }}
+            className="p-5 rounded-xl bg-white/10 backdrop-blur-lg border border-white/10 shadow transition duration-500 hover:shadow-xl"
           >
             <a
               href={repo.html_url}
@@ -47,6 +50,20 @@ const Projects = () => {
           </div>
         ))}
       </div>
+
+      {/* Inline Keyframes */}
+      <style jsx>{`
+        @keyframes fadeIn {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+        }
+      `}</style>
     </div>
   );
 };
