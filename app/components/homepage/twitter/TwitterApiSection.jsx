@@ -37,10 +37,7 @@ export default function TwitterApiSection() {
           <h2 className="text-lg font-bold text-white">Twitter / X API v2</h2>
         </div>
 
-        <motion.p
-          variants={itemVariants}
-          className="text-gray-300 text-sm mb-4"
-        >
+        <motion.p variants={itemVariants} className="text-gray-300 text-sm mb-4">
           You can fetch <strong className="text-white">tweets</strong>,{" "}
           <strong className="text-white">user profiles</strong>,{" "}
           <strong className="text-white">timelines</strong>,{" "}
@@ -66,10 +63,7 @@ export default function TwitterApiSection() {
           </motion.li>
         </motion.ul>
 
-        <motion.div
-          variants={itemVariants}
-          className="text-xs text-gray-500 italic"
-        >
+        <motion.div variants={itemVariants} className="text-xs text-gray-500 italic">
           Perfect for integrating your own tweets or timeline into your portfolio or dashboard.
         </motion.div>
       </motion.div>
