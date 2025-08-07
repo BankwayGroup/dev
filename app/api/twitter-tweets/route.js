@@ -66,7 +66,7 @@ export async function GET() {
 
     if (!tweetsRes.ok) {
       const error = await tweetsRes.json();
-      throw new Error(error.title || "Failed to fetch tweets");
+      throw new Error(error.title || "n/a");
     }
 
     const tweetsData = await tweetsRes.json();
@@ -104,3 +104,4 @@ export async function GET() {
     isFetching = false;
   }
 }
+
