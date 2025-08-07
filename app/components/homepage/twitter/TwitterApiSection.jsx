@@ -1,6 +1,6 @@
-// @flow strict
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { SiTwitter } from "react-icons/si";
 import Link from "next/link";
@@ -20,6 +20,23 @@ const itemVariants = {
 };
 
 export default function TwitterApiSection() {
+  const [tweets, setTweets] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchTweets() {
+      try {
+        const res = await fetch("/api/twitter-tweets");
+        if (!res.ok) throw new Error("Failed to fetch tweets");
+        const data = await res.json();
+        setTweets(data);
+      } catch (err) {
+        setError(err.message);
+      }
+    }
+    fetchTweets();
+  }, []);
+
   return (
     <section className="mt-20 px-6 md:px-0 max-w-3xl mx-auto">
       <motion.div
@@ -63,8 +80,24 @@ export default function TwitterApiSection() {
           </motion.li>
         </motion.ul>
 
-        <motion.div variants={itemVariants} className="text-xs text-gray-500 italic">
+        <motion.div variants={itemVariants} className="text-xs text-gray-500 italic mb-4">
           Perfect for integrating your own tweets or timeline into your portfolio or dashboard.
+        </motion.div>
+
+        {/* Tweets List */}
+        <motion.div variants={itemVariants} className="text-white">
+          {error && <p className="text-red-500 mb-2">Error: {error}</p>}
+          {!error && tweets.length === 0 && <p>Loading tweets...</p>}
+          <ul className="space-y-3 max-h-64 overflow-y-auto">
+            {tweets.map((tweet) => (
+              <li key={tweet.id} className="p-3 bg-[#1a1a2e] rounded-md shadow-sm">
+                <p>{tweet.text}</p>
+                <small className="text-gray-400 text-xs">
+                  {new Date(tweet.created_at).toLocaleString()}
+                </small>
+              </li>
+            ))}
+          </ul>
         </motion.div>
       </motion.div>
     </section>
