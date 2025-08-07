@@ -18,7 +18,7 @@ export const experiences = [
   {
     id: 3,
     title: "AI Automation & SaaS Developer",
-    company: "Indie DevZahir",
+    company: "Personal & Client Projects",
     duration: "(2024 - Present)",
     description:
       "Developing AI-integrated tools, SaaS platforms, and intelligent bots with automation pipelines, user dashboards, and Stripe billing.",
