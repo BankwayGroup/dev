@@ -10,7 +10,7 @@ export async function GET() {
   }
 
   try {
-    const username = "devzahirx3";
+    const username = "devzahirjs";
 
     // Step 1: Get user ID from username
     const userRes = await fetch(
@@ -63,3 +63,4 @@ export async function GET() {
     );
   }
 }
+
