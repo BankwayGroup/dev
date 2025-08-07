@@ -8,6 +8,7 @@ import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
 import plansAnimation from "/public/lottie/code.json";
 import { useRouter } from "next/navigation"; // ✅ Add this
+import Projects from '../github/Projects';
 
 const plans = [
   {
@@ -110,6 +111,14 @@ function AboutSection() {
   };
 
   return (
+
+
+    <div className="space-y-16">
+  <AboutSection />
+  <Services />
+  <Projects /> {/* ← Add it here */}
+</div>
+
     <div className="relative min-h-screen py-12 px-4 max-w-7xl mx-auto">
       <AnimatePresence mode="wait" initial={false}>
         {step === "packages" && (
