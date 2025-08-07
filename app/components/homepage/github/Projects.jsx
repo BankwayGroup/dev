@@ -14,9 +14,9 @@ const Projects = () => {
 
   return (
     <div className="p-6 backdrop-blur-xl bg-white/5 rounded-2xl shadow-2xl max-w-5xl mx-auto border border-white/10">
-      <h2 className="text-3xl font-extrabold text-white mb-6 text-center">
-        🚀 My GitHub Projects
-      </h2>
+      <h3 className="text-3xl font-extrabold text-white mb-6 text-center">
+        My GitHub Projects
+      </h3>
       <div className="grid gap-6 md:grid-cols-2">
         {repos.map((repo, index) => (
           <div
@@ -40,11 +40,11 @@ const Projects = () => {
             </p>
             <div className="flex justify-between text-sm text-gray-400 mt-4">
               <span>{repo.language || 'Unknown'}</span>
-              <span>📅 {new Date(repo.updated_at).toLocaleDateString()}</span>
+              <span>{new Date(repo.updated_at).toLocaleDateString()}</span>
             </div>
             {repo.license && (
               <div className="mt-2 text-xs text-gray-500">
-                🪪 {repo.license.name}
+                {repo.license.name}
               </div>
             )}
           </div>
@@ -69,3 +69,4 @@ const Projects = () => {
 };
 
 export default Projects;
+
