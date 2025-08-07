@@ -34,35 +34,6 @@ function ContactSection() {
     <Projects />
   </section>
 
-  {/* Skill Bars */}
-  <motion.div
-    ref={ref}
-    initial={{ opacity: 0, y: 50 }}
-    animate={inView ? { opacity: 1, y: 0 } : {}}
-    transition={{ duration: 0.8, ease: 'easeOut' }}
-    className="mb-16 bg-transparent p-6 rounded-xl shadow-lg max-w-3xl mx-auto"
-  >
-    <h2 className="text-lg text-[#16f2b3] font-bold text-center mb-4">
-      DevZahir.com
-    </h2>
-    <div className="flex flex-col gap-4">
-      {skills.map(({ name, percentage }, i) => (
-        <div key={name} className="flex items-center justify-between">
-          <span className="text-sm font-semibold w-20">{name}</span>
-          <div className="flex-1 mx-3 bg-[#1a1a2e] rounded-full h-4 overflow-hidden">
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: `${percentage}%` }}
-              transition={{ duration: 1.5, delay: i * 0.2, ease: 'easeOut' }}
-              className="h-full rounded-full"
-              style={{ backgroundColor: barColors[name] || '#16f2b3' }}
-            />
-          </div>
-          <span className="text-xs font-medium w-10 text-right">{percentage}%</span>
-        </div>
-      ))}
-    </div>
-  </motion.div>
   {/* Add your Twitter API Section here */}
             <TwitterApiSection />
 
