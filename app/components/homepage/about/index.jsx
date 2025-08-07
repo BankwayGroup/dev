@@ -143,15 +143,27 @@ function AboutSection() {
                   <p className="text-lg font-semibold text-[#7a5cff] mb-4">{plan.price}</p>
                   <p className="text-sm text-gray-300 mb-5">{plan.description}</p>
 
-                  {/* Features list with some spacing */}
-                  <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-6 max-h-36 overflow-auto pr-2">
+                  {/* Features list with SVG checks */}
+                  <ul className="mb-6 max-h-36 overflow-auto pr-2 space-y-2">
                     {plan.features.map((feature, index) => (
-                      <li key={index}>{feature}</li>
+                      <li key={index} className="flex items-start space-x-2 text-sm text-gray-400">
+                        <svg
+                          className="flex-shrink-0 w-5 h-5 text-[#7a5cff] mt-0.5"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>{feature}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
 
-                {/* Footer with delivery & revisions info */}
+                {/* Footer with delivery & revisions */}
                 <div className="mb-6 text-sm text-gray-400 space-y-1">
                   <p>
                     <strong>Delivery Time:</strong> {plan.deliveryTime}
@@ -161,7 +173,7 @@ function AboutSection() {
                   </p>
                 </div>
 
-                {/* Button aligned bottom */}
+                {/* Purchase button */}
                 <button
                   onClick={() => {
                     const query = new URLSearchParams({
@@ -189,10 +201,26 @@ function AboutSection() {
                 <p className="text-sm text-gray-300 mb-5">
                   Need something more advanced or tailored? Let&apos;s build your dream app, dashboard, bot, or automation.
                 </p>
-                <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-6 max-h-36 overflow-auto pr-2">
-                  <li>Fully tailored to your needs</li>
-                  <li>Scalable & maintainable code</li>
-                  <li>Ongoing support available</li>
+                <ul className="mb-6 max-h-36 overflow-auto pr-2 space-y-2">
+                  {[
+                    "Fully tailored to your needs",
+                    "Scalable & maintainable code",
+                    "Ongoing support available",
+                  ].map((feature, idx) => (
+                    <li key={idx} className="flex items-start space-x-2 text-sm text-gray-400">
+                      <svg
+                        className="flex-shrink-0 w-5 h-5 text-[#7a5cff] mt-0.5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div className="mb-6 text-sm text-gray-400 space-y-1">
