@@ -179,7 +179,7 @@ function AboutSection() {
         <h3 className="text-2xl font-bold mb-2">Custom Project</h3>
         <p className="text-lg font-semibold text-[#7a5cff] mb-4">Starting at $250+</p>
         <p className="text-sm text-gray-300 mb-4">
-          Need something more advanced or tailored? Let's build your dream app, dashboard, bot, or automation.
+          Need something more advanced or tailored? Let&apos;s build your dream app, dashboard, bot, or automation.
         </p>
         <ul className="list-disc list-inside text-sm text-gray-400 space-y-1 mb-4">
           <li>Fully tailored to your needs</li>
