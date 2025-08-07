@@ -7,29 +7,40 @@ const Projects = () => {
     fetch('https://api.github.com/users/devzahirx3/repos')
       .then(res => res.json())
       .then(data => {
-        // Optional: sort by recent update
         const sorted = data.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
         setRepos(sorted);
       });
   }, []);
 
   return (
-    <div className="p-6 bg-gray-100 rounded-xl">
-      <h2 className="text-2xl font-bold mb-4">🚀 My GitHub Projects</h2>
-      <div className="grid gap-4 md:grid-cols-2">
+    <div className="p-6 bg-[#121217] rounded-xl shadow-lg max-w-5xl mx-auto">
+      <h2 className="text-3xl font-extrabold text-white mb-6">🚀 My GitHub Projects</h2>
+      <div className="grid gap-6 md:grid-cols-2">
         {repos.map(repo => (
-          <div key={repo.id} className="p-4 bg-white rounded shadow hover:shadow-lg transition">
-            <a href={repo.html_url} target="_blank" rel="noreferrer" className="text-xl font-semibold text-blue-600">
+          <div
+            key={repo.id}
+            className="p-5 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-xl border border-gray-700 shadow-md hover:shadow-xl transition-shadow duration-300"
+          >
+            <a
+              href={repo.html_url}
+              target="_blank"
+              rel="noreferrer"
+              className="text-xl font-semibold text-indigo-400 hover:text-indigo-600 transition-colors"
+            >
               {repo.name}
             </a>
-            <p className="text-gray-700">{repo.description}</p>
-            <div className="text-sm text-gray-500 mt-2 flex justify-between">
+            <p className="text-gray-300 mt-2 min-h-[3rem]">
+              {repo.description || 'No description available.'}
+            </p>
+            <div className="flex justify-between text-sm text-gray-400 mt-4">
               <span>🌐 {repo.language || 'Unknown'}</span>
               <span>📅 Updated: {new Date(repo.updated_at).toLocaleDateString()}</span>
             </div>
-            <div className="mt-1 text-sm">
-              {repo.license && <span>🪪 {repo.license.name}</span>}
-            </div>
+            {repo.license && (
+              <div className="mt-2 text-xs text-gray-500">
+                🪪 {repo.license.name}
+              </div>
+            )}
           </div>
         ))}
       </div>
