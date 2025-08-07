@@ -19,39 +19,46 @@ function OrderDetailsInner() {
     deliveryTime: searchParams.get("deliveryTime") || "",
   };
 
-  const handleCheckout = async () => {
-    if (!orderDetails.trim()) {
-      alert("Please enter order details.");
-      return;
-    }
+const handleCheckout = async () => {
+  const trimmed = orderDetails.trim();
 
-    setProcessing(true);
-    try {
-      const response = await fetch("/api/checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: plan.title,
-          price: plan.price,
-          orderDetails,
-        }),
-      });
+  if (!trimmed) {
+    alert("Please enter order details.");
+    return;
+  }
 
-      const data = await response.json();
-      if (data?.url) {
-        window.location.href = data.url;
-      } else {
-        alert("Failed to create checkout session.");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("An error occurred during checkout.");
-    } finally {
-      setProcessing(false);
+  if (trimmed.length < 100) {
+    alert("Order details must be at least 100 characters long.");
+    return;
+  }
+
+  setProcessing(true);
+  try {
+    const response = await fetch("/api/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: plan.title,
+        price: plan.price,
+        orderDetails,
+      }),
+    });
+
+    const data = await response.json();
+    if (data?.url) {
+      window.location.href = data.url;
+    } else {
+      alert("Failed to create checkout session.");
     }
-  };
+  } catch (err) {
+    console.error(err);
+    alert("An error occurred during checkout.");
+  } finally {
+    setProcessing(false);
+  }
+};
 
   return (
     <div className="min-h-screen py-20 px-4 max-w-xl mx-auto text-white">
@@ -124,6 +131,7 @@ export default function OrderDetailsPage() {
     </Suspense>
   );
 }
+
 
 
 
