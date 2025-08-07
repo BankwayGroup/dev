@@ -73,14 +73,15 @@ function HeroSection() {
   >
     <SiWhatsapp size={30} />
   </Link>
-<Link
-  href="https://devzahir.com/#github"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="transition-all hover:scale-125 duration-300"
->
-  <SiGithub size={30} color="#181717" />
-</Link>
+<div className="p-1 rounded-full bg-white">
+  <Link
+    href="https://devzahir.com/#github"
+    rel="noopener noreferrer"
+    className="transition-all hover:scale-125 duration-300"
+  >
+    <SiGithub size={30} color="#181717" />
+  </Link>
+</div>
 
 </div>
 
