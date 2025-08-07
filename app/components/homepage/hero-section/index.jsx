@@ -55,6 +55,15 @@ function HeroSection() {
 
 
 
+<div className="w-[32px] h-[32px] flex items-center justify-center rounded-full border border-pink-500/30">
+  <Link
+    href="https://devzahir.com/#github"
+    rel="noopener noreferrer"
+    className="transition-all hover:scale-125 duration-300"
+  >
+    <SiGithub size={18} color="#ffffff" />
+  </Link>
+</div>
 
 <Link
   href="https://t.me/devzahirbot?start=start"
@@ -73,15 +82,6 @@ function HeroSection() {
   >
     <SiWhatsapp size={30} />
   </Link>
-<div className="w-[32px] h-[32px] flex items-center justify-center rounded-full border border-pink-500/30">
-  <Link
-    href="https://devzahir.com/#github"
-    rel="noopener noreferrer"
-    className="transition-all hover:scale-125 duration-300"
-  >
-    <SiGithub size={18} color="#ffffff" />
-  </Link>
-</div>
 
 
 
