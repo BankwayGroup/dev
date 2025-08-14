@@ -12,7 +12,6 @@ import { SiTelegram } from 'react-icons/si';
 import ContactForm from './contact-form';
 import Image from 'next/image';
 import Projects from '../github/Projects';
-import TwitterApiSection from "@/app/components/homepage/twitter/TwitterApiSection";
 
 const skills = [
   { name: 'JavaScript', percentage: 94.8 },
@@ -33,8 +32,7 @@ function ContactSection() {
   <section id="github" className="mt-20">
     <Projects />
   </section>
-  {/* Add your Twitter API Section here */}
-            <TwitterApiSection />
+ 
       {/* Contact Section */}
       <div id="contact" className="my-12 lg:my-16 relative mt-24 text-white">
         <div className="hidden lg:flex flex-col items-center absolute top-24 -right-8">
